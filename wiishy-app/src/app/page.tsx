@@ -8,10 +8,10 @@ export default function Home() {
     <>
       <ConfigProvider theme={theme}>
         <div className="App">
-          <Button type="primary">Button</Button>
+         
+         
         </div>
       </ConfigProvider>
-
     </>
 
   )
