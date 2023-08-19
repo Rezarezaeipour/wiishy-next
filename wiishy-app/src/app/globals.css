@@ -13,11 +13,25 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+  background-color: #F1F1F1;
 }
+
+/* Navbar */
+
+.navbar-light {
+    position: fixed;
+    width:100%;
+    bottom:0px;
+    left: 0px;
+    background-color:white;
+    padding:7px 0 12px 0;
+}
+
+/* End Navbar */

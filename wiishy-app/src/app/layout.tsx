@@ -1,9 +1,10 @@
-'use client'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from "react";
-import StyledComponentsRegistry from '../../lib/AntdRegistry';
 import './globals.css';
+import Navbar from './components/navbar';
+
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,13 +14,15 @@ const inter = Inter({ subsets: ['latin'] })
 // };
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
+ 
+
   return (
     <html>
       <body className={inter.className}>
         <React.StrictMode>
 
           {children}
-
+          <Navbar/>
         </React.StrictMode>
       </body>
     </html>

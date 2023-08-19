@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.16.2",
+    "@ant-design/icons": "^5.2.5",
     "@types/node": "20.5.0",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "antd": "^5.8.3",
     "antd-mobile": "^5.32.0",
+    "antd-mobile-icons": "^0.3.0",
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
