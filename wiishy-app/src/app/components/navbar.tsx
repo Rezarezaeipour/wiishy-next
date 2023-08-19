@@ -5,12 +5,16 @@ import React from "react";
 import StyledComponentsRegistry from '../../../lib/AntdRegistry';
 import '../globals.css';
 import { Badge, TabBar } from 'antd-mobile';
+import { usePathname } from 'next/navigation';
 import {
   HomeOutlined, MessageOutlined, PlusCircleFilled, PlusOutlined, SearchOutlined, UserOutlined,
   
 } from '@ant-design/icons'
 
  export default function Navbar() {
+  const params = usePathname()
+  console.log('test')
+  console.log(params)
     const tabs = [
         {
           key: 'Home',
