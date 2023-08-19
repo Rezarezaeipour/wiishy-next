@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from "react";
 import './globals.css';
+import Header from './components/header'
 import Navbar from './components/navbar';
 
 
@@ -20,7 +21,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
     <html>
       <body className={inter.className}>
         <React.StrictMode>
-
+          <Header/>
           {children}
           <Navbar/>
         </React.StrictMode>
