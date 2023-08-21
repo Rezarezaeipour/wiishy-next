@@ -12,9 +12,8 @@ import {
 } from '@ant-design/icons'
 
  export default function Navbar() {
-  const params = usePathname()
-  console.log('test')
-  console.log(params)
+  const pathname = usePathname()
+ 
     const tabs = [
         {
           key: 'Home',
