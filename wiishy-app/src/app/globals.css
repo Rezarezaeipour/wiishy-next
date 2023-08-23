@@ -13,6 +13,7 @@
 }
 
 body {
+  margin: 0;
   /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -35,3 +36,8 @@ body {
 }
 
 /* End Navbar */
+
+
+.mt-45px {
+  margin-top: 45px;
+}
