@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sidemenu-container{
+    padding: 15px;
+}
+
+.sidemenu-header{
+    background-color: white;
+    padding-top: 2vh;
+}
