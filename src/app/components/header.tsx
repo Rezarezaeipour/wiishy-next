@@ -7,7 +7,7 @@ import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import Image from 'next/image'
 import useToggle from "../hooks/useToggle";
 
-export default () => {
+export default function Header() {
   const [popupVisible, togglePopup] = useToggle();
 
 
