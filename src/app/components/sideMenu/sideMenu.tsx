@@ -1,7 +1,7 @@
 import { Image, List, Switch } from 'antd-mobile'
 import { PayCircleOutline, SetOutline, UnorderedListOutline } from "antd-mobile-icons";
 import './style.css';
-import People from '../people/people';
+import HorizontalCard from '../horizontalCard/horizontalCard';
 
 
 function SideMenu() {
@@ -12,7 +12,9 @@ function SideMenu() {
       <div className='sidemenu-header'>
           <Image alt='Wiishy' src='/wisshy.png' width={100} />
           <p className='pl-4'>An ultimate wishlist</p>
-       
+
+        
+          
       </div>
       <List header='Menu'>
         <List.Item prefix={<UnorderedListOutline />} onClick={() => { }}>

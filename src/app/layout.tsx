@@ -18,7 +18,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
  
 
   return (
-    <html>
+    <html >
       <body className={inter.className}>
         <React.StrictMode>
         
