@@ -6,6 +6,7 @@ import { SearchOutline, MoreOutline } from "antd-mobile-icons";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import Image from 'next/image'
 import useToggle from "../hooks/useToggle";
+import SideMenu from "./sideMenu/sideMenu";
 
 export default function Header() {
   const [popupVisible, togglePopup] = useToggle();
@@ -36,7 +37,7 @@ export default function Header() {
           position="left"
           bodyStyle={{ width: "70vw" }}
         >
-          Content
+          <SideMenu/>
         </Popup>
       </div>
     </>
