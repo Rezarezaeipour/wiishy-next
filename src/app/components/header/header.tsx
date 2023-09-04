@@ -5,8 +5,8 @@ import { NavBar, Space, Toast, Popup } from "antd-mobile";
 import { SearchOutline, MoreOutline } from "antd-mobile-icons";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import Image from 'next/image'
-import useToggle from "../hooks/useToggle";
-import SideMenu from "./sideMenu/sideMenu";
+import useToggle from "../../hooks/useToggle";
+import SideMenu from "../sideMenu/sideMenu";
 
 export default function Header() {
   const [popupVisible, togglePopup] = useToggle();

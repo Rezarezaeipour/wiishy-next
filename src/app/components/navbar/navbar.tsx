@@ -2,8 +2,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from "react";
-import StyledComponentsRegistry from '../../../lib/AntdRegistry';
-import '../globals.css';
+import StyledComponentsRegistry from '../../../../lib/AntdRegistry';
+import '@/app/globals.css';
 import { Badge, TabBar } from 'antd-mobile';
 import { usePathname } from 'next/navigation';
 import {
