@@ -1,10 +1,10 @@
 import { Image } from "antd-mobile";
 
-function Steps(prop: [Number]) {
+function Steps(props : { step : number}) {
 
     let H = "";
     let P = "";
-    switch (prop.step) {
+    switch (props.step) {
         case 1: {
             H = "Something Special?";
             P = "Are you thinking about";
@@ -36,7 +36,7 @@ function Steps(prop: [Number]) {
     return (
         <>
             <div className="text-center flex flex-col items-center justify-center">
-                <Image alt="step1" src={`/${prop.step}.png`}></Image>
+                <Image alt="step1" src={`/${props.step}.png`}></Image>
                 <h2 className="font-normal text-2xl">{P}</h2>
                 <h1 className="font-extrabold text-[2rem]">{H}</h1> 
                
@@ -45,4 +45,4 @@ function Steps(prop: [Number]) {
     );
 }
 
-export default Steps;
+export default Steps;``
