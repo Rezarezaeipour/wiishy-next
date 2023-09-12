@@ -17,8 +17,9 @@
   }
 }
 
-body {
-  
+html,body {
+  height: 100%;
+  width: 100%;
   margin: 0;
   /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -27,7 +28,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
-  background-color: #ffffff;
+  background-color: #E1E1E1;
 
 }
 
@@ -48,3 +49,14 @@ body {
 .mt-45px {
   margin-top: 45px;
 }
+
+.xx{
+ margin-bottom: 30px;
+}
+
+.btn-regular{
+  background-color: black !important;
+  color: white !important;
+}
+
+
