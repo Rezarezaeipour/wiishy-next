@@ -6,7 +6,7 @@ import { SwiperRef } from 'antd-mobile/es/components/swiper'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 
-function Page1() {
+function Page() {
 
   const ref = useRef<SwiperRef>(null)
   const [current, setCurrent] = useState(0);
@@ -26,7 +26,7 @@ function Page1() {
     <>
       <div className='h-full' >
 
-        <Swiper className='h-full' style={{ height: '100%' }} allowTouchMove={true} ref={ref} loop>
+        <Swiper className='h-full' style={{ height: '100%' }} allowTouchMove={false} ref={ref} loop>
           {items}
         </Swiper>
 
@@ -87,4 +87,4 @@ function Page1() {
   );
 }
 
-export default Page1;
+export default Page;
