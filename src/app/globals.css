@@ -9,7 +9,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -17,7 +17,8 @@
   }
 }
 
-html,body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -28,19 +29,19 @@ html,body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
-  background-color: #E1E1E1;
+  background-color: #f1f1f1;
 
 }
 
 /* Navbar */
 
 .navbar-light {
-    position: fixed;
-    width:100%;
-    bottom:0px;
-    left: 0px;
-    background-color:white;
-    padding:7px 0 12px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  background-color: white;
+  padding: 7px 0 12px 0;
 }
 
 /* End Navbar */
@@ -50,11 +51,11 @@ html,body {
   margin-top: 45px;
 }
 
-.xx{
- margin-bottom: 30px;
+.xx {
+  margin-bottom: 30px;
 }
 
-.btn-regular{
+.btn-regular {
   background-color: black !important;
   color: white !important;
 }
