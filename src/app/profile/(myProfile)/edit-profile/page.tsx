@@ -24,11 +24,8 @@ function EditProfile() {
     return (
 
         <>
-            <div className="py-3">
-
-
-                <Form layout='vertical' mode="card" >
-
+            <div className="py-3 pb-20">
+                <Form  layout='vertical' mode="card" >
                     <div className="flex justify-center py-8">
                         <ImageUploader value={fileList} onChange={setFileList}
                             maxCount={1} upload={mockUpload} style={{'--cell-size': '150px', borderRadius: '80px'}}>
@@ -49,11 +46,34 @@ function EditProfile() {
                         </ImageUploader>
                     </div>
 
-                    <Form.Item label='Name' name='Name' className="font-extrabold text-3xl" >
-                        <Input placeholder='Your name' clearable className="font-normal" />
+                    <Form.Item label='Name' name='Name' className="font-extrabold text-3xl"  >
+                        <Input placeholder='Your name' clearable className="font-normal"  />
                     </Form.Item>
                     <Form.Item label='Family Name' name='Family' className="font-extrabold text-3xl">
                         <Input placeholder='Your family name' clearable className="font-normal"/>
+                    </Form.Item>
+                  
+                    <Form.Item style={{'fontSize':'13px'}}>
+                        <Button className="btn-regular" style={{fontSize:'14px'}}
+                            onClick={() => {
+                                setDateVisible(true)
+                            }}
+                        >
+                            Birth Date
+                        </Button>
+                        <DatePicker
+                            visible={datevisible}
+                            onClose={() => {
+                                setDateVisible(false)
+                            }}
+                            defaultValue={now}
+                            max={now}
+                            cancelText="Cancel"
+                            confirmText="Add"
+                            title='Your birthday'
+                        >
+                            {value => "  " + value?.toDateString()}
+                        </DatePicker>
                     </Form.Item>
                     <Form.Item label='Gender' name='Gender' className="font-extrabold text-3xl">
                         <Selector
@@ -88,28 +108,6 @@ function EditProfile() {
                             }}
                             defaultValue={['1']}
                         />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button
-                            onClick={() => {
-                                setDateVisible(true)
-                            }}
-                        >
-                            Birth Date
-                        </Button>
-                        <DatePicker
-                            visible={datevisible}
-                            onClose={() => {
-                                setDateVisible(false)
-                            }}
-                            defaultValue={now}
-                            max={now}
-                            cancelText="Cancel"
-                            confirmText="Add"
-                            title='Your birthday'
-                        >
-                            {value => "  " + value?.toDateString()}
-                        </DatePicker>
                     </Form.Item>
                     <Form.Item name='address' label='Bio' help='Let others know about you' className="font-extrabold text-3xl">
                         <TextArea 
