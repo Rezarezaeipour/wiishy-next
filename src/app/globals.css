@@ -61,3 +61,17 @@ body {
 }
 
 
+.adm-image-uploader-cell-delete-icon {
+  left: 11px !important;
+  top: 5px !important;
+  font-size: 13px !important;
+}
+
+.adm-image-uploader-cell-delete {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 20px;
+    border-radius: 0 0 0 30px !important;
+}
+
+
