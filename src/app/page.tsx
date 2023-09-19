@@ -1,24 +1,23 @@
-"use client"
+'use client'
 import Image from 'next/image'
 import { Button, ConfigProvider } from 'antd';
 import theme from '../../theme/themeConfig';
-
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
+  const { data: session, status } = useSession();
   return (
     <>
-      {/* <ConfigProvider theme={theme}> */}
+
       <div className="App">
 
-        <h2 className="text-3xl font-bold text-green-400 underline">
+        <div>
+          ClientComponent {status}{' '}
+          {status === 'authenticated' && session.user?.name}
+        </div>
 
-        </h2>
-        <p className="text-green-400">
-        
-
-        </p>
       </div>
-      {/* </ConfigProvider> */}
+
     </>
 
   )
