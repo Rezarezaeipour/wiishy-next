@@ -1,9 +1,11 @@
+'use client'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from "react";
 import '@/app/globals.css';
 import Header from '@/app/components/header/header';
 import Navbar from '@/app/components/navbar/navbar';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -16,10 +18,12 @@ const inter = Inter({ subsets: ['latin'] })
 // 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
 
-
+  const { data: session, status } = useSession();
   return (
     <>
       <Header />
+          ClientComponent {status}{' '}
+          {status === 'authenticated' && session.user?.name}
       {children}
       <Navbar />
     </>
