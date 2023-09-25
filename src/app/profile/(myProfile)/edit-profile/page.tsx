@@ -25,10 +25,10 @@ function EditProfile() {
 
         <>
             <div className="py-3 pb-20">
-                <Form  layout='vertical' mode="card" >
+                <Form layout='vertical' mode="card" >
                     <div className="flex justify-center py-8">
                         <ImageUploader value={fileList} onChange={setFileList}
-                            maxCount={1} upload={mockUpload} style={{'--cell-size': '150px', borderRadius: '80px'}}>
+                            maxCount={1} upload={mockUpload} style={{ '--cell-size': '150px', borderRadius: '80px' }}>
                             <div
                                 style={{
                                     width: 150,
@@ -41,20 +41,20 @@ function EditProfile() {
                                     color: '#999999',
                                 }}
                             >
-                                <PictureOutline className="rounded-full" style={{  width : '150px' }} />
+                                <PictureOutline className="rounded-full" style={{ width: '150px' }} />
                             </div>
                         </ImageUploader>
                     </div>
 
                     <Form.Item label='Name' name='Name' className="font-extrabold text-3xl"  >
-                        <Input placeholder='Your name' clearable className="font-normal"  />
+                        <Input placeholder='Your name' clearable className="font-normal" />
                     </Form.Item>
                     <Form.Item label='Family Name' name='Family' className="font-extrabold text-3xl">
-                        <Input placeholder='Your family name' clearable className="font-normal"/>
+                        <Input placeholder='Your family name' clearable className="font-normal" />
                     </Form.Item>
-                  
-                    <Form.Item style={{'fontSize':'13px'}}>
-                        <Button className="btn-regular" style={{fontSize:'14px'}}
+
+                    <Form.Item style={{ 'fontSize': '13px' }}>
+                        <Button className="btn-regular" style={{ fontSize: '14px' }}
                             onClick={() => {
                                 setDateVisible(true)
                             }}
@@ -82,8 +82,8 @@ function EditProfile() {
                                 '--border': 'solid transparent 1px',
                                 '--checked-border': 'solid var(--adm-color-primary) 1px',
                                 '--padding': '8px 24px',
-                                fontSize:'13px',
-                                fontWeight:'normal'
+                                fontSize: '13px',
+                                fontWeight: 'normal'
                             }}
                             showCheckMark={false}
                             options={[
@@ -110,16 +110,23 @@ function EditProfile() {
                         />
                     </Form.Item>
                     <Form.Item name='address' label='Bio' help='Let others know about you' className="font-extrabold text-3xl">
-                        <TextArea 
+                        <TextArea
                             placeholder='Write atleast three lines about yourself'
                             maxLength={100}
                             rows={5}
                             showCount
-                            style={{fontSize:'13px' , fontWeight:'normal'}}
+                            style={{ fontSize: '13px', fontWeight: 'normal' }}
                         />
                     </Form.Item>
-
-
+                    <div className="py-5 px-2 mt-3">
+                        <Button className="btn-regular w-full m-1" style={{ fontSize: '14px' }}
+                            onClick={() => {
+                                console.log('Save profile!')
+                            }}
+                        >
+                            Save
+                        </Button>
+                    </div>
                 </Form>
             </div>
 
