@@ -17,7 +17,7 @@ export default function Login() {
         <h1 className='text-center text-2xl font-bold '>Wiishy</h1>
         <h2 className='text-center mb-2'>An ultimate wishlist for proffesionals!</h2>
         <Button
-          onClick={() => signIn('linkedin')}
+          onClick={() => signIn('linkedin',{callbackUrl:"/profile/edit-profile"})}
           className='flex justify-center w-full'
           style={{marginBottom:'10px !important'}}
         >

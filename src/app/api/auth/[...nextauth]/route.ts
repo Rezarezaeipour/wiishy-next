@@ -1,3 +1,4 @@
+import { opendir } from "fs";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -19,12 +20,23 @@ const handler = NextAuth({
         },
         issuer: 'https://www.linkedin.com',
         jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
-      })
+        profile(profile, tokens) {
+          const defaultImage =
+            'https://cdn-icons-png.flaticon.com/512/174/174857.png';
+          return {
+            id: profile.sub,
+            name: profile.name,
+            email: profile.email,
+            image: profile.picture ?? defaultImage,
+            
+          };
+        },
+      } )
     
   ],
   pages: {
     signIn: '/login',
-    signOut: '/auth/signout',
+    signOut: '/signout',
     error: '/auth/error', // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
