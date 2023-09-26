@@ -18,13 +18,13 @@ export default function Login() {
         <Button
           onClick={() => signOut()}
           className='flex justify-center w-full'
-          style={{marginBottom:'10px !important'}}
+          style={{ marginBottom: '10px !important' }}
         >
-         
+
           <span>SignOut</span>
         </Button>
-     
-      
+
+
       </Card>
     </div>
   )
