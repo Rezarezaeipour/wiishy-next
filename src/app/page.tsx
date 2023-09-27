@@ -5,8 +5,9 @@ import theme from '../../theme/themeConfig';
 import { useSession } from 'next-auth/react';
 
 export default function Home() {
-  const { data: session, status  } = useSession();
+  const { data: session, status } = useSession();
   console.log(session)
+
   return (
     <>
 
@@ -17,15 +18,13 @@ export default function Home() {
           {status === 'authenticated' && session?.user?.image && session?.user?.name && (
 
             <>
-              <br/>
+              <br />
               <p>{session?.user?.name}</p>
-              <br/>
+              <br />
               <p>{session?.user?.email}</p>
-              <br/>
-              <img  height={100} src={session.user.image} />
-              <br/>
-              {session?.user?.x}
-             
+              <br />
+              <img height={100} src={session.user.image} />
+              <br />
             </>
           )}
         </div>

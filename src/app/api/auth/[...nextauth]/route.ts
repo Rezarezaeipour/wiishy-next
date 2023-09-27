@@ -21,6 +21,7 @@ const handler = NextAuth({
         issuer: 'https://www.linkedin.com',
         jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
         profile(profile, tokens) {
+        
           const defaultImage =
             'https://cdn-icons-png.flaticon.com/512/174/174857.png';
           return {
@@ -28,7 +29,9 @@ const handler = NextAuth({
             name: profile.name,
             email: profile.email,
             image: profile.picture ?? defaultImage,
-            
+            given_name: profile.given_name,
+            family_name: profile.family_name,
+            locale: profile.locale
           };
         },
       } )
