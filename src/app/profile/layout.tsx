@@ -22,8 +22,6 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
   return (
     <>
       <Header />
-          ClientComponent {status}{' '}
-          {status === 'authenticated' && session.user?.name}
           {children}
       <Navbar />
     </>
