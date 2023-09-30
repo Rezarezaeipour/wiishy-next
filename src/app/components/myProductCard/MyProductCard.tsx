@@ -4,7 +4,7 @@ import './style.module.css'
 import '@/app/globals.css'
 import { Product } from '@/types';
 
-function ProductCard(props : Product) {
+function MyProductCard(props : Product) {
     return (
         <div className="p-2 pb-7 rounded-[10px]">
             <Image alt={props.title || 'image name'} className="rounded-[10px]" src={ props.image || '/book.jpg'} ></Image>
@@ -21,4 +21,4 @@ function ProductCard(props : Product) {
     );
 }
 
-export default ProductCard;
+export default MyProductCard;

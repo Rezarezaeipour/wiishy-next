@@ -46,6 +46,12 @@ body {
 
 /* End Navbar */
 
+/* pages */
+  .main-head{
+    font-size: x-large;
+    font-weight: 600;
+  }
+/* end pages */
 
 .mt-45px {
   margin-top: 45px;

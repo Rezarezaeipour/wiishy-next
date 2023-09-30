@@ -1,15 +1,15 @@
 'use client'
-import ProductCard from "@/app/components/productCard/productCard";
+import MyProductCard from "@/app/components/myProductCard/MyProductCard";
 import { Product } from "@/types";
 
 
-function NyProductList(props : { productList : [Product] }) {
+function MyProductList(props : { productList : [Product] }) {
     return ( 
         <>
           {
             props.productList.map((Item,index) => {
                 return (
-                    <ProductCard key={'prd'+index} title={Item.title} image={Item.image} price={Item.price} rate={Item.rate} />
+                    <MyProductCard key={'prd'+index} title={Item.title} image={Item.image} price={Item.price} rate={Item.rate} />
                 )
             })
           } 
@@ -17,4 +17,4 @@ function NyProductList(props : { productList : [Product] }) {
      );
 }
 
-export default NyProductList;
+export default MyProductList;
