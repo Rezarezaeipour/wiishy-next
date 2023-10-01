@@ -6,6 +6,7 @@ import '@/app/globals.css';
 import Header from '@/app/components/header/header';
 import Navbar from '@/app/components/navbar/navbar';
 import { useSession } from 'next-auth/react';
+import {LoginProvider} from '../context/loginContext';
 
 
 
@@ -21,9 +22,11 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
   const { data: session, status } = useSession();
   return (
     <>
-      <Header />
-          {children}
-      <Navbar />
+      <LoginProvider>
+        <Header />
+        {children}
+        <Navbar />
+      </LoginProvider>
     </>
   )
 }
