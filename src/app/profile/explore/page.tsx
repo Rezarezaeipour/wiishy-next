@@ -1,4 +1,3 @@
-import ProductCard from "@/app/components/myProductCard/MyProductCard";
 import ProductList from "@/app/components/productList/productList";
 
 function Explore() {
