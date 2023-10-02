@@ -1,13 +1,14 @@
-import { opendir } from "fs";
+// import { login } from "@/api/authentication";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import LinkedInProvider from "next-auth/providers/linkedin";
+import LinkedInProvider, { LinkedInProfile } from "next-auth/providers/linkedin";
+import { signIn } from "next-auth/react";
 
 const handler = NextAuth({
-  
-  debug:true,
-  providers: [  
+
+  debug: false,
+  providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -35,8 +36,47 @@ const handler = NextAuth({
           };
         },
       } )
-    
   ],
+  callbacks: {
+    async signIn(params) {
+      const { email, given_name, family_name } = params.user as LinkedInProfile
+      // @ts-ignore
+      params.user.lastName = family_name
+      // @ts-ignore
+      const { provider } = params.account
+      // const response = await login({ provider, firstName: given_name, lastName: family_name, email })
+      try {
+        // const data = await response?.json()
+        // console.log('response: ')
+        // console.log(data)
+        return true 
+      }
+      catch (err) {
+        return '/error'
+      }
+    },
+    async jwt({ token, account, profile }) {
+    
+      if(profile){
+        token.family_name = profile.family_name
+        token.given_name = profile.given_name 
+        token.locale = profile.locale 
+      }
+      if(account?.provider){
+        token.provider = account.provider
+      }
+      return token
+    },
+    async session({ token, session, user, newSession, trigger }) {
+      if (token && session?.user) {
+        session.user.firstName = token.given_name
+        session.user.lastName = token.family_name,
+        session.user.locale = token.locale 
+        session.user.provider = token.provider
+        }
+      return session;
+  },
+  },
   pages: {
     signIn: '/login',
     signOut: '/signout',
@@ -44,7 +84,7 @@ const handler = NextAuth({
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
-  
+
 })
 
 export { handler as GET, handler as POST };

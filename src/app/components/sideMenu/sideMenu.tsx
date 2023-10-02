@@ -46,7 +46,7 @@ function SideMenu() {
               uncheckedText={<BulbOutlined fontSize={15} />}
             />
           }>Dark mode</List.Item>
-          <List.Item className='text-xs' onClick={() => { signOut() }}>
+          <List.Item className='text-xs' onClick={() => { signOut({callbackUrl:'/login'}) }}>
             SignOut
           </List.Item>
         </List>
