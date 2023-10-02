@@ -1,9 +1,11 @@
 'use client'
 import { Avatar, Button, CascadePickerView, DatePicker, Form, Image, ImageUploadItem, ImageUploader, Input, List, Picker, Selector, TextArea } from "antd-mobile";
 import { PictureOutline } from "antd-mobile-icons";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 function EditProfile() {
+    const seasion = useSession()
     const [gender, setGender] = useState('1');
     const [datevisible, setDateVisible] = useState(false);
     const columns = [['86', '01', '02', '03']];
