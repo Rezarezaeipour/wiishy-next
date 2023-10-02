@@ -1,20 +1,19 @@
-
+"use client"
 import { List, Avatar, Button } from "antd-mobile";
 import './style.css';
+import { Event } from "@/types";
 
-function HorizontalCard() {
+function HorizontalCard(props : { event : Event}) {
     return (
         <>
-            <List>
-                <List.Item className="card-name"
-                    
-                    prefix={<Avatar src='/book.jpg' />}
-                    description='Last 30 min'
+       
+                <List.Item className="card-name"  
+                    prefix={<Avatar src={props.event.image} />}
+                    description={props.event.time}
                 >
-                    <span className="card-desc">Reza added a gift</span>
-                   
+                    <span className="card-desc">{props.event.title}</span>
                 </List.Item>
-            </List>
+        
         </>
     );
 }

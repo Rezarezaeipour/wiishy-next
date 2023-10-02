@@ -7,3 +7,9 @@ export  interface Product {
     rate : number;
 }
 
+export interface Event {
+    title : string;
+    image : string;
+    time : string;
+}
+
