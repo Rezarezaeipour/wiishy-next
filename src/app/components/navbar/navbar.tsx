@@ -1,45 +1,45 @@
 "use client"
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+
 import React from "react";
-import StyledComponentsRegistry from '../../../../lib/AntdRegistry';
 import '@/app/globals.css';
 import { Badge, TabBar } from 'antd-mobile';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   HomeOutlined, MessageOutlined, PlusCircleFilled, PlusOutlined, SearchOutlined, UserOutlined,
   
 } from '@ant-design/icons'
 
  export default function Navbar() {
-  const pathname = usePathname()
- 
+  const router = useRouter();
+  const setRouteActive = (value: string) => {
+    router.push(value);
+  }
     const tabs = [
         {
-          key: 'Home',
+          key: '/profile/home',
           title: 'Home',
-          icon: <HomeOutlined/>,
+          icon: <HomeOutlined className="mb-2"/>,
           badge: Badge.dot,
         },
         {
-          key: 'Search',
+          key: '/profile/search',
           title: 'Search',
           icon: <SearchOutlined/> ,
         },
         {
-          key: 'message',
+          key: '/profile/new-gift',
           title: 'Add',
           icon: (active: boolean) =>
             active ? <PlusOutlined /> : <PlusCircleFilled />,
         },
         {
-          key: 'Events',
+          key: '/profile/events',
           title: 'Events',
           icon: <MessageOutlined />,
           badge: '5',
         },
         {
-          key: 'Profile',
+          key: '/profile/my-profile',
           title: 'Profile',
           icon: <UserOutlined />,
         }
@@ -47,13 +47,13 @@ import {
       ]
 
     return ( 
-        <TabBar className='navbar-light'>
+        <TabBar className='navbar-light' onChange={value=>setRouteActive(value)}>
         {tabs.map(item => (
           <TabBar.Item
             key={item.key}
             icon={item.icon}
             title={item.title}
-            badge={item.badge}
+            badge={item.badge}  
           />
         ))}
       </TabBar>

@@ -35,13 +35,18 @@ body {
 
 /* Navbar */
 
-.navbar-light {
+.adm-tab-bar {
   position: fixed;
   width: 100%;
   bottom: 0px;
   left: 0px;
   background-color: white;
-  padding: 7px 0 12px 0;
+  padding: 3px 0 3px 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.adm-tab-bar-item-title-with-icon{
+  margin-top: 8px !important;
 }
 
 /* End Navbar */

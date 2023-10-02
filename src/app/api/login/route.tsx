@@ -8,9 +8,8 @@ export async function POST(req: { json: () => PromiseLike<{ name: any; email: an
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "name": "amirali",
-      
-      "email": "test@gmail.com",
+      "name": name,
+      "email": email,
     }),
   });
 
