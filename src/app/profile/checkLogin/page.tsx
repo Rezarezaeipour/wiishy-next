@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import CookieSetter from "@/app/components/cookieSetter/cookieSetter";
+
 
 function CheckLogin() {
   const { data: session, status } = useSession();
@@ -34,19 +34,7 @@ function CheckLogin() {
 
       const data = await res.json();
 
-      ///Adding to Cookie
-      
-      CookieSetter({
-        name: data.user.name,
-        family: "",
-        userId: data.user.id,
-        age: 0,
-        location: "",
-        token: data?.token,
-      });
-
-      ///Adding to Cookie
-
+     
     //   if (data.new_user) {
     //     router.push("/profile/edit-profile");
     //   } else {
