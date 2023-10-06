@@ -1,3 +1,4 @@
+import CookieSetter from "@/app/components/cookieSetter/cookieSetter";
 
 export async function POST(req: { json: () => PromiseLike<{ name: any; email: any; provider: any; }> | { name: any; email: any; provider: any; }; }) {
 
@@ -18,6 +19,20 @@ export async function POST(req: { json: () => PromiseLike<{ name: any; email: an
   // }
 
   const data = await response.json();
+
+   ///Adding to Cookie
+      
+   CookieSetter({
+    name: data.user.name,
+    family: "",
+    userId: data.user.id,
+    age: 0,
+    location: "",
+    token: data?.token,
+  });
+
+  ///Adding to Cookie
+
   return Response.json(data)
 
 }

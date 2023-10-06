@@ -1,4 +1,3 @@
-'use client'
 import { cookies } from "next/headers";
 import { User } from "@/types";
 
@@ -10,7 +9,6 @@ function CookieSetter(props : User) {
     httpOnly: true,
     maxAge: 60 * 6 * 24,
   });
-
 
   return <></>;
 }
