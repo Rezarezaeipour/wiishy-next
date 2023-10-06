@@ -35,11 +35,11 @@ function CheckLogin() {
       const data = await res.json();
 
      
-    //   if (data.new_user) {
-    //     router.push("/profile/edit-profile");
-    //   } else {
-    //     router.push("/profile/explore");
-    //   }
+      if (data.new_user) {
+        router.push("/profile/edit-profile");
+      } else {
+        router.push("/profile/explore");
+      }
     } catch (error) {
       // Handle error as needed
     }
