@@ -1,4 +1,5 @@
 "use client";
+
 import { useSession } from "next-auth/react";
 import { createContext, ReactNode, useContext } from "react";
 
@@ -7,11 +8,6 @@ const LoginContext = createContext<any>(null);
 const LoginProvider = ({ children }: { children: ReactNode }) => {
   const { data: session, status } = useSession();
 
-  const checkIsNew = async () => {
-    const res = await fetch("/api/loginApi");
-    const data = await res.json();
-    console.log(data);
-  };
 
   const logIn = async () => {
     const res = await fetch("/api/login", {
@@ -22,7 +18,7 @@ const LoginProvider = ({ children }: { children: ReactNode }) => {
       body: JSON.stringify({
         name: session?.user?.name,
         email: session?.user?.email,
-        provider: session?.user?.provider,
+        provider: session?.user.provider,
       }),
     });
 
@@ -44,7 +40,7 @@ const LoginProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ checkIsNew, logIn, logOut }}>
+    <LoginContext.Provider value={{ logIn, logOut }}>
       {children}
     </LoginContext.Provider>
   );

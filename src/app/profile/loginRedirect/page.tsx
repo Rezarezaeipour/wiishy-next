@@ -16,7 +16,7 @@ function LoginRedirect() {
     try {
      
       const data = logIn();
-      console.log(data);
+     
       if (data.new_user) {
         router.push("/profile/edit-profile");
       } else {

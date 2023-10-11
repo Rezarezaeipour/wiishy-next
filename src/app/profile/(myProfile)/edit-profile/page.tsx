@@ -2,10 +2,16 @@
 import { Avatar, Button, CascadePickerView, DatePicker, Form, Image, ImageUploadItem, ImageUploader, Input, List, Picker, Selector, TextArea } from "antd-mobile";
 import { PictureOutline } from "antd-mobile-icons";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useLoadInfo from "../../../hooks/useLoadInfo";
 
 function EditProfile() {
-    const seasion = useSession()
+    
+  
+    const userData = useLoadInfo();
+    console.log('Hi there...',userData)
+    
+    
     const [gender, setGender] = useState('1');
     const [datevisible, setDateVisible] = useState(false);
     const columns = [['86', '01', '02', '03']];
@@ -15,9 +21,7 @@ function EditProfile() {
             url: '',
         },
     ])
-
     async function mockUpload(file: File) {
-
         return {
             url: URL.createObjectURL(file),
         }
