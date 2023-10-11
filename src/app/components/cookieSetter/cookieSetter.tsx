@@ -1,16 +1,21 @@
 import { cookies } from "next/headers";
 import { User } from "@/types";
 
-function CookieSetter(props : User) {
- 
+function CookieInfoSetter(props : User) {
     cookies().set({
     name: "w-user",
     value: JSON.stringify({ name: props.name, family: props.family, id: props.userId, age: props.age }),
-    httpOnly: true,
     maxAge: 60 * 6 * 24,
   });
-
-  return <></>;
 }
 
-export default CookieSetter;
+export function CookieTokenSetter(token : string,userId : number){
+  cookies().set({
+    name: "w-token",
+    value: JSON.stringify({'token':token,'userId':userId}),
+    httpOnly: true,
+    maxAge: 60 * 6 * 24,
+    sameSite: 'strict'
+})}
+
+export default CookieInfoSetter;

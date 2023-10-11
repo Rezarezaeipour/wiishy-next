@@ -1,28 +1,34 @@
-import CookieSetter from "@/app/components/cookieSetter/cookieSetter";
+import CookieInfoSetter, { CookieTokenSetter } from "@/app/components/cookieSetter/cookieSetter";
 
-export async function POST(req: { json: () => PromiseLike<{ name: any; email: any; provider: any; }> | { name: any; email: any; provider: any; }; }) {
-
+export async function POST(req: {
+  json: () =>
+    | PromiseLike<{ name: any; email: any; provider: any }>
+    | { name: any; email: any; provider: any };
+}) {
   const { name, email, provider } = await req.json();
-  const response = await fetch(`http://wiishy-backend.ir/api/auth/${provider}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      "name": name,
-      "email": email,
-    }),
-  });
+  const response = await fetch(
+    `http://wiishy-backend.ir/api/auth/${provider}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    }
+  );
 
   // if (!response.ok) {
   //   throw new Error('Failed to fetch data');
   // }
-
+   
   const data = await response.json();
 
-   ///Adding to Cookie
-      
-   CookieSetter({
+  ///Adding to Cookie
+
+  CookieInfoSetter({
     name: data.user.name,
     family: "",
     userId: data.user.id,
@@ -31,8 +37,9 @@ export async function POST(req: { json: () => PromiseLike<{ name: any; email: an
     token: data?.token,
   });
 
+  CookieTokenSetter(data.token,data.user.id);
+
   ///Adding to Cookie
 
-  return Response.json(data)
-
+  return Response.json(data);
 }
