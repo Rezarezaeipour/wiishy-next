@@ -6,7 +6,6 @@ import {
   ImageUploadItem,
   ImageUploader,
   Selector,
-  TextArea,
 } from "antd-mobile";
 
 import { PictureOutline } from "antd-mobile-icons";
@@ -16,10 +15,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import userUpdateHandler from "@/app/handlers/userUpdate";
 
 function EditProfile() {
-
   const { register, setValue, handleSubmit } = useForm();
 
-  const [gender, setGender] = useState("1");
+  const [gender, setGender] = useState("3");
   const [datevisible, setDateVisible] = useState(false);
   const now = new Date();
   const [fileList, setFileList] = useState<ImageUploadItem[]>([
@@ -30,23 +28,24 @@ function EditProfile() {
 
   /// Handle Submit
   const onSubmit = (data: any) => {
-    userUpdateHandler({...data,'user_gender':gender});
+    userUpdateHandler({ ...data, user_gender: gender });
   };
   /// End Handle Submit
 
   useEffect(() => {
     (async () => {
       const data = await getLoadInfo();
-       
+
       ///Load user info
+
       setValue("name", data.user.name);
       setValue("family", data.user.family);
-      setValue("user_desc",data.user.user_desc);
-      setGender(data.user.user_gender)
+      setValue("user_desc", data.user.user_desc);
+      setGender(data.user.user_gender);
+  
       ///End load user info
-
     })();
-  }, [setValue,setGender]);
+  }, [setValue, setGender]);
 
   async function mockUpload(file: File) {
     return {
@@ -56,8 +55,9 @@ function EditProfile() {
 
   return (
     <>
-      <div className="py-3 pb-20">
+      <div className="p-3 pb-20">
         <form onSubmit={handleSubmit(onSubmit)}>
+
           <div className="flex justify-center py-8">
             <ImageUploader
               value={fileList}
@@ -89,12 +89,12 @@ function EditProfile() {
           {/* NAME */}
           <Form.Item
             label="Name"
-            name="Name"
-            className="font-extrabold text-3xl"
+            className="font-extrabold text-3xl "
+            style={{ backgroundColor: "transparent" }}
           >
             <input
               placeholder="Your name"
-              className="font-normal"
+              className="font-normal wiishy-input-text"
               {...register("name")}
             />
           </Form.Item>
@@ -106,17 +106,20 @@ function EditProfile() {
             label="Family"
             name="Family"
             className="font-extrabold text-3xl"
+            style={{ backgroundColor: "transparent" }}
           >
             <input
               placeholder="Your family name"
-              className="font-normal"
+              className="font-normal  wiishy-input-text"
               {...register("family")}
             />
           </Form.Item>
           {/* END FAMILY NAME */}
 
           {/* BIRTH DATE */}
-          <Form.Item style={{ fontSize: "13px" }}>
+          <Form.Item
+            style={{ fontSize: "13px", backgroundColor: "transparent" }}
+          >
             <Button
               className="btn-regular"
               style={{ fontSize: "14px" }}
@@ -143,12 +146,7 @@ function EditProfile() {
           {/* END BIRTH DATE */}
 
           {/* GENDER */}
-          <Form.Item
-            label="Gender"
-            name="Gender"
-            className="font-extrabold text-3xl"
-          >
-            <Selector
+          <Selector
               style={{
                 "--border-radius": "100px",
                 "--border": "solid transparent 1px",
@@ -176,10 +174,18 @@ function EditProfile() {
               onChange={(v) => {
                 if (v.length) {
                   setGender(v[0]);
+                  console.log(gender)
                 }
               }}
-              defaultValue={["2"]}
+             
             />
+          <Form.Item
+            label="Gender"
+            name="Gender"
+            className="font-extrabold text-3xl"
+            style={{ backgroundColor: "transparent" }}
+          >
+          
           </Form.Item>
           {/* END GENDER */}
 
@@ -189,26 +195,28 @@ function EditProfile() {
             label="Bio"
             help="Let others know about you"
             className="font-extrabold text-3xl"
+            style={{ backgroundColor: "transparent" }}
           >
             <textarea
-            
               placeholder="Write atleast three lines about yourself"
               maxLength={100}
               rows={5}
-              style={{ fontSize: "13px", fontWeight: "normal" }}
+              className="font-normal wiishy-input-text"
               {...register("user_desc")}
             />
           </Form.Item>
           {/* END BIO */}
 
           {/* SUBMIT BUTTON */}
-          <div className="py-5 px-2 mt-3">
-            <input
+          <div className="pb-5 px-0 mt-1 ">
+            <Button
               type="submit"
-              className="btn-regular w-full m-1"
+              className="btn btn-regular w-full m-1"
               style={{ fontSize: "14px" }}
-              value="SAVE"
-            />
+            >
+              Save
+            </Button>
+
             {/* END SUBMIT BUTTON */}
           </div>
         </form>
