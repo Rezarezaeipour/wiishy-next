@@ -58,6 +58,19 @@ body {
   }
 /* end pages */
 
+
+/* Forms */
+.wiishy-input-text{
+  width: 100%;
+  height: 100%;
+  padding: 0px 5px;
+  border: solid thin silver;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* End Forms */
+
 .mt-45px {
   margin-top: 45px;
 }
