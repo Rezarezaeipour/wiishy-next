@@ -37,6 +37,8 @@ export async function POST(req: {
     token: data?.token,
   });
 
+
+
   CookieTokenSetter(data.token,data.user.id);
 
   ///Adding to Cookie

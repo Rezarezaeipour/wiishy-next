@@ -6,6 +6,7 @@ export async function GET(request: Request) {
     const cookie = cookies();
     const info = cookie.get('w-token');
     let res ="";
+    
     if(info){
         const parsedInf = JSON.parse(info.value);
         const token = parsedInf.token;

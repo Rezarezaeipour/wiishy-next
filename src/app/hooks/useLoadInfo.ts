@@ -9,5 +9,6 @@ export default async function useLoadInfo() {
     },
   });
   const data = await res.json();
+  
   return data;
 }
