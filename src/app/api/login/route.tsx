@@ -2,10 +2,10 @@ import CookieInfoSetter, { CookieTokenSetter } from "@/app/components/cookieSett
 
 export async function POST(req: {
   json: () =>
-    | PromiseLike<{ name: any; email: any; provider: any }>
-    | { name: any; email: any; provider: any };
+    | PromiseLike<{ name: any; email: any; provider: any; image:any }>
+    | { name: any; email: any; provider: any;image: any };
 }) {
-  const { name, email, provider } = await req.json();
+  const { name, email, provider,image } = await req.json();
   const response = await fetch(
     `http://wiishy-backend.ir/api/auth/${provider}`,
     {
@@ -16,6 +16,7 @@ export async function POST(req: {
       body: JSON.stringify({
         name: name,
         email: email,
+        user_image_url:image
       }),
     }
   );

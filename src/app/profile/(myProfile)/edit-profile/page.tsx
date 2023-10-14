@@ -4,7 +4,6 @@ import {
   DatePicker,
   Form,
   ImageUploadItem,
-  ImageUploader,
   Selector,
 } from "antd-mobile";
 
@@ -13,77 +12,52 @@ import { useEffect, useRef, useState } from "react";
 import getLoadInfo from "../../../hooks/useLoadInfo";
 import { useForm, SubmitHandler } from "react-hook-form";
 import userUpdateHandler from "@/app/handlers/userUpdate";
+import Image from "next/image";
 
 function EditProfile() {
   const { register, setValue, handleSubmit } = useForm();
 
   const [gender, setGender] = useState("3");
+  const [image, setImage] = useState("/wiishy.png");
   const [datevisible, setDateVisible] = useState(false);
+  const [file, setFile] = useState<File>();
   const now = new Date();
-  const [fileList, setFileList] = useState<ImageUploadItem[]>([
-    {
-      url: "/Reza1.jpg",
-    },
-  ]);
-
-  /// Handle Submit
-  const onSubmit = (data: any) => {
-    userUpdateHandler({ ...data, user_gender: gender });
-  };
-  /// End Handle Submit
 
   useEffect(() => {
     (async () => {
       const data = await getLoadInfo();
-
+      console.log("nnnmm", data);
       ///Load user info
 
-      setValue("name", data.user.name);
-      setValue("family", data.user.family);
-      setValue("user_desc", data.user.user_desc);
-      setGender(data.user.user_gender);
-  
+      setValue("name", data.user?.name);
+      setValue("family", data.user?.family);
+      setValue("user_desc", data.user?.user_desc);
+      setGender(data.user?.user_gender);
+      setImage(data.user?.user_image_url);
+
       ///End load user info
     })();
   }, [setValue, setGender]);
 
-  async function mockUpload(file: File) {
-    return {
-      url: URL.createObjectURL(file),
-    };
-  }
+
+  /// Handle Submit
+  const onSubmit = (data: any) => {
+    userUpdateHandler({ ...data, user_gender: gender, image: file });
+  };
+  /// End Handle Submit
 
   return (
     <>
       <div className="p-3 pb-20">
         <form onSubmit={handleSubmit(onSubmit)}>
-
+          {image}
+          <Image src={image} width={150} height={150} alt="wiishy user" />
           <div className="flex justify-center py-8">
-            <ImageUploader
-              value={fileList}
-              onChange={setFileList}
-              maxCount={1}
-              upload={mockUpload}
-              style={{ "--cell-size": "150px", borderRadius: "80px" }}
-            >
-              <div
-                style={{
-                  width: 150,
-                  height: 150,
-                  borderRadius: 80,
-                  backgroundColor: "#f5f5f5",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "#999999",
-                }}
-              >
-                <PictureOutline
-                  className="rounded-full"
-                  style={{ width: "150px" }}
-                />
-              </div>
-            </ImageUploader>
+            <input
+              type="file"
+              name="file"
+              onChange={(e) => setFile(e.target.files?.[0])}
+            />
           </div>
 
           {/* NAME */}
@@ -104,7 +78,6 @@ function EditProfile() {
           {/* FAMILY NANE */}
           <Form.Item
             label="Family"
-            name="Family"
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >
@@ -147,46 +120,39 @@ function EditProfile() {
 
           {/* GENDER */}
           <Selector
-              style={{
-                "--border-radius": "100px",
-                "--border": "solid transparent 1px",
-                "--checked-border": "solid var(--adm-color-primary) 1px",
-                "--padding": "8px 24px",
-                fontSize: "13px",
-                fontWeight: "normal",
-              }}
-              showCheckMark={false}
-              options={[
-                {
-                  label: "Man",
-                  value: "1",
-                },
-                {
-                  label: "Woman",
-                  value: "2",
-                },
-                {
-                  label: "Others",
-                  value: "3",
-                },
-              ]}
-              value={[gender]}
-              onChange={(v) => {
-                if (v.length) {
-                  setGender(v[0]);
-                  console.log(gender)
-                }
-              }}
-             
-            />
-          <Form.Item
-            label="Gender"
-            name="Gender"
-            className="font-extrabold text-3xl"
-            style={{ backgroundColor: "transparent" }}
-          >
-          
-          </Form.Item>
+            style={{
+              "--border-radius": "100px",
+              "--border": "solid transparent 1px",
+              "--checked-border": "solid var(--adm-color-primary) 1px",
+              "--padding": "8px 24px",
+              fontSize: "13px",
+              fontWeight: "normal",
+            }}
+            showCheckMark={false}
+            options={[
+              {
+                label: "Man",
+                value: "1",
+              },
+              {
+                label: "Woman",
+                value: "2",
+              },
+              {
+                label: "Others",
+                value: "3",
+              },
+            ]}
+            value={[gender]}
+            defaultValue={[gender]}
+            onChange={(v) => {
+              if (v.length) {
+                setGender(v[0]);
+                console.log(gender);
+              }
+            }}
+          />
+        
           {/* END GENDER */}
 
           {/* BIO */}
