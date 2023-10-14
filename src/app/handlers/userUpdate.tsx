@@ -1,17 +1,22 @@
 function userUpdateHandler(data: {
   name: string;
   family: string;
-  bio: string;
+  user_desc: string;
+  image: File,
+  user_gender:string
+
 }) {
-  console.log('userUpdateFunction',data);
+  
+  console.log('userUpdate',data)
+  const dt = new FormData();
+  dt.set('file',JSON.stringify(data))
   const req = fetch("/api/updateuser", {
     method: "PUT",
-    body: JSON.stringify(data),
+    body: dt,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
     },
   });
-  return <></>;
 }
 
 export default userUpdateHandler;

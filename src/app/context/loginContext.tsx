@@ -8,7 +8,7 @@ const LoginContext = createContext<any>(null);
 const LoginProvider = ({ children }: { children: ReactNode }) => {
   const { data: session, status } = useSession();
 
-
+ 
   const logIn = async () => {
     const res = await fetch("/api/login", {
       method: "POST",
@@ -18,7 +18,8 @@ const LoginProvider = ({ children }: { children: ReactNode }) => {
       body: JSON.stringify({
         name: session?.user?.name,
         email: session?.user?.email,
-        provider: session?.user.provider,
+        provider: session?.user?.provider,
+        image:session?.user?.image,
       }),
     });
 
