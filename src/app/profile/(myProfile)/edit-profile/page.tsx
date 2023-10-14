@@ -120,39 +120,42 @@ function EditProfile() {
 
           {/* GENDER */}
           <Selector
-            style={{
-              "--border-radius": "100px",
-              "--border": "solid transparent 1px",
-              "--checked-border": "solid var(--adm-color-primary) 1px",
-              "--padding": "8px 24px",
-              fontSize: "13px",
-              fontWeight: "normal",
-            }}
-            showCheckMark={false}
-            options={[
-              {
-                label: "Man",
-                value: "1",
-              },
-              {
-                label: "Woman",
-                value: "2",
-              },
-              {
-                label: "Others",
-                value: "3",
-              },
-            ]}
-            value={[gender]}
-            defaultValue={[gender]}
-            onChange={(v) => {
-              if (v.length) {
-                setGender(v[0]);
-                console.log(gender);
-              }
-            }}
-          />
-        
+
+              style={{
+                "--border-radius": "100px",
+                "--border": "solid transparent 1px",
+                "--checked-border": "solid var(--adm-color-primary) 1px",
+                "--padding": "8px 24px",
+                fontSize: "13px",
+                fontWeight: "normal",
+              }}
+              showCheckMark={false}
+              options={[
+                {
+                  label: "Man",
+                  value: "1",
+                },
+                {
+                  label: "Woman",
+                  value: "2",
+                },
+                {
+                  label: "Others",
+                  value: "3",
+                },
+              ]}
+              value={[gender]}
+              defaultValue={[gender]}
+              onChange={(v) => {
+                if (v.length) {
+                  setGender(v[0]);
+                  console.log(gender)
+                }
+              }}
+             
+            />
+          
+
           {/* END GENDER */}
 
           {/* BIO */}
