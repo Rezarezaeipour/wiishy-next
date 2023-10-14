@@ -171,6 +171,7 @@ function EditProfile() {
                 },
               ]}
               value={[gender]}
+              defaultValue={[gender]}
               onChange={(v) => {
                 if (v.length) {
                   setGender(v[0]);
