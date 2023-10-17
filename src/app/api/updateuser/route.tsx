@@ -1,39 +1,35 @@
-
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
-import { json } from "stream/consumers";
 
-export async function PUT(request: NextRequest) {
+export async function POST(request: NextRequest) {
+  let xdata = null;
 
+  const data = await request.formData()
 
-  let xdata;
   const cookie = cookies();
   const infoCookie = cookie.get("w-token");
- 
+  
   if (infoCookie?.value) {
-    
-    const infoCookieObject = JSON.parse(infoCookie?.value)
+  
+    const infoCookieObject = JSON.parse(infoCookie.value);
     const userId = infoCookieObject.userId;
     const token = infoCookieObject.token;
-    
-    const dt = new FormData()
-    dt.set('userinfo',await request.json())
+
   
+   
     const response = await fetch(
-      `http://wiishy-backend.ir/api/user-update/${userId}`,
+      `https://wiishy-backend.ir/api/user-update/${userId}`,
       {
-        body : dt,
-        method: "PUT",
+        method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`,
-        }
+        },
+        body: data
       }
     );
 
-
     xdata = await response.json();
-  
+    console.log(xdata)
   }
 
   return Response.json(xdata);

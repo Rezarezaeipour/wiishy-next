@@ -1,22 +1,25 @@
-function userUpdateHandler(data: {
+async function userUpdateHandler(data: {
   name: string;
   family: string;
   user_desc: string;
-  image: File,
-  user_gender:string
-
+  user_gender: string;
+  image: File;
 }) {
-  
-  console.log('userUpdate',data)
-  const dt = new FormData();
-  dt.set('file',JSON.stringify(data))
-  const req = fetch("/api/updateuser", {
-    method: "PUT",
-    body: dt,
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+  console.log('userUpdate', data.image);
+
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('family', data.family);
+  formData.append('user_desc', data.user_desc);
+  formData.append('user_gender', data.user_gender);
+ formData.append('image', data.image);
+
+  const req =  await fetch("/api/updateuser", {
+    method: "POST",
+    body: formData
   });
+  
+  
 }
 
 export default userUpdateHandler;
