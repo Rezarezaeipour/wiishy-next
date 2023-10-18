@@ -3,7 +3,6 @@ import {
   Button,
   DatePicker,
   Form,
-  ImageUploadItem,
   Selector,
 } from "antd-mobile";
 
@@ -44,7 +43,7 @@ function EditProfile() {
   };
   /// End Handle Submit
 
-  console.log("GENDER: ", gender);
+
 
   return (
     <>
@@ -52,7 +51,7 @@ function EditProfile() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex justify-center pt-5">
             <Image
-              src={`https://wiishy-backend.ir${image}`}
+              src={image ? `https://wiishy-backend.ir${image}` : '/wiisy.png'}
               width={150}
               height={150}
               className="rounded-full"
