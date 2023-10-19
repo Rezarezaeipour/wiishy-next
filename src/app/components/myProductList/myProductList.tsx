@@ -4,6 +4,7 @@ import { Product } from "@/types";
 
 
 function MyProductList(props : { productList : [Product] }) {
+   
     return ( 
         <>
           {
