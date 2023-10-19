@@ -24,8 +24,7 @@ function EditProfile() {
   useEffect(() => {
     (async () => {
       const data = await getLoadInfo();
-      console.log("nnnmm", data);
-      ///Load user info
+
 
       setValue("name", data.user?.name);
       setValue("family", data.user?.family);
