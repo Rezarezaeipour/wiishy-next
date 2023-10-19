@@ -98,4 +98,8 @@ body {
     border-radius: 0 0 0 30px !important;
 }
 
+.adm-slider-thumb{
+  display: flex;
+}
+
 
