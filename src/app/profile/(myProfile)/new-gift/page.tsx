@@ -3,18 +3,20 @@ import { Button, DatePicker, Form, Selector, Slider } from "antd-mobile";
 import { useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import userUpdateHandler from "@/app/handlers/userUpdate";
 import Image from "next/image";
+import giftAddHandler from "@/app/handlers/giftAddHandler";
+import { SliderValue } from "antd-mobile/es/components/slider";
 
 function NewGift() {
   const { register, handleSubmit } = useForm();
 
   const [file, setFile] = useState<File>();
+  const [desire, setDesire] = useState<SliderValue>(50);
   const now = new Date();
 
   /// Handle Submit
   const onSubmit = (data: any) => {
-    // userUpdateHandler({ ...data, user_gender: gender, image: file });
+    giftAddHandler({ ...data, desire_rate: desire });
   };
   /// End Handle Submit
 
@@ -48,6 +50,20 @@ function NewGift() {
             />
           </div>
 
+          {/* GIFT URL */}
+          <Form.Item
+            label="Gift URL"
+            className="font-extrabold text-3xl "
+            style={{ backgroundColor: "transparent" }}
+          >
+            <input
+              placeholder="Gift name"
+              className="font-normal wiishy-input-text"
+              {...register("gift_url")}
+            />
+          </Form.Item>
+          {/* END URL */}
+
           {/* GIFT NAME */}
           <Form.Item
             label="Gift name"
@@ -76,9 +92,22 @@ function NewGift() {
             />
           </Form.Item>
           {/* END GIFT PRICE */}
-          <div className="my-4">
-            <Slider marks={marks} ticks value={40}/>
-          </div>
+
+          {/* GIFT DESIRE */}
+          <Form.Item
+            label="Gift desire"
+            className="font-extrabold text-3xl"
+            style={{ backgroundColor: "transparent" }}
+          >
+            <div className="my-4">
+              <Slider
+                marks={marks}
+                ticks
+                onAfterChange={(value) => setDesire(value)}
+              />
+            </div>
+          </Form.Item>
+          {/* Endi GIFT DESIRE */}
           {/* GIFT DESCRIPTION */}
           <Form.Item
             label="Gift description"
