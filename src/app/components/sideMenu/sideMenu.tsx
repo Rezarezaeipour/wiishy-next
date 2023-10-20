@@ -9,13 +9,14 @@ import "./style.css";
 import ProfileCard from "../profileCard/profileCard";
 import { signOut, useSession } from "next-auth/react";
 import { BulbOutlined, FireOutlined } from "@ant-design/icons";
-import { useLoginContext } from "@/app/context/loginContext";
 import { useRouter } from "next/navigation";
+import { useLoginContext } from "@/app/context/loginContext";
 
 function SideMenu() {
   const { data: session, status } = useSession();
   const { logOut } = useLoginContext();
   const router = useRouter();
+
   return (
     <>
       {session ?
