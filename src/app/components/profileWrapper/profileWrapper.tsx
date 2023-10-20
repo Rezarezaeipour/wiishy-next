@@ -1,7 +1,7 @@
 import { Button, Image } from "antd-mobile";
 import { LocationFill } from "antd-mobile-icons";
 
-function ProfileWrapper(props) {
+function ProfileWrapper(props: { name: string; image: string | undefined; gender: number; location: any; following: any; followers: any; bio: any; }) {
     return (
         <>
             <div className="flex flex-col items-center pt-5">

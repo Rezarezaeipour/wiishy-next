@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   let xdata = null;
@@ -32,5 +32,5 @@ export async function POST(request: NextRequest) {
    
   }
 
-  return Response.json(xdata);
+  return NextResponse.json(xdata);
 }
