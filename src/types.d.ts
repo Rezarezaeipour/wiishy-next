@@ -1,10 +1,21 @@
 import { type } from "os";
 
 export interface Product {
-  title: string;
-  image: string;
-  price: string;
-  rate: number;
+  // title: string;
+  // image: string;
+  // price: string;
+  // rate: number;
+
+  gift_id?: number,
+  gift_view?: number,
+  gift_like?: number,
+  desire_rate?: number,
+  created_at?: Date,
+  gift_name?: string,
+  gift_price?: string,
+  gift_desc?: string,
+  gift_url?: string,
+  islike?: boolean
 }
 
 export interface Event {
