@@ -9,7 +9,7 @@ function ProductList(props : { productList : [Product] }) {
           {
             props.productList.map((Item,index) => {
                 return (
-                    <ProductCard key={'prd'+index} title={Item.title} image={Item.image} price={Item.price} rate={Item.rate} />
+                    <ProductCard key={'prd'+index}  gift_name={Item.gift_name} gift_url={Item.gift_url} gift_price={Item.gift_price} desire_rate={Item.desire_rate} />
                 )
             })
           } 
