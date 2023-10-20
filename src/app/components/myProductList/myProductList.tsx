@@ -1,8 +1,6 @@
 'use client'
 import MyProductCard from "@/app/components/myProductCard/MyProductCard";
 import { Product } from "@/types";
-import ProductList from "../productList/productList";
-
 
 function MyProductList(props : { productList : [Product] }) {
     console.log('propsPage',props.productList)
