@@ -18,6 +18,7 @@ const LoginProvider = ({ children }: { children: ReactNode }) => {
       body: JSON.stringify({
         name: session?.user?.name,
         email: session?.user?.email,
+        // @ts-ignore
         provider: session?.user?.provider,
         image:session?.user?.image,
       }),

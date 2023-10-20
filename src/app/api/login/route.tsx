@@ -1,10 +1,7 @@
 import CookieInfoSetter, { CookieTokenSetter } from "@/app/components/cookieSetter/cookieSetter";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: {
-  json: () =>
-    | PromiseLike<{ name: any; email: any; provider: any; image:any }>
-    | { name: any; email: any; provider: any;image: any };
-}) {
+export async function POST(req: NextRequest) {
   const { name, email, provider,image } = await req.json();
   const response = await fetch(
     `http://wiishy-backend.ir/api/auth/${provider}`,
@@ -44,5 +41,5 @@ export async function POST(req: {
 
   ///Adding to Cookie
 
-  return Response.json(data);
+  return NextResponse.json(data);
 }

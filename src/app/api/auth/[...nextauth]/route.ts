@@ -58,8 +58,11 @@ const handler = NextAuth({
     async jwt({ token, account, profile }) {
     
       if(profile){
+         // @ts-ignore
         token.family_name = profile.family_name
+         // @ts-ignore
         token.given_name = profile.given_name 
+         // @ts-ignore
         token.locale = profile.locale 
       }
       if(account?.provider){
@@ -69,9 +72,13 @@ const handler = NextAuth({
     },
     async session({ token, session, user, newSession, trigger }) {
       if (token && session?.user) {
+         // @ts-ignore
         session.user.firstName = token.given_name
-        session.user.lastName = token.family_name,
+         // @ts-ignore
+        session.user.lastName = token.family_name
+         // @ts-ignore
         session.user.locale = token.locale 
+         // @ts-ignore
         session.user.provider = token.provider
         }
       return session;

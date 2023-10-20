@@ -73,8 +73,8 @@ function SideMenu() {
             className="text-xs"
             extra={
               <Switch
-                checkedText={<FireOutlined fontSize={15} />}
-                uncheckedText={<BulbOutlined fontSize={15} />}
+                checkedText={<FireOutlined style={{fontSize:"15px"}} />}
+                uncheckedText={<BulbOutlined  style={{fontSize:"15px"}} />}
               />
             }
           >
