@@ -1,9 +1,10 @@
 "use client";
 import MyProductList from "@/app/components/myProductList/myProductList";
 import MyProfileWrapper from "@/app/components/myProfileWrapper/myProfileWrapper";
-import myProductListHandler from "@/app/handlers/myProductListHandler";
+
 import { useEffect, useState } from "react";
 import getLoadInfo from "../../../hooks/useLoadInfo";
+import { myProductListHandler } from "@/app/api-client/gifts";
 
 function MyProfile() {
   const [productList,setProductList] = useState();
