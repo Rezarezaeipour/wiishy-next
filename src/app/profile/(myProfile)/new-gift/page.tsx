@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
-import giftAddHandler from "@/app/handlers/giftAddHandler";
 import { SliderValue } from "antd-mobile/es/components/slider";
+import { addHandler } from "@/app/api-client/gifts";
 
 function NewGift() {
   const { register, handleSubmit } = useForm();
@@ -16,7 +16,7 @@ function NewGift() {
 
   /// Handle Submit
   const onSubmit = (data: any) => {
-    giftAddHandler({ ...data, desire_rate: desire });
+    addHandler({ ...data, desire_rate: desire });
   };
   /// End Handle Submit
 

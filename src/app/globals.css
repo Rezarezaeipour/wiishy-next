@@ -69,6 +69,19 @@ body {
   font-size: 16px;
 }
 
+#input-image-avatar{
+  display: none;
+}
+
+.uploaAvatarBtn{
+  vertical-align: -0.125em;
+  position: absolute;
+  bottom: 0px;
+  z-index: 5000;
+  margin-left: 97px;
+  font-size: 39px;
+  cursor: pointer;
+}
 /* End Forms */
 
 .mt-45px {
@@ -101,5 +114,15 @@ body {
 .adm-slider-thumb{
   display: flex;
 }
+
+.input-alert
+{
+  font-size: 11px;
+  font-weight: normal;
+  margin-bottom: 6px;
+  color: black;
+  float: right;
+}
+
 
 
