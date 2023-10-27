@@ -28,6 +28,7 @@ function EditProfile() {
   const [birth, setbirth] = useState<Date>();
   const minDate = new Date(1960, 1, 1);
   const [status, setStatuse] = useState(false);
+  
 
   useEffect(() => {
     (async () => {
@@ -50,9 +51,8 @@ function EditProfile() {
               content: "There is a problem in loading your data",
               position: "bottom",
             });
-            const router = useRouter();
-            router.push('/login');
-          })();
+            
+          })(); 
 
       ///End load user info
     })();
@@ -211,7 +211,7 @@ function EditProfile() {
               onChange={(v) => {
                 if (v.length) {
                   setGender(v[0]);
-                  console.log(gender);
+                
                 }
               }}
             />
