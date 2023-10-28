@@ -7,7 +7,7 @@ import {
 } from "antd-mobile-icons";
 import "./style.css";
 import ProfileCard from "../profileCard/profileCard";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { BulbOutlined, FireOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useLoginContext } from "@/app/context/loginContext";
@@ -85,7 +85,6 @@ function SideMenu() {
             className="text-xs"
             onClick={() => {
               logOut();
-              signOut({ callbackUrl: "/login" });
             }}
           >
             Log Out

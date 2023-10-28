@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { createContext, ReactNode, useContext } from "react";
+import { signOut } from "next-auth/react"
 
 const LoginContext = createContext<any>(null);
 
@@ -39,6 +40,7 @@ const LoginProvider = ({ children }: { children: ReactNode }) => {
         "Content-Type": "application/json",
       },
     });
+    signOut({ callbackUrl: "/login" });
   };
 
   return (

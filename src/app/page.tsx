@@ -9,7 +9,7 @@ export default function Home() {
   const router = useRouter();
 
     useEffect(() => { 
-      setTimeout( async () => {
+      setTimeout(  () => {
         session ? 
         router.push("/profile/explore")
          :
