@@ -76,7 +76,7 @@ function Page() {
           ) : (
             <Button
               className="btn-regular"
-              onClick={() => { router.push('/') }}
+              onClick={() => { router.push('/login') }}
             >
               Try wiishy
             </Button>
