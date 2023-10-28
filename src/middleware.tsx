@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   const user = request.cookies.get("w-user");
 
   if (request.nextUrl.pathname.startsWith('/profile/') && !request.nextUrl.pathname.startsWith('/profile/loginRedirect')  ) {
-   if(!info && !user){
+   if(!info || !user){
    return NextResponse.redirect(new URL('/login', request.url))
    }
  }
