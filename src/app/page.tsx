@@ -13,7 +13,7 @@ export default function Home() {
         session ? 
         router.push("/profile/explore")
          :
-         router.push("/login")
+         router.push("/steps")
         }, 1000);
     }, [session]);
  

@@ -7,19 +7,14 @@ import Image from 'next/image'
 
 export default function Login() {
   return (
-    <div className='flex flex-col items-center justify-center h-full bg-white'>
+    <div className='flex flex-col items-center space-y-3 justify-center h-full bg-white p-4'>
 
-      <Card
-        hoverable
-        style={{ width: '100%' }}
-        cover={<img alt="wiishy" src="/intro.jpg" />}
-      >
-        <h1 className='text-center text-2xl font-bold '>Wiishy</h1>
-        <h2 className='text-center mb-2'>An ultimate wishlist for proffesionals!</h2>
+     
+        <h1 className='text-center text-4xl font-bold '>Wiishy</h1>
+        <h2 className='text-center '>An ultimate wishlist for proffesionals!</h2>
         <Button
           onClick={() => signIn('linkedin',{callbackUrl:"/profile/loginRedirect"})}
           className='flex justify-center w-full'
-          style={{marginBottom:'10px !important'}}
         >
           <LinkedinOutlined className='mr-1' />
           <span>Linkedin</span>
@@ -32,7 +27,7 @@ export default function Login() {
           <GoogleOutlined className='mr-1'/>
           <span>Google</span>
         </Button>
-      </Card>
+    
     </div>
   )
 }
