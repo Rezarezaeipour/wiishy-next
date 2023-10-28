@@ -1,12 +1,11 @@
 // import { login } from "@/api/authentication";
+import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider, { LinkedInProfile } from "next-auth/providers/linkedin";
 import { signIn } from "next-auth/react";
-
-const handler = NextAuth({
-
+export const authOptions:NextAuthOptions = {
   debug: false,
   providers: [
     GoogleProvider({
@@ -92,6 +91,7 @@ const handler = NextAuth({
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
 
-})
+}
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST };
