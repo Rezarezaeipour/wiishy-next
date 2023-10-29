@@ -16,7 +16,7 @@ const LoginProvider = ({ children }: { children: ReactNode }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+        body: JSON.stringify({
         name: session?.user?.name,
         email: session?.user?.email,
         // @ts-ignore
