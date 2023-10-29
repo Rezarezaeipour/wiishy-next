@@ -24,8 +24,7 @@ export async function POST(request: NextRequest) {
       }
     );
   
-    xdata = await response.json();
-
+    xdata = await response.json(); 
   }
 
   return NextResponse.json(xdata.message);
