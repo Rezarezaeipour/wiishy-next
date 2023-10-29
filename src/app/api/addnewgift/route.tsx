@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   
   let xdata = null;
   const data = await request.formData();
-  console.log('request',data);
+ 
   const cookie = cookies();
   const infoCookie = cookie.get("w-token");
 
@@ -18,16 +18,16 @@ export async function POST(request: NextRequest) {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization" : `Bearer ${token}`,
         },
         body: data,
       }
     );
-
+  
     xdata = await response.json();
-    console.log('xdata',xdata)
+
   }
 
-  return NextResponse.json(xdata);
+  return NextResponse.json(xdata.message);
 }
 

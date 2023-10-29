@@ -16,7 +16,7 @@ export async function updateHandler(data: {
   if (data.image) {
     formData.append("image", data.image);
   }
-console.log('rezasa',formData.get('birth_date'))
+
   const req = await fetch("/api/updateuser", {
     method: "POST",
     body: formData,
