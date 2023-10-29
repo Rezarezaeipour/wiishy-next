@@ -18,15 +18,12 @@ export async function POST(req: NextRequest) {
     }
   );
 
-  // if (!response.ok) {
-  //   throw new Error('Failed to fetch data');
-  // }
    
   const data = await response.json();
 
   ///Adding to Cookie
 
-  CookieInfoSetter({
+  await CookieInfoSetter({
     name: data.user.name,
     family: "",
     userId: data.user.id,
@@ -37,7 +34,7 @@ export async function POST(req: NextRequest) {
 
 
 
-  CookieTokenSetter(data.token,data.user.id);
+  await CookieTokenSetter(data.token,data.user.id);
 
   ///Adding to Cookie
 

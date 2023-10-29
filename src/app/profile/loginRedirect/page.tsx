@@ -36,9 +36,11 @@ function LoginRedirect() {
     }
   }, [checkLog, session]);
 
-  return <>
-  <p>Redirecting to the wiishy</p>
-  </>;
+  return (
+    <>
+      <p>Redirecting to the wiishy</p>
+    </>
+  );
 }
 
 export default LoginRedirect;
