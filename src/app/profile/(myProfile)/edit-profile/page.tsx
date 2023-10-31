@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 
 
 function EditProfile() {
+
   const {
     register,
     setValue,
@@ -29,7 +30,7 @@ function EditProfile() {
   const minDate = new Date(1960, 1, 1);
   const [status, setStatuse] = useState(false);
   
-
+  /// Handle Load
   useEffect(() => {
     (async () => {
       ///Load user info
@@ -57,6 +58,7 @@ function EditProfile() {
       ///End load user info
     })();
   }, [setValue, setGender, setbirth]);
+  // End handle load
 
   /// Handle Submit
   const onSubmit = (data: any) => {

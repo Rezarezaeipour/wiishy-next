@@ -1,34 +1,39 @@
-
 export async function addHandler(data: any) {
-    const formData = new FormData();
-  
-      formData.append("gift_name", data.giftname),
-      formData.append("gift_price", data.giftprice),
-      formData.append("gift_desc", data.giftdescription),
-      formData.append("gift_url", data.gift_url),
-      formData.append("gift_image_url", "http://djkjd.com"),
-      formData.append("desire_rate", data.desire_rate);
-      formData.append("image", data.image);
-      
-      const req = await fetch("/api/addnewgift", {
-      method: "POST",
-      body: formData,
-    });
+  const formData = new FormData();
 
-    const response = await req.json();
-    return response;
-  }
+  formData.append("gift_name", data.giftname),
+    formData.append("gift_price", data.giftprice),
+    formData.append("gift_desc", data.giftdescription),
+    formData.append("gift_url", data.gift_url),
+    formData.append("gift_image_url", "http://djkjd.com"),
+    formData.append("desire_rate", data.desire_rate);
+  formData.append("image", data.image);
 
+  const req = await fetch("/api/addnewgift", {
+    method: "POST",
+    body: formData,
+  });
 
-  export async function myProductListHandler() {
-    const list = await fetch('/api/getmygifts',{
-        method:"GET",
-        headers:{
-            "Content-Type":"application/json"
-        }
-    })
-   
-    return await list.json();
+  const response = await req.json();
+  return response;
 }
-  
-  
+
+export async function myProductListHandler() {
+  const list = await fetch("/api/getmygifts", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await list.json();
+}
+
+export async function loadGiftHandler(giftid: number) {
+  const response = await fetch("/api/loadgift", {
+    method: "POST",
+    body: JSON.stringify(`{"giftid" : ${giftid}}`),
+  });
+
+  return response.json();
+}

@@ -17,7 +17,7 @@ function MyProfile() {
 
         const data = await getLoadInfo();
         setNewuser(data.user);
-        console.log('data',data.user);
+       
     })()
   }, []);
 
