@@ -30,10 +30,10 @@ export async function myProductListHandler() {
 }
 
 export async function loadGiftHandler(giftid: number) {
-  const response = await fetch("/api/loadgift", {
+  const res = await fetch("/api/loadgift", {
     method: "POST",
     body: JSON.stringify(`{"giftid" : ${giftid}}`),
   });
-
-  return response.json();
+  
+   return res.json();
 }
