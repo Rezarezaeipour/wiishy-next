@@ -16,6 +16,7 @@ export interface Product {
   gift_desc?: string,
   gift_url?: string,
   islike?: boolean
+  gift_image_url?:string
 }
 
 export interface Event {
