@@ -10,12 +10,13 @@ import { AddCircleOutline } from "antd-mobile-icons";
 
 function EditGift({ params }: { params: { giftid : string } }) {
 
-  const { register, handleSubmit,reset } = useForm();
+  const { register, handleSubmit,reset,setValue } = useForm();
 
   const [file, setFile] = useState<File>();
   const [image, setImage] = useState(wisshy.src);
-  const [desire, setDesire] = useState<SliderValue>(50);
+  const [desire, setDesire] = useState<SliderValue>(5);
   const [loading, setLoading] = useState(false);
+  
   const now = new Date();
   
   /// Handle Load Gift
@@ -24,26 +25,29 @@ function EditGift({ params }: { params: { giftid : string } }) {
     (async () => {
      
       const data = await loadGiftHandler(Number.parseInt(params.giftid));
-      console.log('data',data);
-
-      // data
-      //   ? (() => {
-      //       data ? setStatuse(true) : setStatuse(false);
-      //       const bd = new Date(data?.user.user_birthday);
-      //       setValue("name", data.user?.name);
-           
-      //     })()
-      //   : (() => {
+      const loadedGift = data.gift_detail[0];
+      console.log(loadedGift)
+      data
+        ? (() => {
           
-      //       Toast.show({
-      //         content: "There is a problem in loading your data",
-      //         position: "bottom",
-      //       });
+            setValue("gift_url", loadedGift.gift_url);
+            setValue("giftname", loadedGift.gift_name);
+            setValue("giftprice", loadedGift.gift_price);
+            setValue("giftdescription", loadedGift.gift_desc)
+            setDesire(loadedGift.desire_rate);
+            setImage("https://wiishy-backend.ir/"+loadedGift.gift_image_url);
+          })()
+        : (() => {
+          
+            Toast.show({
+              content: "There is a problem in loading your data",
+              position: "bottom",
+            });
             
-      //     })(); 
+          })(); 
 
     })();
-  }, []);
+  }, [setValue]);
 
   /// End Handle Load Gift
 
@@ -168,12 +172,14 @@ function EditGift({ params }: { params: { giftid : string } }) {
                 marks={marks}
                 ticks
                 onAfterChange={(value) => setDesire(value)}
-                defaultValue={3}
+                defaultValue={desire}
+                value={desire}
                 max={5}
               />
             </div>
           </Form.Item>
-          {/* Endi GIFT DESIRE */}
+          {/* End GIFT DESIRE */}
+
           {/* GIFT DESCRIPTION */}
           <Form.Item
             label="Gift description"

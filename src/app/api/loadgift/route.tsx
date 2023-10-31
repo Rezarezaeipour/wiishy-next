@@ -6,14 +6,14 @@ export async function POST(request: NextRequest) {
 
   const cookie = cookies();
   const info = cookie.get("w-token");
-  let res;
+  let res="";
 
   if (info) {
     const parsedInf = JSON.parse(info.value);
     const token = parsedInf.token;
     const userid = parsedInf.userId;
 
-    res = await fetch(
+    const response = await fetch(
       `http://wiishy-backend.ir/api/giftdetail/${giftid.giftid}/${userid}`,
       {
         method: "GET",
@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
         },
       }
     );
-
-    console.log(res.json())
+    res = await response.json()
+    
   }
 
   return NextResponse.json(res);
