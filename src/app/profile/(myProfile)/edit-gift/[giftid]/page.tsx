@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
-import { addHandler, loadGiftHandler } from "@/app/api-client/gifts";
+import { loadGiftHandler, updateHandler } from "@/app/api-client/gifts";
 import wisshy from "../../../../../../public/wisshy.png";
 import { AddCircleOutline } from "antd-mobile-icons";
 
@@ -26,7 +26,7 @@ function EditGift({ params }: { params: { giftid : string } }) {
      
       const data = await loadGiftHandler(Number.parseInt(params.giftid));
       const loadedGift = data.gift_detail[0];
-      console.log(loadedGift)
+     
       data
         ? (() => {
           
@@ -54,19 +54,20 @@ function EditGift({ params }: { params: { giftid : string } }) {
   /// Handle Submit
   const onSubmit = async (data: any) => {
     setLoading(true);
-    const response = await addHandler({
+    const response = await updateHandler({
       ...data,
       desire_rate: desire,
       image: file,
+      giftid: params.giftid
     });
     if (response) {
       setLoading(false);
       Toast.show({
-        content: response,
+        content: response.message,
         position: "bottom",
       });
-      reset();
-      setImage(wisshy.src);
+      // reset();
+     
     }
   };
   /// End Handle Submit

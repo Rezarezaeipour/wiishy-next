@@ -13,7 +13,7 @@ function LoginRedirect() {
 
   const checkLog = async () => {
     try {
-      const data = logIn();
+      const data = await logIn();
 
       if (data.new_user) {
         setTimeout(() => {
