@@ -18,6 +18,33 @@ export async function addHandler(data: any) {
   return response;
 }
 
+export async function updateHandler(data: any) {
+  const formData = new FormData();
+
+  formData.append("gift_name", data.giftname),
+    formData.append("gift_price", data.giftprice),
+    formData.append("gift_desc", data.giftdescription),
+    formData.append("gift_url", data.gift_url),
+    formData.append("gift_image_url", data.gift_url),
+    formData.append("desire_rate", data.desire_rate);
+    formData.append("gift_id",data.giftid)
+    if (data.image){
+      formData.append("image", data.image);
+    }
+ 
+
+  const res = await fetch("/api/updategift", {
+    method: "POST",
+    body: formData,
+  });
+  if(res.ok){
+    const response = await res.json();
+    return response;
+  }
+ 
+  return 'Something went wrong';
+}
+
 export async function myProductListHandler() {
   const list = await fetch("/api/getmygifts", {
     method: "GET",
@@ -34,6 +61,6 @@ export async function loadGiftHandler(giftid: number) {
     method: "POST",
     body: JSON.stringify(`{"giftid" : ${giftid}}`),
   });
-  
-   return res.json();
+
+  return res.json();
 }
