@@ -47,7 +47,7 @@ function EditGift({ params }: { params: { giftid : string } }) {
           })(); 
 
     })();
-  }, [setValue]);
+  }, [setValue,params.giftid]);
 
   /// End Handle Load Gift
 

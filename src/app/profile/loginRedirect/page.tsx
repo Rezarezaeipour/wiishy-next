@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useContext } from "react";
 import { useLoginContext } from "@/app/context/loginContext";
+import { SpinLoading } from "antd-mobile";
 
 function LoginRedirect() {
   const { data: session, status } = useSession();
@@ -18,11 +19,11 @@ function LoginRedirect() {
       if (data.new_user) {
         setTimeout(() => {
           router.push("/profile/edit-profile");
-        }, 2000);
+        }, 1000);
       } else {
         setTimeout(() => {
           router.push("/profile/explore");
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       // Handle error as needed
@@ -38,7 +39,10 @@ function LoginRedirect() {
 
   return (
     <>
-      <p>Redirecting to the wiishy</p>
+      <div className="h-full w-full flex flex-col items-center justify-center">
+        <SpinLoading color="currentColor" className="mb-2"/>
+        Redirecting to the wiishy
+      </div>
     </>
   );
 }

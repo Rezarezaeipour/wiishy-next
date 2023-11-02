@@ -15,7 +15,7 @@ export default function Home() {
          :
          router.push("/steps")
         }, 1000);
-    }, [session]);
+    }, [session,router]);
  
   return (
     <>
