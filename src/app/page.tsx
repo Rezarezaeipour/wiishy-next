@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import logo from "../../public/logo/wiishy-little.png"
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -26,7 +27,7 @@ export default function Home() {
               width={300}
               height={100}
               alt="Wiishy, an ultimate wishlist"
-              src="/wisshy.png"
+              src={logo}
             ></Image>
             <p className="text-center font-bold text-xl">
               An ultimate wishlist 

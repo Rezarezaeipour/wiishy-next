@@ -11,13 +11,13 @@ export default function Login() {
       <Image src={wiishylogo}
       style={{width:"100%"}}
       alt="wiishyLogo"></Image>
-
+      <h1 style={{marginTop:"50px"}} className="text-xl">Login to your account</h1>
       <Button
         onClick={() =>
           signIn("linkedin", { callbackUrl: "/profile/loginRedirect" })
         }
         className="btn btn-regular-outline w-full"
-        style={{ marginTop: "80px" }}
+        style={{ marginTop: "20px" }}
       >
         <div className="flex items-center justify-center content-center align-middle justify-items-center">
           <LinkedinOutlined className="mr-1" />

@@ -1,6 +1,8 @@
+import { Skeleton } from "antd";
 import { Button, Image } from "antd-mobile";
 import { LocationFill } from "antd-mobile-icons";
 import Link from "next/link";
+import { Suspense } from "react";
 
 function MyProfileWrapper(props: {
   name: string;
@@ -16,10 +18,13 @@ function MyProfileWrapper(props: {
     <>
       <div className="flex flex-col items-center pt-5">
         <Image
+          width={150}
+          height={150}
           alt={props.name}
           src={`https://wiishy-backend.ir${props.image}`}
           className="rounded-full w-1/3 "
         />
+
         <h1 className="font-bold text-xl mt-3">
           {props.name || "Name"} {props.family || "Family"}
         </h1>
@@ -51,7 +56,6 @@ function MyProfileWrapper(props: {
             <p>followers</p>
           </div>
         </div>
-
         <p className="px-4 py-1">
           {props.bio ||
             " A passionate web developer and designer looking for new opportunities in European "}
