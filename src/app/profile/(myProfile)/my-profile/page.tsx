@@ -6,7 +6,7 @@ import { Suspense, useEffect, useState } from "react";
 import getLoadInfo from "../../../hooks/useLoadInfo";
 import { myProductListHandler } from "@/app/api-client/gifts";
 import { Skeleton } from "antd";
-import { DotLoading } from "antd-mobile";
+
 
 function MyProfile() {
   const [productList, setProductList] = useState();
@@ -28,7 +28,7 @@ function MyProfile() {
       const data = await getLoadInfo();
       setNewuser(data.user);
     })();
-  }, []);
+  }, [setNewuser,setProductList]);
 
   return (
     <>

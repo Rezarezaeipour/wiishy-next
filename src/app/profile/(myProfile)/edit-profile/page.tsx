@@ -81,7 +81,7 @@ function EditProfile() {
             ) : (
               <Image
                 src={
-                  image ? `https://wiishy-backend.ir${image}` : "./wiishy.png"
+                  image ? `https://wiishy-backend.ir${image}` : "./logo/wiishy-gray.jpg"
                 }
                 width={150}
                 height={150}
