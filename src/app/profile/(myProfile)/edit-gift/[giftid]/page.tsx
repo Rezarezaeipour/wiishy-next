@@ -4,50 +4,45 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
-import { loadGiftHandler, updateHandler } from "@/app/api-client/gifts";
+import { loadGiftHandler, updateHandler ,deleteGift } from "@/app/api-client/gifts";
 import wisshy from "../../../../../../public/wisshy.png";
 import { AddCircleOutline } from "antd-mobile-icons";
+import { useRouter } from "next/navigation";
 
-function EditGift({ params }: { params: { giftid : string } }) {
-
-  const { register, handleSubmit,reset,setValue } = useForm();
+function EditGift({ params }: { params: { giftid: string } }) {
+  const { register, handleSubmit, reset, setValue } = useForm();
 
   const [file, setFile] = useState<File>();
   const [image, setImage] = useState(wisshy.src);
   const [desire, setDesire] = useState<SliderValue>(5);
   const [loading, setLoading] = useState(false);
-  
+  const router = useRouter();
   const now = new Date();
-  
+
   /// Handle Load Gift
 
   useEffect(() => {
     (async () => {
-     
       const data = await loadGiftHandler(Number.parseInt(params.giftid));
       const loadedGift = data.gift_detail[0];
-     
+
       data
         ? (() => {
-          
             setValue("gift_url", loadedGift.gift_url);
             setValue("giftname", loadedGift.gift_name);
             setValue("giftprice", loadedGift.gift_price);
-            setValue("giftdescription", loadedGift.gift_desc)
+            setValue("giftdescription", loadedGift.gift_desc);
             setDesire(loadedGift.desire_rate);
-            setImage("https://wiishy-backend.ir/"+loadedGift.gift_image_url);
+            setImage("https://wiishy-backend.ir/" + loadedGift.gift_image_url);
           })()
         : (() => {
-          
             Toast.show({
               content: "There is a problem in loading your data",
               position: "bottom",
             });
-            
-          })(); 
-
+          })();
     })();
-  }, [setValue,params.giftid]);
+  }, [setValue, params.giftid]);
 
   /// End Handle Load Gift
 
@@ -58,7 +53,7 @@ function EditGift({ params }: { params: { giftid : string } }) {
       ...data,
       desire_rate: desire,
       image: file,
-      giftid: params.giftid
+      giftid: params.giftid,
     });
     if (response) {
       setLoading(false);
@@ -67,10 +62,25 @@ function EditGift({ params }: { params: { giftid : string } }) {
         position: "bottom",
       });
       // reset();
-     
     }
   };
   /// End Handle Submit
+
+  /// Handle Delete
+  const deleteHandler = async () => {
+    const deleteRes = await deleteGift(Number.parseInt(params.giftid));
+    
+    Toast.show({
+      content: deleteRes.message,
+      position: "bottom",
+    });
+    (() =>{
+      setTimeout(() => {
+        router.push("/profile/my-profile");
+      }, 1000);
+    })()
+  };
+  /// End Handle Delete
 
   const marks = {
     0: 0,
@@ -199,16 +209,24 @@ function EditGift({ params }: { params: { giftid : string } }) {
           {/* END GIFT DESCRIPTION */}
 
           {/* SUBMIT BUTTON */}
-          <div className="pb-5 px-0 mt-1 ">
+          <div className="flex flex-row pb-5 px-0 mt-1 ">
             <Button
               loading={loading}
               type="submit"
-              className="btn btn-regular w-full m-1"
+              className="btn btn-regular w-full m-1 basis-3/4"
               style={{ fontSize: "14px" }}
             >
               Save
             </Button>
-
+            <Button
+              loading={loading}
+              type="button"
+              className="btn btn-regular-outline w-full m-1 basis-1/4"
+              style={{ fontSize: "14px" }}
+              onClick={() => deleteHandler()}
+            >
+              Delete
+            </Button>
             {/* END SUBMIT BUTTON */}
           </div>
         </form>
