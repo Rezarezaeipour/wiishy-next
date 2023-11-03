@@ -62,5 +62,16 @@ export async function loadGiftHandler(giftid: number) {
     body: JSON.stringify(`{"giftid" : ${giftid}}`),
   });
 
-  return res.json();
+  return await res.json();
 }
+
+export async function deleteGift(giftid : number) {
+ 
+  const res = await fetch ("/api/deletegift",{
+    method: "POST",
+    body: JSON.stringify(`{"giftid" : ${giftid}}`)
+  })
+  return await res.json();
+}
+
+
