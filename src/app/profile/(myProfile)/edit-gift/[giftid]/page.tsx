@@ -111,54 +111,40 @@ function EditGift({ params }: { params: { giftid: string } }) {
     <>
       <div className="p-3 pb-20">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center pt-5 w-full">
-            {!image ? (
-              <Skeleton.Image
-                style={{ width: "100% !important", height: "200px" }}
-                className="w-full"
-              />
-            ) : (
-              <Image
-                src={image}
-                width={300}
-                height={250}
-                alt="wiishy user"
-                style={{
-                  width: "100%",
-                  height: "250px",
-                  objectFit: "cover",
-                }}
-              />
-            )}
-          </div>
-          <div className="flex justify-center py-8 relative">
-            <AddCircleOutline
-              className="uploaGiftBtn"
-              onClick={() =>
-                document.getElementById("input-image-gift")?.click()
-              }
-            />
-            <input
-              type="file"
-              name="file"
-              id="input-image-gift"
-              onChange={(e) => {
-                setFile(e.target.files?.[0]);
-                e.target.files?.[0] &&
-                  setImage(URL.createObjectURL(e.target.files?.[0]));
-              }}
-              style={{ display: "none" }}
-            />
-          </div>
-
-          {!loaded ? (
+          {loaded ? (
             <>
-              <Skeleton paragraph={{ rows: 4 }} />
-              <br/>
-              <Skeleton paragraph={{ rows: 4 }} />
-            </>
-          ) : (
-            <>
+              <div className="flex justify-center pt-5 w-full">
+                <Image
+                  src={image}
+                  width={300}
+                  height={250}
+                  alt="wiishy user"
+                  style={{
+                    width: "100%",
+                    height: "250px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+              <div className="flex justify-center py-8 relative">
+                <AddCircleOutline
+                  className="uploaGiftBtn"
+                  onClick={() =>
+                    document.getElementById("input-image-gift")?.click()
+                  }
+                />
+                <input
+                  type="file"
+                  name="file"
+                  id="input-image-gift"
+                  onChange={(e) => {
+                    setFile(e.target.files?.[0]);
+                    e.target.files?.[0] &&
+                      setImage(URL.createObjectURL(e.target.files?.[0]));
+                  }}
+                  style={{ display: "none" }}
+                />
+              </div>
               {/* GIFT URL */}
               <Form.Item
                 label="Gift URL"
@@ -238,45 +224,57 @@ function EditGift({ params }: { params: { giftid: string } }) {
                 />
               </Form.Item>
               {/* END GIFT DESCRIPTION */}
+              {/* SUBMIT BUTTON */}
+              <div className="flex flex-row pb-5 px-0 mt-1 ">
+                <Button
+                  loading={loading}
+                  type="submit"
+                  className="btn btn-regular w-full m-1 basis-3/4"
+                  style={{ fontSize: "14px" }}
+                >
+                  Save
+                </Button>
+                <Button
+                  loading={loading}
+                  type="button"
+                  className="btn btn-regular-outline w-full m-1 basis-1/4"
+                  style={{ fontSize: "14px" }}
+                  onClick={async () => {
+                    const result = await Dialog.confirm({
+                      content: "Are you sure to delete this Gift?",
+                      confirmText: "Yes",
+                      cancelText: "No",
+                      onConfirm: async () => {
+                        deleteHandler();
+                      },
+                      onCancel: async () => {
+                        Toast.show({
+                          content: "Delete aborted",
+                          position: "bottom",
+                        });
+                      },
+                    });
+                  }}
+                >
+                  Delete
+                </Button>
+                {/* END SUBMIT BUTTON */}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex justify-center pt-5 w-full mb-5">
+                <Skeleton.Image
+                  style={{ width: "100% !important", height: "200px" }}
+                  className="w-full"
+                />
+              </div>
+              <br/>
+              <Skeleton paragraph={{ rows: 4 }} />
+              <br />
+              <Skeleton paragraph={{ rows: 4 }} />
             </>
           )}
-
-          {/* SUBMIT BUTTON */}
-          <div className="flex flex-row pb-5 px-0 mt-1 ">
-            <Button
-              loading={loading}
-              type="submit"
-              className="btn btn-regular w-full m-1 basis-3/4"
-              style={{ fontSize: "14px" }}
-            >
-              Save
-            </Button>
-            <Button
-              loading={loading}
-              type="button"
-              className="btn btn-regular-outline w-full m-1 basis-1/4"
-              style={{ fontSize: "14px" }}
-              onClick={async () => {
-                const result = await Dialog.confirm({
-                  content: "Are you sure to delete this Gift?",
-                  confirmText: "Yes",
-                  cancelText: "No",
-                  onConfirm: async () => {
-                    deleteHandler();
-                  },
-                  onCancel: async () => {
-                    Toast.show({
-                      content: "Delete aborted",
-                      position: "bottom",
-                    });
-                  },
-                });
-              }}
-            >
-              Delete
-            </Button>
-            {/* END SUBMIT BUTTON */}
-          </div>
         </form>
       </div>
     </>
