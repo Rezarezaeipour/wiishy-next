@@ -22,3 +22,21 @@ export async function updateHandler(data: {
     body: formData,
   });
 }
+
+export default async function getUserData(userId:number) {
+  let data;
+  const res = await fetch("/api/loaduser", {
+    method:"POST",
+    body : JSON.stringify(`{"userId": ${userId}}`)
+    // body : JSON.stringify({"userId": userId})
+  });
+  
+  if(res.ok){
+     data = await res.json();
+  }else{
+    data = {'message':'Something went wrong'}
+  }
+  
+  
+  return data;
+}
