@@ -1,23 +1,38 @@
 "use client";
-import { Button, DatePicker, Form, Selector, Slider, Toast } from "antd-mobile";
+import {
+  Button,
+  DatePicker,
+  Dialog,
+  Form,
+  Selector,
+  Slider,
+  Toast,
+} from "antd-mobile";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
-import { loadGiftHandler, updateHandler ,deleteGift } from "@/app/api-client/gifts";
-import wisshy from "../../../../../../public/wisshy.png";
+import {
+  loadGiftHandler,
+  updateHandler,
+  deleteGift,
+} from "@/app/api-client/gifts";
+import wisshy from "../../../../../../public/logo/wiishy-gray.jpg";
 import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/navigation";
+import { Skeleton } from "antd";
+import { DotChartOutlined } from "@ant-design/icons";
 
 function EditGift({ params }: { params: { giftid: string } }) {
   const { register, handleSubmit, reset, setValue } = useForm();
 
   const [file, setFile] = useState<File>();
-  const [image, setImage] = useState(wisshy.src);
+  const [image, setImage] = useState("");
   const [desire, setDesire] = useState<SliderValue>(5);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const now = new Date();
+  const [loaded, setLoaded] = useState(false);
 
   /// Handle Load Gift
 
@@ -34,6 +49,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
             setValue("giftdescription", loadedGift.gift_desc);
             setDesire(loadedGift.desire_rate);
             setImage("https://wiishy-backend.ir/" + loadedGift.gift_image_url);
+            setLoaded(true);
           })()
         : (() => {
             Toast.show({
@@ -69,16 +85,16 @@ function EditGift({ params }: { params: { giftid: string } }) {
   /// Handle Delete
   const deleteHandler = async () => {
     const deleteRes = await deleteGift(Number.parseInt(params.giftid));
-    
+
     Toast.show({
       content: deleteRes.message,
       position: "bottom",
     });
-    (() =>{
+    (() => {
       setTimeout(() => {
         router.push("/profile/my-profile");
       }, 1000);
-    })()
+    })();
   };
   /// End Handle Delete
 
@@ -95,18 +111,25 @@ function EditGift({ params }: { params: { giftid: string } }) {
     <>
       <div className="p-3 pb-20">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center pt-5 ">
-            <Image
-              src={image}
-              width={300}
-              height={250}
-              alt="wiishy user"
-              style={{
-                width: "100%",
-                height: "250px",
-                objectFit: "cover",
-              }}
-            />
+          <div className="flex justify-center pt-5 w-full">
+            {!image ? (
+              <Skeleton.Image
+                style={{ width: "100% !important", height: "200px" }}
+                className="w-full"
+              />
+            ) : (
+              <Image
+                src={image}
+                width={300}
+                height={250}
+                alt="wiishy user"
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  objectFit: "cover",
+                }}
+              />
+            )}
           </div>
           <div className="flex justify-center py-8 relative">
             <AddCircleOutline
@@ -128,85 +151,95 @@ function EditGift({ params }: { params: { giftid: string } }) {
             />
           </div>
 
-          {/* GIFT URL */}
-          <Form.Item
-            label="Gift URL"
-            className="font-extrabold text-3xl "
-            style={{ backgroundColor: "transparent" }}
-          >
-            <input
-              placeholder="https://amazon.com/xxx"
-              className="font-normal wiishy-input-text"
-              {...register("gift_url")}
-            />
-          </Form.Item>
-          {/* END URL */}
+          {!loaded ? (
+            <>
+              <Skeleton paragraph={{ rows: 4 }} />
+              <br/>
+              <Skeleton paragraph={{ rows: 4 }} />
+            </>
+          ) : (
+            <>
+              {/* GIFT URL */}
+              <Form.Item
+                label="Gift URL"
+                className="font-extrabold text-3xl "
+                style={{ backgroundColor: "transparent" }}
+              >
+                <input
+                  placeholder="https://amazon.com/xxx"
+                  className="font-normal wiishy-input-text"
+                  {...register("gift_url")}
+                />
+              </Form.Item>
+              {/* END URL */}
 
-          {/* GIFT NAME */}
-          <Form.Item
-            label="Gift name"
-            className="font-extrabold text-3xl "
-            style={{ backgroundColor: "transparent" }}
-          >
-            <input
-              placeholder="Electric bicycle"
-              className="font-normal wiishy-input-text"
-              {...register("giftname")}
-            />
-          </Form.Item>
+              {/* GIFT NAME */}
+              <Form.Item
+                label="Gift name"
+                className="font-extrabold text-3xl "
+                style={{ backgroundColor: "transparent" }}
+              >
+                <input
+                  placeholder="Electric bicycle"
+                  className="font-normal wiishy-input-text"
+                  {...register("giftname")}
+                />
+              </Form.Item>
 
-          {/* END GIFT NAME */}
+              {/* END GIFT NAME */}
 
-          {/* GIFT PRICE */}
-          <Form.Item
-            label="Gift Price (in USD)"
-            className="font-extrabold text-3xl"
-            style={{ backgroundColor: "transparent" }}
-          >
-            <input
-              type="number"
-              placeholder="250"
-              className="font-normal  wiishy-input-text"
-              {...register("giftprice")}
-            />
-          </Form.Item>
-          {/* END GIFT PRICE */}
+              {/* GIFT PRICE */}
+              <Form.Item
+                label="Gift Price (in USD)"
+                className="font-extrabold text-3xl"
+                style={{ backgroundColor: "transparent" }}
+              >
+                <input
+                  type="number"
+                  placeholder="250"
+                  className="font-normal  wiishy-input-text"
+                  {...register("giftprice")}
+                />
+              </Form.Item>
+              {/* END GIFT PRICE */}
 
-          {/* GIFT DESIRE */}
-          <Form.Item
-            label="Gift desire"
-            className="font-extrabold text-3xl"
-            style={{ backgroundColor: "transparent" }}
-          >
-            <div className="my-4">
-              <Slider
-                marks={marks}
-                ticks
-                onAfterChange={(value) => setDesire(value)}
-                defaultValue={desire}
-                value={desire}
-                max={5}
-              />
-            </div>
-          </Form.Item>
-          {/* End GIFT DESIRE */}
+              {/* GIFT DESIRE */}
+              <Form.Item
+                label="Gift desire"
+                className="font-extrabold text-3xl"
+                style={{ backgroundColor: "transparent" }}
+              >
+                <div className="my-4">
+                  <Slider
+                    marks={marks}
+                    ticks
+                    onAfterChange={(value) => setDesire(value)}
+                    defaultValue={desire}
+                    value={desire}
+                    max={5}
+                  />
+                </div>
+              </Form.Item>
+              {/* End GIFT DESIRE */}
 
-          {/* GIFT DESCRIPTION */}
-          <Form.Item
-            label="Gift description"
-            help="Let others know about this product"
-            className="font-extrabold text-3xl"
-            style={{ backgroundColor: "transparent" }}
-          >
-            <textarea
-              placeholder="Write atleast three lines about the gift"
-              maxLength={100}
-              rows={5}
-              className="font-normal wiishy-input-text"
-              {...register("giftdescription")}
-            />
-          </Form.Item>
-          {/* END GIFT DESCRIPTION */}
+              {/* GIFT DESCRIPTION */}
+              <Form.Item
+                label="Gift description"
+                help="Let others know about this product"
+                className="font-extrabold text-3xl"
+                style={{ backgroundColor: "transparent" }}
+              >
+                <textarea
+                  placeholder="Write atleast three lines about the gift"
+                  maxLength={100}
+                  rows={5}
+                  className="font-normal wiishy-input-text"
+                  {...register("giftdescription")}
+                />
+              </Form.Item>
+              {/* END GIFT DESCRIPTION */}
+            </>
+          )}
 
           {/* SUBMIT BUTTON */}
           <div className="flex flex-row pb-5 px-0 mt-1 ">
@@ -223,7 +256,22 @@ function EditGift({ params }: { params: { giftid: string } }) {
               type="button"
               className="btn btn-regular-outline w-full m-1 basis-1/4"
               style={{ fontSize: "14px" }}
-              onClick={() => deleteHandler()}
+              onClick={async () => {
+                const result = await Dialog.confirm({
+                  content: "Are you sure to delete this Gift?",
+                  confirmText: "Yes",
+                  cancelText: "No",
+                  onConfirm: async () => {
+                    deleteHandler();
+                  },
+                  onCancel: async () => {
+                    Toast.show({
+                      content: "Delete aborted",
+                      position: "bottom",
+                    });
+                  },
+                });
+              }}
             >
               Delete
             </Button>
