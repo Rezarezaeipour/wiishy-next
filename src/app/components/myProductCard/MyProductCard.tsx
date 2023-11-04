@@ -6,7 +6,7 @@ import { Product } from "@/types";
 import { EyeOutline, LikeOutline } from "antd-mobile-icons";
 import Link from "next/link";
 import { Skeleton } from "antd";
-import grayLogo from "../../../../../Logo/wiishy-gray.jpg";
+import grayLogo from "../../../../public/logo/wiishy-gray.jpg";
 import Image from "next/image";
 
 function MyProductCard(props: Product) {
