@@ -3,7 +3,7 @@ import { loadMyFollowingProductlist } from "@/app/api-client/gifts";
 import ProductList from "@/app/components/productList/productList";
 import { useEffect, useState } from "react";
 
-async function Home() {
+function Home() {
   const [count, setCount] = useState(0);
   const [giftlist, setGiftlist] = useState();
 

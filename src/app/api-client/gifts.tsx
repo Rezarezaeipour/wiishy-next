@@ -84,3 +84,14 @@ export async function loadMyFollowingProductlist() {
     }
   
 }
+
+export async function explore() {
+
+  const res = await fetch("/api/explore", {
+    method: "GET",
+  });
+  if (res.ok){
+    return await res.json(); 
+  }
+
+}
