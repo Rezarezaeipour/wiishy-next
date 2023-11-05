@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-    const req =  JSON.parse(await request.json());
+    const req =  await request.json();
     const cookie = cookies();
     const info = cookie.get('w-token');
   
