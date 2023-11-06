@@ -22,7 +22,7 @@ function Home() {
       >
         <h1 className="main-head">Home</h1>
 
-        {count > 0 && giftlist ? (
+        {/* {count > 0 && giftlist ? (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
             <ProductList productList={giftlist} />
           </div>
@@ -30,7 +30,7 @@ function Home() {
           <div className="flex items-center justify-center h-screen mt-[-100px]">
             <p>There is nothing to show!</p>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );
