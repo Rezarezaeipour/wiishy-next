@@ -63,16 +63,28 @@ function MyProfile() {
           {productList ? (
             <MyProductList productList={productList} />
           ) : (
-            <div
-              className="text-center w-full mx-auto"
-              style={{ color: "#000" }}
-            >
+            <>
               <Skeleton
                 paragraph={{ rows: 5 }}
                 active
-                className="mt-3 text-center"
+                className="mt-3 p-3 text-center"
               />
-            </div>
+               <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+               <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+               <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+            </>
           )}
         </div>
       </div>
