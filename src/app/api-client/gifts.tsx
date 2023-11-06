@@ -57,6 +57,20 @@ export async function myProductListHandler() {
   return await list.json();
 }
 
+
+export async function productListHandler(userId : number) {
+  const list = await fetch("/api/getusergifts", {
+    method: "POST",
+    body: JSON.stringify({userId})
+  });
+  if(list.ok){
+  return await list.json();
+  }else{
+    return {'message':'something went wrong'}
+  }
+}
+
+
 export async function loadGiftHandler(giftid: number) {
   const res = await fetch("/api/loadgift", {
     method: "POST",
