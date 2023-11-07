@@ -1,10 +1,6 @@
 import { type } from "os";
 
 export interface Product {
-  // title: string;
-  // image: string;
-  // price: string;
-  // rate: number;
 
   gift_id?: number,
   gift_view?: number,
@@ -17,6 +13,26 @@ export interface Product {
   gift_url?: string,
   islike?: boolean
   gift_image_url?:string
+}
+
+export interface ProductComplete {
+
+  gift_id?: number,
+  gift_view?: number,
+  gift_like?: number,
+  desire_rate?: number,
+  created_at?: Date,
+  gift_name?: string,
+  gift_price?: string,
+  gift_desc?: string,
+  gift_url?: string,
+  islike?: boolean
+  gift_image_url?:string,
+  name:string,
+  family:string,
+  user_image_url:string
+  user_id:number
+
 }
 
 export interface Event {
