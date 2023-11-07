@@ -76,8 +76,10 @@ export async function loadGiftHandler(giftid: number) {
     method: "POST",
     body: JSON.stringify(`{"giftid" : ${giftid}}`),
   });
-
-  return await res.json();
+  if(res.ok){
+  return await res.json();}else{
+    return {"message":"There is a problem"};
+  }
 }
 
 export async function deleteGift(giftid: number) {
