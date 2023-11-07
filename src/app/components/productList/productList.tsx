@@ -12,7 +12,6 @@ function ProductList(props: { userId: number }) {
   useEffect(() => {
     (async () => {
       const ProductList = await productListHandler(props.userId);
-      console.log("gifts", ProductList);
       setGifts(ProductList.gifts);
     })();
   }, [props.userId]);
