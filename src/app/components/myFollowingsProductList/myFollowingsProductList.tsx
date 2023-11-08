@@ -1,15 +1,13 @@
 "use client";
 
-import {  ProductComplete } from "@/types";
+import { ProductComplete } from "@/types";
 import ProductCardComplete from "../productCardComplete/productCardComplete";
 
 function MyFollowingsProductList(props: { productList: [ProductComplete] }) {
-  
   return (
     <>
       {props.productList.map((Item, index) => {
         return (
-
           <ProductCardComplete
             key={"prd" + index}
             gift_name={Item.gift_name}
@@ -19,13 +17,12 @@ function MyFollowingsProductList(props: { productList: [ProductComplete] }) {
             gift_view={Item.gift_view}
             gift_id={Item.gift_id}
             gift_image_url={Item.gift_image_url}
-            name =  {Item.name}
-            family = {Item.family}
-            user_image_url = {Item.user_image_url}
+            name={Item.name}
+            family={Item.family}
+            user_image_url={Item.user_image_url}
             user_id={Item.user_id}
           />
         );
-
       })}
     </>
   );

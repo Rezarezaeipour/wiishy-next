@@ -1,14 +1,15 @@
 "use client";
 import { Product } from "@/types";
-import MyProductCard from "../myProductCard/myProductCard";
+import MyPrdCard from "@/app/components/myPrdCard/myPrdCard";
 
+ 
 function MyProductList(props: { productList: [Product] }) {
   
   return (
     <>
       {props.productList.map((Item, index) => {
         return (
-          <MyProductCard
+          <MyPrdCard
             key={"prd" + index}
             gift_name={Item.gift_name}
             gift_price={Item.gift_price}
