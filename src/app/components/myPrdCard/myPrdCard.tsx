@@ -9,7 +9,7 @@ import { Skeleton } from "antd";
 import grayLogo from "../../../../public/logo/wiishy-gray.jpg";
 import Image from "next/image";
 
-function MyProductCard(props: Product) {
+function MyPrdCard(props: Product) {
   return !props ? (
     <Skeleton.Image active />
   ) : (
@@ -62,4 +62,4 @@ function MyProductCard(props: Product) {
   );
 }
 
-export default MyProductCard;
+export default MyPrdCard;

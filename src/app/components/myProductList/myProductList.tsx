@@ -1,6 +1,6 @@
 "use client";
 import { Product } from "@/types";
-import MyProductCard from "@/app/components/myPrdCard/myPrdCard";
+import MyPrdCard from "@/app/components/myPrdCard/myPrdCard";
 
  
 function MyProductList(props: { productList: [Product] }) {
@@ -9,7 +9,7 @@ function MyProductList(props: { productList: [Product] }) {
     <>
       {props.productList.map((Item, index) => {
         return (
-          <MyProductCard
+          <MyPrdCard
             key={"prd" + index}
             gift_name={Item.gift_name}
             gift_price={Item.gift_price}
