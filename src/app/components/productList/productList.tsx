@@ -30,6 +30,7 @@ function ProductList(props: { userId: number }) {
                   gift_price={Item.gift_price}
                   desire_rate={Item.desire_rate}
                   gift_id={Item.gift_id}
+                  gift_image_url={Item.gift_image_url}
                 />
               );
             })
