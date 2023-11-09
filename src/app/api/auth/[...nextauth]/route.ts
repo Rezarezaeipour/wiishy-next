@@ -13,8 +13,8 @@ const handler = NextAuth({
   debug: false,
   providers: [
     TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID || '',
-      clientSecret: process.env.TWITTER_CLIENT_SECRET || '',
+      clientId:'',
+      clientSecret:  '',
       version: "2.0",
     }),
     GoogleProvider({
