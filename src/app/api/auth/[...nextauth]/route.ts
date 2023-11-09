@@ -1,14 +1,21 @@
 // import { login } from "@/api/authentication";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import TwitterProvider from "next-auth/providers/twitter";import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider, { LinkedInProfile } from "next-auth/providers/linkedin";
 import { signIn } from "next-auth/react";
+
+console.log('client id: ', process.env.TWITTER_CLIENT_ID)
+console.log('client sectet: ', process.env.TWITTER_CLIENT_SECRET)
 
 const handler = NextAuth({
 
   debug: false,
   providers: [
+    TwitterProvider({
+      clientId: process.env.TWITTER_CLIENT_ID || '',
+      clientSecret: process.env.TWITTER_CLIENT_SECRET || ''
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
