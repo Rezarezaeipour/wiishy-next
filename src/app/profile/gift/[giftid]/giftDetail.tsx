@@ -1,5 +1,6 @@
 "use client";
 import { likeGift, loadGiftHandler, unLikeGift } from "@/app/api-client/gifts";
+import { amIfollowHim, followUser, unFollowUser } from "@/app/api-client/users";
 import ProductList from "@/app/components/productList/productList";
 import { Product, ProductComplete } from "@/types";
 import { HeartOutlined } from "@ant-design/icons";
@@ -11,8 +12,11 @@ import { useEffect, useState } from "react";
 
 export default function GiftDetail(props: { giftid: number }) {
   const [isLike, setIslike] = useState<boolean>();
+  const [likecount, setLikeCount] = useState(0);
+  const [isfollow, setIsfollow] = useState(false);
   const [giftDetail, setGiftDetail] = useState<ProductComplete>();
   const [loading, setLoading] = useState(false);
+  const [useId, setUserId] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -22,19 +26,35 @@ export default function GiftDetail(props: { giftid: number }) {
         console.log("dkm", response.gift_detail[0]);
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
+        setLikeCount(response.gift_detail[0].gift_like);
+        setUserId(response.gift_detail[0].user_id);
+        const res = await amIfollowHim(response.gift_detail[0].user_id);
+        res.isfollow ? setIsfollow(true) : setIsfollow(false);
       }
     })();
   }, [loadGiftHandler, setIslike, setGiftDetail]);
+
+  const likeit = async (giftDetail: number) => {
+    likeGift(giftDetail);
+    setIslike(true);
+    setLikeCount((old) => old + 1);
+  };
+
+  const unLikeit = async (giftDetail: number) => {
+    unLikeGift(giftDetail);
+    setIslike(false);
+    setLikeCount((old) => (old != 0 ? old - 1 : old));
+  };
 
   return (
     <>
       {giftDetail ? (
         <div className="py-5 px-4">
-          <Link
-            className="text-black"
-            href={`/profile/profile/${giftDetail.user_id}`}
-          >
-            <div className="flex flex-row mt-2 mb-3 p-2 pb-0 items-center justify-between">
+          <div className="flex flex-row mt-2 mb-3 p-2 pb-0 items-center justify-between">
+            <Link
+              className="text-black"
+              href={`/profile/profile/${giftDetail.user_id}`}
+            >
               <div className="flex flex-row items-center justify-start">
                 <Avatar
                   src={`https://wiishy-backend.ir/${giftDetail.user_image_url}`}
@@ -49,11 +69,37 @@ export default function GiftDetail(props: { giftid: number }) {
                   </p>
                 </div>
               </div>
-              <div>
-                <Button className="btn btn-regular-outline">Follow</Button>
-              </div>
+            </Link>
+            <div>
+              {isfollow ? (
+                <Button
+                  onClick={async () => {
+                    const result = await unFollowUser(useId);
+                    console.log("result", result);
+                    result.status == "success"
+                      ? setIsfollow(false)
+                      : setIsfollow(true);
+                  }}
+                  className="btn btn-regular-outline"
+                >
+                  Unfollow
+                </Button>
+              ) : (
+                <Button
+                  onClick={async () => {
+                    const result = await followUser(useId);
+                    result.status == "success"
+                      ? setIsfollow(true)
+                      : setIsfollow(false);
+                  }}
+                  className="btn btn-regular-outline"
+                >
+                  Follow
+                </Button>
+              )}
             </div>
-          </Link>
+          </div>
+
           <>
             <div className="flex justify-center pt-2 w-full">
               <Image
@@ -80,17 +126,21 @@ export default function GiftDetail(props: { giftid: number }) {
                 />
               </div>
               <div className="flex flex-row items-center justify-end">
-                <p className="text-black text-[17px] font-light pt-1">{giftDetail.gift_like}</p>
+                <p className="text-black text-[17px] font-light pt-1">
+                  {likecount}
+                </p>
                 <Rate
                   character={<HeartOutlined style={{ fontSize: "25px" }} />}
                   count={1}
                   allowClear
                   defaultValue={isLike ? 1 : 0}
-                  onChange={
-                    ()=>{
-                      giftDetail.id ? (isLike ? unLikeGift(giftDetail.id) : likeGift(giftDetail.id)) : ("")
-                    }
-                  }
+                  onChange={() => {
+                    giftDetail.id
+                      ? isLike
+                        ? unLikeit(giftDetail.id)
+                        : likeit(giftDetail.id)
+                      : "";
+                  }}
                 />
               </div>
               {isLike}
