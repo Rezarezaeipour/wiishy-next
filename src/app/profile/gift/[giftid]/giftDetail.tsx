@@ -1,23 +1,25 @@
 "use client";
-import { loadGiftHandler } from "@/app/api-client/gifts";
+import { likeGift, loadGiftHandler, unLikeGift } from "@/app/api-client/gifts";
 import ProductList from "@/app/components/productList/productList";
 import { Product, ProductComplete } from "@/types";
 import { HeartOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dialog, Rate, Toast } from "antd-mobile";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function GiftDetail(props: { giftid: number }) {
   const [isLike, setIslike] = useState<boolean>();
   const [giftDetail, setGiftDetail] = useState<ProductComplete>();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
       const response = await loadGiftHandler(props.giftid);
       if (response) {
-        console.log("dkm", response.islike);
+        console.log("dkm", response.gift_detail[0]);
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
       }
@@ -69,28 +71,35 @@ export default function GiftDetail(props: { giftid: number }) {
             </div>
 
             <div className="flex flex-row mt-3 align-middle justify-between">
-              <Rate
-                style={{ "--star-size": "25px" }}
-                readOnly
-                value={giftDetail.desire_rate || 4}
-                className="pt-0.5"
-              />
+              <div className="flex flex-row items-center">
+                <Rate
+                  style={{ "--star-size": "20px" }}
+                  readOnly
+                  value={giftDetail.desire_rate || 4}
+                  className="pt-0.5"
+                />
+              </div>
               <div className="flex flex-row items-center justify-end">
-                <p className="text-black text-[17px] font-light pt-1">35</p>
+                <p className="text-black text-[17px] font-light pt-1">{giftDetail.gift_like}</p>
                 <Rate
                   character={<HeartOutlined style={{ fontSize: "25px" }} />}
                   count={1}
                   allowClear
                   defaultValue={isLike ? 1 : 0}
+                  onChange={
+                    ()=>{
+                      giftDetail.id ? (isLike ? unLikeGift(giftDetail.id) : likeGift(giftDetail.id)) : ("")
+                    }
+                  }
                 />
               </div>
               {isLike}
             </div>
             <div className="mt-1">
-              <p className="text-left font-bold text-[30px]">
+              <p className="text-left font-bold text-[20px]">
                 {giftDetail.gift_name}
               </p>
-              <p className="text-left font-medium text-[20px] mt-1">
+              <p className="text-left font-medium text-[18px] mt-1">
                 ${giftDetail.gift_price}
               </p>
               <p className="text-left font-light text-[13px] mt-1">
@@ -98,12 +107,21 @@ export default function GiftDetail(props: { giftid: number }) {
               </p>
             </div>
 
-            <div className="flex flex-row pb-5 px-0 mt-2 ">
+            <div className="flex flex-row pb-5 px-0 mt-3 ">
               <Button
                 loading={loading}
                 type="submit"
                 className="btn btn-regular w-full m-1 basis-3/5"
                 style={{ fontSize: "14px" }}
+                onClick={async () => {
+                  const result = await Dialog.confirm({
+                    content:
+                      "Are you sure you want to add it to your collection?",
+                    confirmText: "Yes",
+                    cancelText: "No",
+                    onConfirm: async () => {},
+                  });
+                }}
               >
                 Add to my wish list +
               </Button>
@@ -112,19 +130,13 @@ export default function GiftDetail(props: { giftid: number }) {
                 type="button"
                 className="btn btn-regular-outline w-full m-1 basis-2/5"
                 style={{ fontSize: "14px" }}
-                onClick={async () => {
-                  const result = await Dialog.confirm({
-                    content: "Are you sure to delete this Gift?",
-                    confirmText: "Yes",
-                    cancelText: "No",
-                    onConfirm: async () => {},
-                    onCancel: async () => {
-                      Toast.show({
-                        content: "Delete aborted",
+                onClick={() => {
+                  giftDetail.gift_url
+                    ? router.push(`${giftDetail.gift_url}?utm=wiishy`)
+                    : Toast.show({
+                        content: "There is a problem in loading your data",
                         position: "bottom",
                       });
-                    },
-                  });
                 }}
               >
                 Buy Online

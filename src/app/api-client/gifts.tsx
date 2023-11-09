@@ -1,5 +1,3 @@
-
-
 export async function addHandler(data: any) {
   const formData = new FormData();
 
@@ -57,28 +55,27 @@ export async function myProductListHandler() {
   return await list.json();
 }
 
-
-export async function productListHandler(userId : number) {
+export async function productListHandler(userId: number) {
   const list = await fetch("/api/getusergifts", {
     method: "POST",
-    body: JSON.stringify({userId})
+    body: JSON.stringify({ userId }),
   });
-  if(list.ok){
-  return await list.json();
-  }else{
-    return {'message':'something went wrong'}
+  if (list.ok) {
+    return await list.json();
+  } else {
+    return { message: "something went wrong" };
   }
 }
-
 
 export async function loadGiftHandler(giftid: number) {
   const res = await fetch("/api/loadgift", {
     method: "POST",
     body: JSON.stringify(`{"giftid" : ${giftid}}`),
   });
-  if(res.ok){
-  return await res.json();}else{
-    return {"message":"There is a problem"};
+  if (res.ok) {
+    return await res.json();
+  } else {
+    return { message: "There is a problem" };
   }
 }
 
@@ -91,23 +88,38 @@ export async function deleteGift(giftid: number) {
 }
 
 export async function loadMyFollowingProductlist() {
-
-    const res = await fetch("/api/loadmyfollowinggifts", {
-      method: "GET",
-    });
-    if (res.ok){
-      return await res.json(); 
-    }
-  
+  const res = await fetch("/api/loadmyfollowinggifts", {
+    method: "GET",
+  });
+  if (res.ok) {
+    return await res.json();
+  }
 }
 
 export async function explore() {
-
   const res = await fetch("/api/explore", {
     method: "GET",
   });
-  if (res.ok){
-    return await res.json(); 
+  if (res.ok) {
+    return await res.json();
   }
+}
 
+export async function unLikeGift(giftid: number) {
+  console.log("unLike");
+  const res = await fetch("/api/unlike", {
+    method: "POST",
+    body: JSON.stringify({ giftid }),
+  });
+}
+
+export async function likeGift(giftid: number) {
+  console.log("Like", giftid);
+  const res = await fetch("/api/like", {
+    method: "POST",
+    body: JSON.stringify({ giftid }),
+  });
+  if (res.ok) {
+    const response = await res.json();
+  }
 }
