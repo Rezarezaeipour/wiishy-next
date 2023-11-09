@@ -12,7 +12,7 @@ function Home() {
     (async () => {
       const res = await loadMyFollowingProductlist();
 
-      setCount(res.followings_gifts_coun);
+      setCount(res.followings_gifts_count);
       setGiftlist(res.followings_gifts);
     })();
   }, []);
