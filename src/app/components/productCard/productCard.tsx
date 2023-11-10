@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Skeleton } from "antd";
 import grayLogo from "../../../../public/logo/wiishy-gray.jpg";
 import Image from "next/image";
+import { HeartOutlined } from "@ant-design/icons";
 
 function ProductCard(props: Product) {
   return !props ? (
@@ -28,18 +29,13 @@ function ProductCard(props: Product) {
           style={{ width: "100%", height: "auto", aspectRatio: " 1 / 1", objectFit:"cover"}} // optional
         ></Image>
         <div className="flex flex-col float-right top-4 right-4 absolute">
+         
           <div className="flex items-center gap-x-1">
-            <LikeOutline />
-            <p className="text-sm font-normal leading-[16px]">
-              {props.gift_like || "0"}
-            </p>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <EyeOutline />
-            <p className="text-sm font-normal  leading-[16px]">
-              {props.gift_view || "0"}
-            </p>
-          </div>
+              <HeartOutlined />
+              <p className="text-sm font-normal leading-[16px]">
+                {props.gift_like || "0"}
+              </p>
+            </div>
         </div>
         <div>
           <h2 className="font-bold text-md mt-5">

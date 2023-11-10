@@ -1,6 +1,9 @@
 "use client"
 import { explore } from "@/app/api-client/gifts";
+import MyFollowingsProductList from "@/app/components/myFollowingsProductList/myFollowingsProductList";
 import ProductList from "@/app/components/productList/productList";
+import { Skeleton } from "antd";
+
 import { useEffect, useState } from "react";
 
 function Explore() {
@@ -12,21 +15,27 @@ function Explore() {
       const res = await explore();
       setCount(res.followings_gifts_coun);
       setGiftlist(res.followings_gifts);
+      console.log('hiii',res)
     })();
   }, []);
   return (
     <>
-      <div className="py-5 px-2">
-        {/* <h1 className="main-head">Explore</h1>
-        {count > 0 && giftlist ? (
+      <div className="py-5 px-2 w-full h-screen">
+        <h1 className="main-head">Explore</h1>
+        {giftlist ? (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
-            <ProductList productList={giftlist} />
+            <MyFollowingsProductList productList={giftlist} />
           </div>
         ) : (
-          <div className="flex items-center justify-center h-screen mt-[-100px]">
-            <p>There is nothing to show!</p>
+          <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
+            <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
+            <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
+            <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
+            <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
+            <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
+            <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
           </div>
-        )} */}
+        )}
       </div>
     </>
   );

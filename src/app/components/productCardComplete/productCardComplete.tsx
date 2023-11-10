@@ -2,12 +2,12 @@
 import { Avatar, Rate } from "antd-mobile";
 import "./style.module.css";
 import "@/app/globals.css";
-import { Product, ProductComplete } from "@/types";
-import { EyeOutline, LikeOutline } from "antd-mobile-icons";
+import { ProductComplete } from "@/types";
 import Link from "next/link";
 import { Skeleton } from "antd";
 import grayLogo from "../../../../public/logo/wiishy-gray.jpg";
 import Image from "next/image";
+import { HeartOutlined } from "@ant-design/icons";
 
 function ProductCardComplete(props: ProductComplete) {
   return !props ? (
@@ -21,9 +21,7 @@ function ProductCardComplete(props: ProductComplete) {
             style={{ "--size": "32px", "--border-radius": "30px" }}
           />
           <div>
-          <p className="text-xs font-thin ml-2">
-              30 years old
-            </p>
+            <p className="text-xs font-thin ml-2">30 years old</p>
             <p className="text-xs font-normal ml-2">
               {props.name} {props.family}
             </p>
@@ -32,7 +30,6 @@ function ProductCardComplete(props: ProductComplete) {
       </Link>
       <Link href={`/profile/gift/${props.gift_id}`}>
         <div className="p-2 rounded-[10px] relative">
-      
           <Image
             alt={props.gift_name || "image name"}
             className="rounded-[10px] w-full h-auto"
@@ -52,15 +49,9 @@ function ProductCardComplete(props: ProductComplete) {
           ></Image>
           <div className="flex flex-col float-right top-4 right-4 absolute">
             <div className="flex items-center gap-x-1">
-              <LikeOutline />
+              <HeartOutlined />
               <p className="text-sm font-normal leading-[16px]">
                 {props.gift_like || "0"}
-              </p>
-            </div>
-            <div className="flex items-center gap-x-1">
-              <EyeOutline />
-              <p className="text-sm font-normal  leading-[16px]">
-                {props.gift_view || "0"}
               </p>
             </div>
           </div>

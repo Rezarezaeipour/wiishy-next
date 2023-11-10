@@ -5,34 +5,40 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
 import { addHandler } from "@/app/api-client/gifts";
-import wisshy from "../../../../../public/wisshy.png";
+import wisshy from "../../../../../public/logo/wiishy-gray.jpg";
 import { AddCircleOutline } from "antd-mobile-icons";
 
 function NewGift() {
-  const { register, handleSubmit,reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [file, setFile] = useState<File>();
   const [image, setImage] = useState(wisshy.src);
   const [desire, setDesire] = useState<SliderValue>(50);
   const [loading, setLoading] = useState(false);
-  const now = new Date();
-
+ 
   /// Handle Submit
   const onSubmit = async (data: any) => {
-    setLoading(true);
-    const response = await addHandler({
-      ...data,
-      desire_rate: desire,
-      image: file,
-    });
-    if (response) {
-      setLoading(false);
+    if (file) {
+      setLoading(true);
+      const response = await addHandler({
+        ...data,
+        desire_rate: desire,
+        image: file,
+      });
+      if (response) {
+        setLoading(false);
+        Toast.show({
+          content: response,
+          position: "bottom",
+        });
+        reset();
+        setImage(wisshy.src);
+      }
+    }else{
       Toast.show({
-        content: response,
+        content: "You should add an image",
         position: "bottom",
       });
-      reset();
-      setImage(wisshy.src);
     }
   };
   /// End Handle Submit
@@ -60,6 +66,7 @@ function NewGift() {
                 width: "100%",
                 height: "250px",
                 objectFit: "cover",
+                borderRadius: "10px",
               }}
             />
           </div>
@@ -106,7 +113,7 @@ function NewGift() {
             <input
               placeholder="Electric bicycle"
               className="font-normal wiishy-input-text"
-              {...register("giftname")}
+              {...register("giftname", { required: true, maxLength: 200 })}
             />
           </Form.Item>
 
@@ -122,7 +129,7 @@ function NewGift() {
               type="number"
               placeholder="250"
               className="font-normal  wiishy-input-text"
-              {...register("giftprice")}
+              {...register("giftprice", { required: true })}
             />
           </Form.Item>
           {/* END GIFT PRICE */}
@@ -156,7 +163,7 @@ function NewGift() {
               maxLength={100}
               rows={5}
               className="font-normal wiishy-input-text"
-              {...register("giftdescription")}
+              {...register("giftdescription", { required: true })}
             />
           </Form.Item>
           {/* END GIFT DESCRIPTION */}
