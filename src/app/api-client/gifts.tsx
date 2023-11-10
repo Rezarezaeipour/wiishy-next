@@ -1,21 +1,26 @@
 export async function addHandler(data: any) {
   const formData = new FormData();
 
-  formData.append("gift_name", data.giftname),
+    formData.append("gift_name", data.giftname),
     formData.append("gift_price", data.giftprice),
     formData.append("gift_desc", data.giftdescription),
     formData.append("gift_url", data.gift_url),
-    formData.append("gift_image_url", "http://djkjd.com"),
     formData.append("desire_rate", data.desire_rate);
-  formData.append("image", data.image);
+    if (data.image) {
+      formData.append("image", data.image);
+    }
 
-  const req = await fetch("/api/addnewgift", {
+  const res = await fetch("/api/addnewgift", {
     method: "POST",
     body: formData,
   });
 
-  const response = await req.json();
+  if (res.ok) {
+  const response = await res.json();
   return response;
+  }
+
+  return "Something went wrong";
 }
 
 export async function updateHandler(data: any) {
@@ -106,7 +111,7 @@ export async function explore() {
 }
 
 export async function unLikeGift(giftid: number) {
-  console.log("unLike");
+  
   const res = await fetch("/api/unlike", {
     method: "POST",
     body: JSON.stringify({ giftid }),
@@ -114,7 +119,7 @@ export async function unLikeGift(giftid: number) {
 }
 
 export async function likeGift(giftid: number) {
-  console.log("Like", giftid);
+  
   const res = await fetch("/api/like", {
     method: "POST",
     body: JSON.stringify({ giftid }),
