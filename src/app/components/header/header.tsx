@@ -36,7 +36,7 @@ export default function Header() {
           }}
           onMaskClick={() => {
             togglePopup();
-           
+
           }}
           position="left"
           bodyStyle={{ width: "70vw" }}
