@@ -39,6 +39,21 @@ export default async function getUserData(userId:number) {
   return data;
 }
 
+export  async function getMyData(userId:number) {
+  let data;
+  const res = await fetch("/api/getuserdata", {
+    method:"GET",
+  });
+  
+  if(res.ok){
+     data = await res.json();
+  }else{
+    data = {'message':'Something went wrong'}
+  }
+  
+  return data;
+}
+
 export async function amIfollowHim(userId:number) {
   let data;
   const res = await fetch("/api/amifollowhim", {
