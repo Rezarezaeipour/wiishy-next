@@ -1,9 +1,8 @@
 "use client";
 import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
-import { Skeleton } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { updateHandler } from "@/app/api-client/users";
+import { addEvent } from "@/app/api-client/events";
 
 
 function AddEvent() {
@@ -11,6 +10,7 @@ function AddEvent() {
     register,
     setValue,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -24,13 +24,21 @@ function AddEvent() {
   const minDate = new Date(1960, 1, 1);
 
   /// Handle Submit
-  const onSubmit = (data: any) => {
-    // updateHandler({
-    //   ...data,
-    //   user_gender: gender,
-    //   birth_date: sbirth,
-    // });
+  const onSubmit = async (data: any) => {
+   const response = await addEvent({
+      ...data,
+      user_gender: gender,
+      rel : rel,
+      type : type,
+      date: sbirth,
+    });
+    Toast.show({
+      content: response,
+      position: "bottom",
+    });
+     reset();
   };
+  
   /// End Handle Submit
 
   return (
@@ -240,7 +248,7 @@ function AddEvent() {
               max={now}
               cancelText="Cancel"
               confirmText="Add"
-              title="Your birthday"
+              title="Date"
               onConfirm={(value) => {
                 setSbirth(
                   `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
@@ -253,6 +261,7 @@ function AddEvent() {
           {/* END BIRTH DATE */}
 
           <br />
+
           {/* SUBMIT BUTTON */}
 
           <div className="pb-5 px-0 mt-1 ">
