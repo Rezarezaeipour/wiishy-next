@@ -21,7 +21,6 @@ export default function Header() {
         onBack={togglePopup}
         backArrow={false}
         style={{ backgroundColor: "white"}}
-
       >
         <Image src={logo} width={96} height={37} alt="wishy logo" className="mx-auto" />
       </NavBar>
@@ -32,8 +31,12 @@ export default function Header() {
           maskClassName="mt-45px"
           bodyClassName="mt-45px"
           visible={popupVisible}
+          onClick={()=>{
+            togglePopup();
+          }}
           onMaskClick={() => {
             togglePopup();
+           
           }}
           position="left"
           bodyStyle={{ width: "70vw" }}

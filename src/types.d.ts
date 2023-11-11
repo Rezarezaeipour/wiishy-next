@@ -36,9 +36,13 @@ export interface ProductComplete {
 }
 
 export interface Event {
-  title: string;
-  image: string;
-  time: string;
+  name: string,
+  family: string,
+  gender: number,
+  relationship : number,
+  eventtype : number,
+  time : string
+
 }
 
 export interface User {
