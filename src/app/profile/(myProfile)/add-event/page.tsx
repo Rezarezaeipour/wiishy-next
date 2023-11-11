@@ -1,156 +1,271 @@
 "use client";
-import { Button, DatePicker, Form, Selector, Slider, Toast } from "antd-mobile";
+import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
+import { Skeleton } from "antd";
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import Image from "next/image";
-import { SliderValue } from "antd-mobile/es/components/slider";
-import { addHandler } from "@/app/api-client/gifts";
-import wisshy from "../../../../../public/logo/wiishy-gray.jpg";
-import { AddCircleOutline } from "antd-mobile-icons";
+import { useForm } from "react-hook-form";
+import { updateHandler } from "@/app/api-client/users";
+
 
 function AddEvent() {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [file, setFile] = useState<File>();
-  const [image, setImage] = useState(wisshy.src);
-  const [desire, setDesire] = useState<SliderValue>(50);
-  const [loading, setLoading] = useState(false);
+  const [gender, setGender] = useState("1");
+  const [rel, setRel] = useState("1");
+  const [type, setType] = useState("1");
+  const [sbirth, setSbirth] = useState<string>("");
+  const [datevisible, setDateVisible] = useState(false);
+  const now = new Date();
+  const [birth, setbirth] = useState<Date>();
+  const minDate = new Date(1960, 1, 1);
 
   /// Handle Submit
-  const onSubmit = async (data: any) => {
-    if (file) {
-      setLoading(true);
-      const response = await addHandler({
-        ...data,
-        desire_rate: desire,
-        image: file,
-      });
-      if (response) {
-        setLoading(false);
-        Toast.show({
-          content: response,
-          position: "bottom",
-        });
-        reset();
-        setImage(wisshy.src);
-      }
-    } else {
-      Toast.show({
-        content: "You should add an image",
-        position: "bottom",
-      });
-    }
+  const onSubmit = (data: any) => {
+    // updateHandler({
+    //   ...data,
+    //   user_gender: gender,
+    //   birth_date: sbirth,
+    // });
   };
   /// End Handle Submit
 
-  const marks = {
-    0: 0,
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-  };
-
   return (
     <>
-      <div className="py-5 px-2 w-full h-screen">
+      <div className="p-3 pb-20">
         <h1 className="main-head">Add event</h1>
-        <h4>Here you can add some important or memorial events like birthday and wedding aniversary. Wiishy will aware 
-          you ten days in advance to make a plan for this vital parts of your life!
+        <h4>
+          Here you can add some important or memorial events like birthday and
+          wedding aniversary. Wiishy will aware you ten days in advance to make
+          a plan for this vital parts of your life!
         </h4>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* GIFT URL */}
+          {/* NAME */}
           <Form.Item
-            label="Gift URL"
+            label="Name"
             className="font-extrabold text-3xl "
             style={{ backgroundColor: "transparent" }}
           >
             <input
-              placeholder="https://amazon.com/xxx"
+              placeholder="Your name"
               className="font-normal wiishy-input-text"
-              {...register("gift_url")}
+              {...register("name", { required: true, maxLength: 200 })}
             />
-          </Form.Item>
-          {/* END URL */}
-
-          {/* GIFT NAME */}
-          <Form.Item
-            label="Gift name"
-            className="font-extrabold text-3xl "
-            style={{ backgroundColor: "transparent" }}
-          >
-            <input
-              placeholder="Electric bicycle"
-              className="font-normal wiishy-input-text"
-              {...register("giftname", { required: true, maxLength: 200 })}
-            />
+            <div style={{ clear: "both" }}></div>
+            {errors.name?.type === "required" && (
+              <p className="input-alert">Name is required</p>
+            )}
           </Form.Item>
 
-          {/* END GIFT NAME */}
+          {/* END NAME */}
 
-          {/* GIFT PRICE */}
+          {/* FAMILY NANE */}
           <Form.Item
-            label="Gift Price (in USD)"
+            label="Family"
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >
             <input
-              type="number"
-              placeholder="250"
+              placeholder="Your family name"
               className="font-normal  wiishy-input-text"
-              {...register("giftprice", { required: true })}
+              {...register("family", { required: true, maxLength: 200 })}
             />
+            <div style={{ clear: "both" }}></div>
+            {errors.family?.type === "required" && (
+              <p className="input-alert">Family is required</p>
+            )}
           </Form.Item>
-          {/* END GIFT PRICE */}
+          {/* END FAMILY NAME */}
+          {/* GENDER */}
 
-          {/* GIFT DESIRE */}
           <Form.Item
-            label="Gift desire"
+            label="Gender"
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >
-            <div className="my-4">
-              <Slider
-                marks={marks}
-                ticks
-                onAfterChange={(value) => setDesire(value)}
-                defaultValue={3}
-                max={5}
-              />
-            </div>
+            <Selector
+              style={{
+                "--border-radius": "100px",
+                "--border": "solid transparent 1px",
+                "--checked-border": "solid var(--adm-color-primary) 1px",
+                "--padding": "8px 24px",
+                fontSize: "13px",
+                fontWeight: "normal",
+              }}
+              showCheckMark={false}
+              options={[
+                {
+                  label: "Man",
+                  value: "1",
+                },
+                {
+                  label: "Woman",
+                  value: "2",
+                },
+                {
+                  label: "Others",
+                  value: "3",
+                },
+              ]}
+              value={[String(gender)]}
+              defaultValue={[String(gender)]}
+              onChange={(v) => {
+                if (v.length) {
+                  setGender(v[0]);
+                }
+              }}
+            />
           </Form.Item>
-          {/* Endi GIFT DESIRE */}
-          {/* GIFT DESCRIPTION */}
+          {/* END GENDER */}
+
+          {/* RELATIONSHIP */}
+
           <Form.Item
-            label="Gift description"
-            help="Let others know about this product"
+            label="Relationship"
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >
-            <textarea
-              placeholder="Write atleast three lines about the gift"
-              maxLength={100}
-              rows={5}
-              className="font-normal wiishy-input-text"
-              {...register("giftdescription", { required: true })}
+            <Selector
+              style={{
+                "--border-radius": "100px",
+                "--border": "solid transparent 1px",
+                "--checked-border": "solid var(--adm-color-primary) 1px",
+                "--padding": "8px 24px",
+                fontSize: "13px",
+                fontWeight: "normal",
+              }}
+              showCheckMark={false}
+              options={[
+                {
+                  label: "Friend",
+                  value: "1",
+                },
+                {
+                  label: "Husband",
+                  value: "2",
+                },
+                {
+                  label: "Wife",
+                  value: "3",
+                },
+                {
+                  label: "Girl friend",
+                  value: "4",
+                },
+                {
+                  label: "Boy friend",
+                  value: "5",
+                },
+                {
+                  label: "Parent",
+                  value: "6",
+                },
+                {
+                  label: "Family member",
+                  value: "7",
+                },
+              ]}
+              value={[String(rel)]}
+              defaultValue={[String(rel)]}
+              onChange={(v) => {
+                if (v.length) {
+                  setRel(v[0]);
+                }
+              }}
             />
           </Form.Item>
-          {/* END GIFT DESCRIPTION */}
+          {/* END RELATIONSHIP */}
 
+          {/* EVENT TYPE */}
+          <Form.Item
+            label="Event type"
+            className="font-extrabold text-3xl"
+            style={{ backgroundColor: "transparent" }}
+          >
+            <Selector
+              style={{
+                "--border-radius": "100px",
+                "--border": "solid transparent 1px",
+                "--checked-border": "solid var(--adm-color-primary) 1px",
+                "--padding": "8px 24px",
+                fontSize: "13px",
+                fontWeight: "normal",
+              }}
+              showCheckMark={false}
+              options={[
+                {
+                  label: "Birthday",
+                  value: "1",
+                },
+                {
+                  label: "Wedding anniversary",
+                  value: "2",
+                },
+              ]}
+              value={[String(type)]}
+              defaultValue={[String(type)]}
+              onChange={(v) => {
+                if (v.length) {
+                  setType(v[0]);
+                }
+              }}
+            />
+          </Form.Item>
+          {/* END EVENT TYPE */}
+
+          {/* BIRTH DATE */}
+          <Form.Item
+            style={{ fontSize: "13px", backgroundColor: "transparent" }}
+          >
+            <Button
+              className="btn-regular"
+              style={{ fontSize: "14px" }}
+              onClick={() => {
+                setDateVisible(true);
+              }}
+            >
+              Choose the date
+            </Button>
+            <DatePicker
+              visible={datevisible}
+              onClose={() => {
+                setDateVisible(false);
+              }}
+              value={birth}
+              defaultValue={now}
+              min={minDate}
+              max={now}
+              cancelText="Cancel"
+              confirmText="Add"
+              title="Your birthday"
+              onConfirm={(value) => {
+                setSbirth(
+                  `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
+                );
+              }}
+            >
+              {(value) => "  " + value?.toDateString()}
+            </DatePicker>
+          </Form.Item>
+          {/* END BIRTH DATE */}
+
+          <br />
           {/* SUBMIT BUTTON */}
+
           <div className="pb-5 px-0 mt-1 ">
             <Button
-              loading={loading}
               type="submit"
               className="btn btn-regular w-full m-1"
               style={{ fontSize: "14px" }}
             >
-              Save
+              Save event
             </Button>
-
-            {/* END SUBMIT BUTTON */}
           </div>
+
+          {/* END SUBMIT BUTTON */}
         </form>
       </div>
     </>
