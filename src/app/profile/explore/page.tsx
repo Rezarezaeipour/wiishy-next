@@ -22,6 +22,9 @@ function Explore() {
     <>
       <div className="py-5 px-2 w-full h-screen">
         <h1 className="main-head">Explore</h1>
+        <h4>Explore among last gift people like you wish to have, moreover, find thousands of gift ideas
+          that are provided by Wiishy AI agent that helps you to choose better gift for your family and friends.
+        </h4>
         {giftlist ? (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
             <MyFollowingsProductList productList={giftlist} />

@@ -48,4 +48,6 @@ export interface User {
   location : string | null | undefined;
   age : number | null | undefined;
   token : string | null | undefined;
+  age? : number;
+  user_image_url? : string;
 }

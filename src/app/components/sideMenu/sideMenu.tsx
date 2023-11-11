@@ -1,13 +1,7 @@
 "use client";
 import { List, Switch } from "antd-mobile";
-import {
-  PayCircleOutline,
-  SetOutline,
-  UnorderedListOutline,
-} from "antd-mobile-icons";
 import "./style.css";
 import Image from "next/image";
-import ProfileCard from "../profileCard/profileCard";
 import { useSession } from "next-auth/react";
 import {
   BulbOutlined,
@@ -21,6 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useLoginContext } from "@/app/context/loginContext";
 import logo from "../../../../public/logo/wiishy-little.png";
+import HorizontalProfileCard from "../horizontalProfileCard/horizontalProfileCard";
 
 function SideMenu() {
   const { data: session, status } = useSession();
@@ -40,38 +35,85 @@ function SideMenu() {
             />
           </div>
 
-          <ProfileCard
-            avatar={session?.user?.image || "/wiishy.png"}
-            name={session?.user?.name || "Wiishy user"}
-          />
+          <HorizontalProfileCard />
 
           <List header="Menu" className="mt-5">
             <List.Item
               className="text-xs"
-              onClick={() => {}}
+              onClick={() => {
+                router.push("/profile/home");
+              }}
             >
               <div className="flex align-middle">
-              <HomeOutlined className="mr-2 pt-0.5"/>Home</div>
-            </List.Item>
-            <List.Item className="text-xs" onClick={() => {}}>
-              <div className="flex align-middle">
-                <CalendarOutlined className="mr-2 pt-0.5" />
-                Event
+                <div className="flex align-middle">
+                  <HomeOutlined className="mr-2 pt-0.5" />
+                  Home
+                </div>
               </div>
             </List.Item>
-            <List.Item className="text-xs" onClick={() => {}}>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/explore");
+              }}
+            >
+              <div className="flex align-middle">
+                <div className="flex align-middle">
+                  <BulbOutlined className="mr-2 pt-0.5" />
+                  Explore
+                </div>
+              </div>
+            </List.Item>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/events");
+              }}
+            >
+              <div className="flex align-middle">
+                <CalendarOutlined className="mr-2 pt-0.5" />
+                Events
+              </div>
+            </List.Item>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/add-event");
+              }}
+            >
+              <div className="flex align-middle">
+                <CalendarOutlined className="mr-2 pt-0.5" />
+                Add Event
+              </div>
+            </List.Item>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/search");
+              }}
+            >
               <div className="flex align-middle">
                 <SearchOutlined className="mr-2 pt-0.5" />
                 Search
               </div>
             </List.Item>
-            <List.Item className="text-xs" onClick={() => {}}>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/followers");
+              }}
+            >
               <div className="flex align-middle">
                 <FullscreenExitOutlined className="mr-2 pt-0.5" />
                 Followers
               </div>
             </List.Item>
-            <List.Item className="text-xs" onClick={() => {}}>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/followings");
+              }}
+            >
               <div className="flex align-middle">
                 <FullscreenOutlined className="mr-2 pt-0.5" />
                 Followings

@@ -23,7 +23,7 @@ export async function GET(request: Request) {
           }
           );
           res = await response.json();
-      
+          
     }
    
     return NextResponse.json(res);
