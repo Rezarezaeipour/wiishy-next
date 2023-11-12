@@ -2,10 +2,9 @@
 import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
 import { Skeleton } from "antd";
 import { Suspense, useEffect, useRef, useState } from "react";
-import getLoadInfo from "../../../hooks/useLoadInfo";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { updateHandler } from "@/app/api-client/users";
+import { getMyData, updateHandler } from "@/app/api-client/users";
 import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/router";
 
@@ -34,20 +33,19 @@ function EditProfile() {
   useEffect(() => {
     (async () => {
       ///Load user info
-      const data = await getLoadInfo();
+      const data = await getMyData(0);
       data
         ? (() => {
             data ? setStatuse(true) : setStatuse(false);
-            const bd = new Date(data?.user.user_birthday);
-            setValue("name", data.user?.name);
-            setValue("family", data.user?.family);
-            setValue("user_desc", data.user?.user_desc);
-            setGender(data.user?.user_gender);
-            setImage(data.user?.user_image_url);
+            const bd = new Date(data?.users.user_birthday);
+            setValue("name", data.users?.name);
+            setValue("family", data.users?.family);
+            setValue("user_desc", data.users?.user_desc);
+            setGender(data.users?.user_gender);
+            setImage(data.users?.user_image_url);
             setbirth(bd);
           })()
         : (() => {
-          
             Toast.show({
               content: "There is a problem in loading your data",
               position: "bottom",

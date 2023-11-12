@@ -22,18 +22,7 @@ function Events() {
             + Add new event
           </Button>
           <div className="mt-3">
-            <EventList
-              eventList={[
-                {
-                  name: "reza",
-                  family: "rezaeipour",
-                  gender: 1,
-                  relationship: 2,
-                  eventtype: 2,
-                  time: " Date.now",
-                },
-              ]}
-            />
+            <EventList />
           </div>
         </div>
       </div>

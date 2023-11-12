@@ -257,6 +257,9 @@ function AddEvent() {
             >
               {(value) => "  " + value?.toDateString()}
             </DatePicker>
+            <p>Please add the date of birthday or your wedding date. We aware you annualy this important event 
+              in event feed and also by email.
+            </p>
           </Form.Item>
           {/* END BIRTH DATE */}
 
