@@ -1,21 +1,31 @@
-
+"use client"
 import { Event } from "@/types";
-import HorizontalEventCard from "../horizontalCard/horizontalCard";
+import { getMyEventList } from "@/app/api-client/events";
+import HorizontalEventCard from "../horizontalCardEvent/horizontalCard";
+import { useEffect, useState } from "react";
 
 
-function EventList(props: { eventList: [Event] }) {
+function EventList() {
+  
+  const [eventlist,setEventlist] = useState<[Event]>();
+
+  useEffect(() => {
+    (async ()=>{
+        const response = await getMyEventList();
+        const tempeventList: [Event] = response.event;
+        setEventlist(tempeventList);
+    })()
    
-    return (
-        <>
-            {
-                props.eventList.map((item, index) => {
-                    return(
-                        <HorizontalEventCard key={10} event={item} />
-                    )  
-                })
-            }
-        </>
-    );
+  }, []);
+  
+ 
+  return(<>
+    {eventlist && eventlist.length > 0
+      ? eventlist.map((item, index) => {
+          return <HorizontalEventCard event={item} key={10} />;
+        })
+      : "....."}
+  </>)
 }
 
 export default EventList;

@@ -3,9 +3,9 @@ import MyProductList from "@/app/components/myProductList/myProductList";
 import MyProfileWrapper from "@/app/components/myProfileWrapper/myProfileWrapper";
 
 import { Suspense, useEffect, useState } from "react";
-import getLoadInfo from "../../../hooks/useLoadInfo";
 import { myProductListHandler } from "@/app/api-client/gifts";
 import { Skeleton } from "antd";
+import  { getMyData } from "@/app/api-client/users";
 
 
 function MyProfile() {
@@ -25,8 +25,9 @@ function MyProfile() {
       const ProductList = await myProductListHandler();
       setProductList(ProductList.gifts);
 
-      const data = await getLoadInfo();
-      setNewuser(data.user);
+      const data = await getMyData(0);
+      console.log("data",data)
+      setNewuser(data.users);
     })();
   }, [setNewuser,setProductList]);
 

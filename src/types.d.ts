@@ -36,13 +36,16 @@ export interface ProductComplete {
 }
 
 export interface Event {
+  id?:number;
   name: string,
   family: string,
   gender: number,
   relationship : number,
-  eventtype : number,
-  time : string
-
+  // eventtype : number,
+  time : string,
+  event_type : string,
+  event_type_id : number,
+  remaining_days : number
 }
 
 export interface User {

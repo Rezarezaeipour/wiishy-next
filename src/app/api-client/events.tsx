@@ -1,14 +1,12 @@
 export async function addEvent(data: any) {
-  console.log(data);
-    const formData = new FormData();
-    
-    formData.append("name", data.name),
+  const formData = new FormData();
+
+  formData.append("name", data.name),
     formData.append("family", data.family),
     formData.append("gender", data.user_gender),
     formData.append("relationship", data.rel),
     formData.append("event_type", data.type);
-    formData.append("event_date", data.date);
-  
+  formData.append("event_date", data.date);
 
   const res = await fetch("/api/addnewevent", {
     method: "POST",
@@ -21,4 +19,15 @@ export async function addEvent(data: any) {
   }
 
   return "Something went wrong";
+}
+
+export async function getMyEventList() {
+  const response = await fetch("/api/getmyeventlist", {
+    method: "GET",
+  });
+  if (response.ok) {
+    return response.json();
+  } else {
+    return "something went wrong";
+  }
 }

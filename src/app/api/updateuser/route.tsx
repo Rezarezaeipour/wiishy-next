@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   let xdata = null;
-
+ 
   const data = await request.formData()
-
+  console.log(data);
   const cookie = cookies();
   const infoCookie = cookie.get("w-token");
   
@@ -18,16 +18,20 @@ export async function POST(request: NextRequest) {
     const response = await fetch(
       `https://wiishy-backend.ir/api/user-update/${userId}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Authorization": `Bearer ${token}`,
         },
         body: data
       }
     );
-
-    xdata = await response.json();
-   
+    if(response.ok){
+      xdata = await response.json();
+    }else{
+      xdata ="Something went wrong";
+    }
+    
+  
   }
 
   return NextResponse.json(xdata);
