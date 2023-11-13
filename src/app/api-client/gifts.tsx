@@ -128,3 +128,9 @@ export async function likeGift(giftid: number) {
     const response = await res.json();
   }
 }
+
+
+export async function scraper(link : string) {
+  const victim = link;
+  
+}

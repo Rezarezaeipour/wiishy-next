@@ -8,11 +8,12 @@ function Events() {
 
   return (
     <>
-      <div className="py-5 px-2">
+      <div className="py-5 px-2 h-full">
         <h1 className="main-head">Events</h1>
         <h4>
-         Here you can find some of the most important events of your life, ex. your wife day or your wedding anniversary,
-         your mother birthday or other important events of your life.
+          Here you can find some of the most important events of your life, ex.
+          your wife day or your wedding anniversary, your mother birthday or
+          other important events of your life.
         </h4>
         <div className="grid mb-10 mt-7">
           <Button
@@ -21,7 +22,7 @@ function Events() {
           >
             + Add new event
           </Button>
-          <div className="mt-3">
+          <div className="mt-3 h-full">
             <EventList />
           </div>
         </div>
