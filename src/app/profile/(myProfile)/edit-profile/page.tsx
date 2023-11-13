@@ -8,16 +8,13 @@ import { getMyData, updateHandler } from "@/app/api-client/users";
 import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/router";
 
-
 function EditProfile() {
-
   const {
     register,
     setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
- 
 
   const [gender, setGender] = useState("3");
   const [image, setImage] = useState("/wiishy.png");
@@ -28,7 +25,7 @@ function EditProfile() {
   const [birth, setbirth] = useState<Date>();
   const minDate = new Date(1960, 1, 1);
   const [status, setStatuse] = useState(false);
-  
+
   /// Handle Load
   useEffect(() => {
     (async () => {
@@ -44,14 +41,14 @@ function EditProfile() {
             setGender(data.users?.user_gender);
             setImage(data.users?.user_image_url);
             setbirth(bd);
+           
           })()
         : (() => {
             Toast.show({
               content: "There is a problem in loading your data",
               position: "bottom",
             });
-            
-          })(); 
+          })();
 
       ///End load user info
     })();
@@ -59,13 +56,20 @@ function EditProfile() {
   // End handle load
 
   /// Handle Submit
-  const onSubmit = (data: any) => {
-    updateHandler({
+  const onSubmit = async (data: any) => {
+    const response = await updateHandler({
       ...data,
       user_gender: gender,
       image: file,
       birth_date: sbirth,
     });
+     
+    response
+      ? Toast.show({
+          content: response.message,
+          position: "bottom",
+        })
+      : "";
   };
   /// End Handle Submit
 
@@ -79,7 +83,9 @@ function EditProfile() {
             ) : (
               <Image
                 src={
-                  image ? `https://wiishy-backend.ir${image}` : "./logo/wiishy-gray.jpg"
+                  image
+                    ? `https://wiishy-backend.ir${image}`
+                    : "./logo/wiishy-gray.jpg"
                 }
                 width={150}
                 height={150}
@@ -211,7 +217,6 @@ function EditProfile() {
               onChange={(v) => {
                 if (v.length) {
                   setGender(v[0]);
-                
                 }
               }}
             />

@@ -25,7 +25,7 @@ function HorizontalEventCard(props: { event: Event }) {
             </div>
           </div>
           <div>
-            <Button onClick={()=>{router.push(`/profile/idea/${props.event.id}`)}} className="bt btn-regular-outline">Idea for gift</Button>
+            <Button onClick={()=>{router.push(`/profile/idea/${props.event.id}`)}} className="bt btn-regular-outline" style={{fontSize:"10px !important"}}>Gift idea</Button>
           </div>
         </div>
       </List.Item>
