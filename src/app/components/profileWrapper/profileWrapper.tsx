@@ -28,11 +28,12 @@ export default function ProfileWrapper(props: { id: number }) {
   useEffect(() => {
     (async () => {
       const data = await getUserData(props.id);
-      setNewuser(data.user);
-      setFollowings(data.user.followings);
-      setFollowers(data.user.followers);
+      console.log("data",data)
+      setNewuser(data.users);
+      setFollowings(data.users.followings);
+      setFollowers(data.users.followers);
     })();
-  }, [setNewuser, props.id]);
+  }, [props.id]);
 
   useEffect(() => {
     (async () => {
@@ -69,7 +70,7 @@ export default function ProfileWrapper(props: { id: number }) {
           <h2 className="mt-1">
             (
             {(() => {
-              switch (newuser.user_gender) {
+              switch (newuser.user_gender.toString()) {
                 case "1":
                   return "Man";
                 case "2":
@@ -105,7 +106,7 @@ export default function ProfileWrapper(props: { id: number }) {
                 <Button
                   onClick={async () => {
                     const result = await unFollowUser(props.id);
-                    console.log("result", result);
+                  
                     result.status == "success"
                       ? setIsfollow(false)
                       : setIsfollow(true);

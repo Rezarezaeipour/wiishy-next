@@ -7,6 +7,7 @@ import { SliderValue } from "antd-mobile/es/components/slider";
 import { addHandler } from "@/app/api-client/gifts";
 import wisshy from "../../../../../public/logo/wiishy-gray.jpg";
 import { AddCircleOutline } from "antd-mobile-icons";
+import scrapp from "@/app/api-client/scrap"
 
 function NewGift() {
   const { register, handleSubmit, reset } = useForm();
@@ -16,8 +17,12 @@ function NewGift() {
   const [desire, setDesire] = useState<SliderValue>(50);
   const [loading, setLoading] = useState(false);
  
+  
+  
   /// Handle Submit
   const onSubmit = async (data: any) => {
+    // const ss = await scrapp({"url" : "https://www.amazon.com/dp/B07FZ8S74R"})
+    // console.log('djwiud',ss);
     if (file) {
       setLoading(true);
       const response = await addHandler({

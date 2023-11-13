@@ -1,14 +1,14 @@
 export async function addHandler(data: any) {
   const formData = new FormData();
 
-    formData.append("gift_name", data.giftname),
+  formData.append("gift_name", data.giftname),
     formData.append("gift_price", data.giftprice),
     formData.append("gift_desc", data.giftdescription),
     formData.append("gift_url", data.gift_url),
     formData.append("desire_rate", data.desire_rate);
-    if (data.image) {
-      formData.append("image", data.image);
-    }
+  if (data.image) {
+    formData.append("image", data.image);
+  }
 
   const res = await fetch("/api/addnewgift", {
     method: "POST",
@@ -16,8 +16,8 @@ export async function addHandler(data: any) {
   });
 
   if (res.ok) {
-  const response = await res.json();
-  return response;
+    const response = await res.json();
+    return response;
   }
 
   return "Something went wrong";
@@ -111,7 +111,6 @@ export async function explore() {
 }
 
 export async function unLikeGift(giftid: number) {
-  
   const res = await fetch("/api/unlike", {
     method: "POST",
     body: JSON.stringify({ giftid }),
@@ -119,7 +118,6 @@ export async function unLikeGift(giftid: number) {
 }
 
 export async function likeGift(giftid: number) {
-  
   const res = await fetch("/api/like", {
     method: "POST",
     body: JSON.stringify({ giftid }),
@@ -129,8 +127,14 @@ export async function likeGift(giftid: number) {
   }
 }
 
-
-export async function scraper(link : string) {
-  const victim = link;
-  
+export async function getGiftIdea() {
+  const res = await fetch("/api/giftidea", {
+    method: "GET",
+  });
+  if (res.ok) {
+    const response = await res.json();
+    console.log("xxxxx",response)
+  }
 }
+
+
