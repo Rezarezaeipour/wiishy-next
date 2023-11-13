@@ -19,7 +19,8 @@ import {
           key: '/profile/home',
           title: 'Home',
           icon: <HomeOutlined className="mb-2"/>,
-          badge: Badge.dot,
+          // badge: Badge.dot,
+          onclick : setRouteActive('/profile/home')
         },
         {
           key: '/profile/search',
@@ -36,7 +37,7 @@ import {
           key: '/profile/events',
           title: 'Events',
           icon: <MessageOutlined />,
-          badge: '5',
+          // badge: '5',
         },
         {
           key: '/profile/my-profile',
@@ -53,7 +54,8 @@ import {
             key={item.key}
             icon={item.icon}
             title={item.title}
-            badge={item.badge}  
+            // badge={item.badge}  
+          
           />
         ))}
       </TabBar>
