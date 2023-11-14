@@ -107,3 +107,29 @@ export async function unFollowUser(userId: number) {
 
   return await data;
 }
+
+
+export async function getFollowings(userId: number) {
+  const res = await fetch("/api/getfollowings", {
+    method: "POST",
+    body: JSON.stringify({ userId }),
+  });
+  if (res.ok) {
+    return await res.json();
+  }else{
+    return  "{'message':'Something went wrong'}";
+  }
+
+}
+
+export async function getFollowers(userId: number) {
+  const res = await fetch("/api/getfollowers", {
+    method: "POST",
+    body: JSON.stringify({ userId }),
+  });
+  if (res.ok) {
+    return await res.json();
+  }else{
+    return  "{'message':'Something went wrong'}";
+  }
+}

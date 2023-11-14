@@ -7,6 +7,7 @@ import getUserData, {
 import { Skeleton } from "antd";
 import { Button, Image } from "antd-mobile";
 import { LocationFill } from "antd-mobile-icons";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function ProfileWrapper(props: { id: number }) {
@@ -28,7 +29,7 @@ export default function ProfileWrapper(props: { id: number }) {
   useEffect(() => {
     (async () => {
       const data = await getUserData(props.id);
-     
+
       setNewuser(data.users);
       setFollowings(data.users.followings);
       setFollowers(data.users.followers);
@@ -86,14 +87,18 @@ export default function ProfileWrapper(props: { id: number }) {
             <p>{"Berlin | Gernmany"}</p>
           </div>
           <div className="flex flex-row gap-4 mt-2 mb-2">
-            <div className="flex flex-col items-center align-middle">
-              <p className="font-bold">{followings}</p>
-              <p>following</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <p className="font-bold">{followers}</p>
-              <p>followers</p>
-            </div>
+            <Link href={`/profile/followings/${props.id}/${newuser.name}`}>
+              <div className="flex flex-col items-center align-middle">
+                <p className="font-bold">{followings}</p>
+                <p>following</p>
+              </div>
+            </Link>
+            <Link href={`/profile/followers/${props.id}/${newuser.name}`}>
+              <div className="flex flex-col items-center">
+                <p className="font-bold">{followers}</p>
+                <p>followers</p>
+              </div>
+            </Link>
           </div>
           <p className="px-4 py-1">
             {newuser?.user_desc ||
@@ -106,7 +111,7 @@ export default function ProfileWrapper(props: { id: number }) {
                 <Button
                   onClick={async () => {
                     const result = await unFollowUser(props.id);
-                  
+
                     result.status == "success"
                       ? setIsfollow(false)
                       : setIsfollow(true);
