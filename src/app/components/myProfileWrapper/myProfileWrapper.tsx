@@ -9,7 +9,7 @@ function MyProfileWrapper(props: {
   family: string;
   image: string | undefined;
   gender: any;
-  location: any;
+  location?: any;
   followings: any;
   followers: any;
   bio: any;

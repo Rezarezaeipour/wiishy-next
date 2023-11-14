@@ -128,13 +128,15 @@ export async function likeGift(giftid: number) {
 }
 
 export async function getGiftIdea() {
-  const res = await fetch("/api/giftidea", {
-    method: "GET",
-  });
-  if (res.ok) {
-    const response = await res.json();
-    console.log("xxxxx",response)
-  }
+
+  // const res = await fetch("/api/giftidea", {
+  //   method: "GET",
+  // });
+  // if (res.ok) {
+  //   const response = await res.json();
+  //   console.log("xxxxx",response)
+  // }
+  
 }
 
 

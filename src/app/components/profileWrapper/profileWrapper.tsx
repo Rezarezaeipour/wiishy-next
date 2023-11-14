@@ -28,7 +28,7 @@ export default function ProfileWrapper(props: { id: number }) {
   useEffect(() => {
     (async () => {
       const data = await getUserData(props.id);
-      console.log("data",data)
+     
       setNewuser(data.users);
       setFollowings(data.users.followings);
       setFollowers(data.users.followers);
