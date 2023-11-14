@@ -52,7 +52,7 @@ export interface User {
   name: string | null | undefined;
   family: string | null | undefined;
   userId : string | null | undefined;
-  location : string | null | undefined;
+  location? : string | null | undefined;
   age : number | null | undefined;
   token : string | null | undefined;
   age? : number;

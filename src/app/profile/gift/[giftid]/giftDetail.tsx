@@ -32,7 +32,7 @@ export default function GiftDetail(props: { giftid: number }) {
         res.isfollow ? setIsfollow(true) : setIsfollow(false);
       }
     })();
-  }, [loadGiftHandler, setIslike, setGiftDetail]);
+  }, [loadGiftHandler, setIslike, setGiftDetail,props.giftid]);
 
   const likeit = async (giftDetail: number) => {
     likeGift(giftDetail);

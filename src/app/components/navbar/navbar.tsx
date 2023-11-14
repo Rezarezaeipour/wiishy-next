@@ -20,7 +20,6 @@ import {
           title: 'Home',
           icon: <HomeOutlined className="mb-2"/>,
           // badge: Badge.dot,
-          onclick : setRouteActive('/profile/home')
         },
         {
           key: '/profile/search',
