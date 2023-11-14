@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 function MyProfileWrapper(props: {
+  id : number;
   name: string;
   family: string;
   image: string | undefined;
@@ -13,6 +14,7 @@ function MyProfileWrapper(props: {
   followings: any;
   followers: any;
   bio: any;
+
 }) {
   return (
     <>
@@ -47,14 +49,18 @@ function MyProfileWrapper(props: {
           <p>{props.location || "Berlin | Gernmany"}</p>
         </div>
         <div className="flex flex-row gap-4 mt-2 mb-2">
-          <div className="flex flex-col items-center align-middle">
-            <p className="font-bold">{props.followings}</p>
-            <p>following</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <p className="font-bold">{props.followers}</p>
-            <p>followers</p>
-          </div>
+          <Link href={`/profile/followings/${props.id}/${props.name}`}>
+            <div className="flex flex-col items-center align-middle">
+              <p className="font-bold">{props.followings}</p>
+              <p>following  </p>
+            </div>
+          </Link>
+          <Link href={`/profile/followers/${props.id}/${props.name}`}>
+            <div className="flex flex-col items-center">
+              <p className="font-bold">{props.followers}</p>
+              <p>followers</p>
+            </div>
+          </Link>
         </div>
         <p className="px-4 py-1">
           {props.bio ||

@@ -11,6 +11,7 @@ import  { getMyData } from "@/app/api-client/users";
 function MyProfile() {
   const [productList, setProductList] = useState();
   const [newuser, setNewuser] = useState<{
+    id : number;
     name: string;
     family: string;
     user_gender: string;
@@ -24,9 +25,9 @@ function MyProfile() {
     (async () => {
       const ProductList = await myProductListHandler();
       setProductList(ProductList.gifts);
-
+      
       const data = await getMyData(0);
-      console.log("data",data)
+    
       setNewuser(data.users);
     })();
   }, [setNewuser,setProductList]);
@@ -44,6 +45,7 @@ function MyProfile() {
             />
           </div>
         ) : (
+          
           <MyProfileWrapper
             image={
               newuser && newuser.user_image_url ? newuser?.user_image_url : ""
@@ -57,6 +59,8 @@ function MyProfile() {
             followings={newuser?.followings}
             followers={newuser?.followers}
             bio={newuser && newuser.user_desc ? newuser?.user_desc : "..."}
+            id={newuser && newuser.id ? newuser?.id : 0}
+        
           />
         )}
 
