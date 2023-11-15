@@ -17,7 +17,7 @@ function EditProfile() {
   } = useForm();
 
   const [gender, setGender] = useState("3");
-  const [image, setImage] = useState("/wiishy.png");
+  const [image, setImage] = useState("wiishy.png");
   const [sbirth, setSbirth] = useState<string>("");
   const [datevisible, setDateVisible] = useState(false);
   const [file, setFile] = useState<File>();
@@ -39,9 +39,8 @@ function EditProfile() {
             setValue("family", data.users?.family);
             setValue("user_desc", data.users?.user_desc);
             setGender(data.users?.user_gender);
-            setImage(data.users?.user_image_url);
+            setImage("https://wiishy-backend.ir/" + data.users?.user_image_url);
             setbirth(bd);
-           
           })()
         : (() => {
             Toast.show({
@@ -63,7 +62,7 @@ function EditProfile() {
       image: file,
       birth_date: sbirth,
     });
-     
+
     response
       ? Toast.show({
           content: response.message,
@@ -82,11 +81,7 @@ function EditProfile() {
               <Skeleton.Avatar active={true} size={150} shape={"circle"} />
             ) : (
               <Image
-                src={
-                  image
-                    ? `https://wiishy-backend.ir${image}`
-                    : "./logo/wiishy-gray.jpg"
-                }
+                src={image}
                 width={150}
                 height={150}
                 className="rounded-full"
@@ -104,7 +99,11 @@ function EditProfile() {
               type="file"
               name="file"
               id="input-image-avatar"
-              onChange={(e) => setFile(e.target.files?.[0])}
+              onChange={(e) => {
+                setFile(e.target.files?.[0]);
+                e.target.files?.[0] &&
+                  setImage(URL.createObjectURL(e.target.files?.[0]));
+              }}
             />
           </div>
 

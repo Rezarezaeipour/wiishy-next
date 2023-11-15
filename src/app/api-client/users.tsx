@@ -6,26 +6,28 @@ export async function updateHandler(data: {
   image: File;
   birth_date: string;
 }) {
-  
   const formData = new FormData();
   formData.append("name", data.name);
   formData.append("family", data.family);
   formData.append("user_desc", data.user_desc);
   formData.append("user_gender", data.user_gender);
   formData.append("user_birthday", data.birth_date);
+  formData.append("user_location_id", "5");
+  formData.append("email", "test@test.com");
   if (data.image) {
     formData.append("image", data.image);
   }
-
+ 
   const res = await fetch("/api/updateuser", {
+   
     method: "POST",
     body: formData,
+  
   });
-
-  if (res.ok) {
+  if (res.status == 200) {
     return await res.json();
   } else {
-    return { message : "something went wrong" };
+    return { message: "Something went wrong" };
   }
 }
 
@@ -108,7 +110,6 @@ export async function unFollowUser(userId: number) {
   return await data;
 }
 
-
 export async function getFollowings(userId: number) {
   const res = await fetch("/api/getfollowings", {
     method: "POST",
@@ -116,10 +117,9 @@ export async function getFollowings(userId: number) {
   });
   if (res.ok) {
     return await res.json();
-  }else{
-    return  "{'message':'Something went wrong'}";
+  } else {
+    return "{'message':'Something went wrong'}";
   }
-
 }
 
 export async function getFollowers(userId: number) {
@@ -129,7 +129,7 @@ export async function getFollowers(userId: number) {
   });
   if (res.ok) {
     return await res.json();
-  }else{
-    return  "{'message':'Something went wrong'}";
+  } else {
+    return "{'message':'Something went wrong'}";
   }
 }
