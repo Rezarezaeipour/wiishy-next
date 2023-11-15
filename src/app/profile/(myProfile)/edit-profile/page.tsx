@@ -1,12 +1,12 @@
 "use client";
 import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
 import { Skeleton } from "antd";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { getMyData, updateHandler } from "@/app/api-client/users";
 import { AddCircleOutline } from "antd-mobile-icons";
-import { useRouter } from "next/router";
+import wisshy from "../../../../../public/logo/wiishy.png";
 
 function EditProfile() {
   const {
@@ -17,10 +17,11 @@ function EditProfile() {
   } = useForm();
 
   const [gender, setGender] = useState("3");
-  const [image, setImage] = useState("wiishy.png");
+  const [image, setImage] = useState(wisshy.src);
   const [sbirth, setSbirth] = useState<string>("");
   const [datevisible, setDateVisible] = useState(false);
   const [file, setFile] = useState<File>();
+  const [loading, setLoading] = useState(false);
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
   const minDate = new Date(1960, 1, 1);
@@ -56,6 +57,7 @@ function EditProfile() {
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
+    setLoading(true);
     const response = await updateHandler({
       ...data,
       user_gender: gender,
@@ -63,12 +65,13 @@ function EditProfile() {
       birth_date: sbirth,
     });
 
-    response
-      ? Toast.show({
+    if(response){
+       setLoading(false);
+       Toast.show({
           content: response.message,
           position: "bottom",
         })
-      : "";
+       }
   };
   /// End Handle Submit
 
@@ -247,6 +250,7 @@ function EditProfile() {
 
           <div className="pb-5 px-0 mt-1 ">
             <Button
+             loading={loading}
               type="submit"
               className="btn btn-regular w-full m-1"
               style={{ fontSize: "14px" }}
