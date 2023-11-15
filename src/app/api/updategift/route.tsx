@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   let xdata = null;
   const data = await request.formData();
- 
   
   const cookie = cookies();
   const infoCookie = cookie.get("w-token");
