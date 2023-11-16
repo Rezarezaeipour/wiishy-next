@@ -5,7 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
 import { addHandler } from "@/app/api-client/gifts";
-import wisshy from "../../../../../public/logo/wiishy-gray.jpg";
+import wiishy from "./../../../../../public/logo/wiishy-gray.jpg"
+
 import { AddCircleOutline } from "antd-mobile-icons";
 import scrapp from "@/app/api-client/scrap"
 
@@ -13,7 +14,7 @@ function NewGift() {
   const { register, handleSubmit, reset } = useForm();
 
   const [file, setFile] = useState<File>();
-  const [image, setImage] = useState(wisshy.src);
+  const [image, setImage] = useState(wiishy.src);
   const [desire, setDesire] = useState<SliderValue>(50);
   const [loading, setLoading] = useState(false);
  
@@ -37,7 +38,7 @@ function NewGift() {
           position: "bottom",
         });
         reset();
-        setImage(wisshy.src);
+        setImage(wiishy.src);
       }
     }else{
       Toast.show({

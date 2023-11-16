@@ -21,6 +21,8 @@ export default function Header() {
         onBack={togglePopup}
         backArrow={false}
         style={{ backgroundColor: "white"}}
+        className="topNav"
+        // right={<MenuOutlined onClick={()=>alert('hi')}/>}
       >
         <Image src={logo} width={96} height={37} alt="wishy logo" className="mx-auto" />
       </NavBar>

@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { getMyData, updateHandler } from "@/app/api-client/users";
-import { AddCircleOutline } from "antd-mobile-icons";
-import wisshy from "../../../../../public/logo/wiishy.png";
+import { AddCircleOutline } from "antd-mobile-icons"; 
+import wisshy from "../../../../../public/default-avatar.png";
+
+
 
 function EditProfile() {
   const {
@@ -65,39 +67,49 @@ function EditProfile() {
       birth_date: sbirth,
     });
 
-    if(response){
-       setLoading(false);
-       Toast.show({
-          content: response.message,
-          position: "bottom",
-        })
-       }
+    if (response) {
+      setLoading(false);
+      Toast.show({
+        content: response.message,
+        position: "bottom",
+      });
+    }
   };
   /// End Handle Submit
 
   return (
     <>
       <div className="p-3 pb-20">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} >
           <div className="flex justify-center pt-5 relative">
-            {!status ? (
-              <Skeleton.Avatar active={true} size={150} shape={"circle"} />
-            ) : (
-              <Image
-                src={image}
-                width={150}
-                height={150}
-                className="rounded-full"
-                alt="wiishy user"
-              />
-            )}
+            <div className="min-h-[150px]">
+              {!status ? (
+                <Skeleton.Avatar active={true} size={150} shape={"circle"} />
+              ) : (
+                <>
+                  <Image
+                    src={image}
+                    width={150}
+                    height={150}
+                    className="rounded-full"
+                    alt="wiishy user"
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      objectFit: "cover",
+                      border: "solid 2px white",
+                    }}
+                  />
+                  <AddCircleOutline
+                    className="uploaAvatarBtn"
+                    onClick={() =>
+                      document.getElementById("input-image-avatar")?.click()
+                    }
+                  />
+                </>
+              )}
+            </div>
 
-            <AddCircleOutline
-              className="uploaAvatarBtn"
-              onClick={() =>
-                document.getElementById("input-image-avatar")?.click()
-              }
-            />
             <input
               type="file"
               name="file"
@@ -250,9 +262,9 @@ function EditProfile() {
 
           <div className="pb-5 px-0 mt-1 ">
             <Button
-             loading={loading}
+              loading={loading}
               type="submit"
-              className="btn btn-regular w-full m-1"
+              className="btn btn-regular btn-big-style w-full m-1"
               style={{ fontSize: "14px" }}
             >
               Save
