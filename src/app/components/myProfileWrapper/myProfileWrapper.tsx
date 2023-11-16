@@ -2,10 +2,9 @@ import { Skeleton } from "antd";
 import { Button, Image } from "antd-mobile";
 import { LocationFill } from "antd-mobile-icons";
 import Link from "next/link";
-import { Suspense } from "react";
 
 function MyProfileWrapper(props: {
-  id : number;
+  id: number;
   name: string;
   family: string;
   image: string | undefined;
@@ -14,7 +13,6 @@ function MyProfileWrapper(props: {
   followings: any;
   followers: any;
   bio: any;
-
 }) {
   return (
     <>
@@ -25,6 +23,13 @@ function MyProfileWrapper(props: {
           alt={props.name}
           src={`https://wiishy-backend.ir${props.image}`}
           className="rounded-full w-1/3 "
+          style={{
+            width: "150px",
+            height: "150px",
+            objectFit: "cover",
+            border: "solid 2px white",
+          }}
+          fit="cover"
         />
 
         <h1 className="font-bold text-xl mt-3">
@@ -52,7 +57,7 @@ function MyProfileWrapper(props: {
           <Link href={`/profile/followings/${props.id}/${props.name}`}>
             <div className="flex flex-col items-center align-middle">
               <p className="font-bold">{props.followings}</p>
-              <p>following  </p>
+              <p>following </p>
             </div>
           </Link>
           <Link href={`/profile/followers/${props.id}/${props.name}`}>

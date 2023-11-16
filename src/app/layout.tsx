@@ -21,7 +21,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
 
   return (
     <html>
-      <body className={inter.className}>
+      <body className={inter.className} >
         <React.StrictMode>
           <SessionProvider>{children}</SessionProvider>
         </React.StrictMode>

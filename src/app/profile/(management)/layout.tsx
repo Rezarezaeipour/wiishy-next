@@ -23,11 +23,12 @@ export default function RootLayout({
   const { data: session, status } = useSession();
   return (
     <>
-      <LoginProvider>
-       
+    
+        <div className="pt-[60px]">
+          <Header />
           {children}
-        
-      </LoginProvider>
+        </div>
+     
     </>
   );
 }
