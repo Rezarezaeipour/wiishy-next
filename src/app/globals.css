@@ -41,8 +41,8 @@ body {
   bottom: -4px;
   left: 0px;
   background-color: white;
-  padding:15px 22px 10px;
-  border-radius: 15px 20px 0 0;
+  padding:10px 22px 10px;
+  border-radius: 15px 15px 0 0;
 }
 
 .adm-tab-bar-item-title-with-icon{
@@ -64,7 +64,7 @@ body {
 }
 
 .ntext{
-  font-size: 11px !important;
+  font-size: 10px !important;
   margin-top: -5px;
 }
 
@@ -113,7 +113,7 @@ body {
   vertical-align: -0.125em;
   position: absolute;
   bottom: 0px;
-  z-index: 5000;
+  z-index: 9;
   margin-left: 0px;
   margin-top: 100px;
   font-size: 39px;

@@ -57,4 +57,5 @@ export interface User {
   token : string | null | undefined;
   age? : number;
   user_image_url? : string;
+  id? : number;
 }

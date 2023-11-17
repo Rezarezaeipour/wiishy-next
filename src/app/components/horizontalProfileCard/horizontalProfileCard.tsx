@@ -5,18 +5,21 @@ import { useEffect, useState } from "react";
 import { getMyData } from "@/app/api-client/users";
 import { Profile } from "next-auth";
 import { User } from "@/types";
+import Link from "next/link";
 
 function HorizontalProfileCard() {
   const [newuser, setNewuser] = useState<User>();
   useEffect(() => {
     (async () => {
       const data = await getMyData(0);
+      console.log("xxx",data );
       setNewuser(data?.users);
     })();
   }, [setNewuser]);
   return (
     <>
       {newuser && newuser?.user_image_url ? (
+        <Link href={`/profile/profile/${newuser.id}`} >
         <List>
           <List.Item
             className="people-name"
@@ -30,12 +33,13 @@ function HorizontalProfileCard() {
               newuser.age ? newuser.age : "??"
             } years old | Berlin`}
           >
-            <span className="people-desc">
+            <span className="people-desc text-black">
               {newuser.name ? newuser.name : "---"}{" "}
               {newuser.family ? newuser.family : "---"}
             </span>
           </List.Item>
         </List>
+        </Link>
       ) : (
         <div className="flex flex-row align-middle justify-center">
           <SpinLoading color="black" style={{ "--size": "24px" }} />
