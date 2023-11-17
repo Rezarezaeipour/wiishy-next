@@ -63,6 +63,13 @@ export default function ProfileWrapper(props: { id: number }) {
             alt={newuser.name}
             src={`https://wiishy-backend.ir${newuser.user_image_url}`}
             className="rounded-full w-1/3 "
+            style={{
+              width: "150px",
+              height: "150px",
+              objectFit: "cover",
+              border: "solid 2px white",
+            }}
+            fit="cover"
           />
 
           <h1 className="font-bold text-xl mt-3">

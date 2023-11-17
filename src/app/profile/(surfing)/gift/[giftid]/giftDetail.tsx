@@ -4,6 +4,7 @@ import { amIfollowHim, followUser, unFollowUser } from "@/app/api-client/users";
 import ProductList from "@/app/components/productList/productList";
 import { Product, ProductComplete } from "@/types";
 import { HeartOutlined } from "@ant-design/icons";
+import { Skeleton } from "antd";
 import { Avatar, Button, Dialog, Rate, Toast } from "antd-mobile";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,7 +24,6 @@ export default function GiftDetail(props: { giftid: number }) {
     (async () => {
       const response = await loadGiftHandler(props.giftid);
       if (response) {
-        console.log("dkm", response.gift_detail[0]);
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
         setLikeCount(response.gift_detail[0].gift_like);
@@ -32,7 +32,7 @@ export default function GiftDetail(props: { giftid: number }) {
         res.isfollow ? setIsfollow(true) : setIsfollow(false);
       }
     })();
-  }, [ setIslike, setGiftDetail,props.giftid]);
+  }, [setIslike, setGiftDetail, props.giftid]);
 
   const likeit = async (giftDetail: number) => {
     likeGift(giftDetail);
@@ -196,14 +196,44 @@ export default function GiftDetail(props: { giftid: number }) {
           </>
         </div>
       ) : (
-        <p></p>
+        <div className="py-5 px-4">
+          <Skeleton avatar paragraph={{ rows: 1 }} />
+          <Skeleton
+            paragraph={{ rows: 5 }}
+            active
+            className="mt-3 p-3 text-center"
+          />
+        </div>
       )}
 
       <div className="pb-4 mt-0">
         {giftDetail ? (
           <ProductList userId={giftDetail?.user_id}></ProductList>
         ) : (
-          <p>Loading</p>
+          <>
+            <div className="grid grid-cols-2 gap-0 mt-7 mb-10">
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+            </div>
+          </>
         )}
       </div>
     </>

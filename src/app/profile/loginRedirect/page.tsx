@@ -13,9 +13,9 @@ function LoginRedirect() {
   const router = useRouter();
 
   const checkLog = async () => {
-    try {
+   
       const data = await logIn();
-
+     
       if (data.new_user) {
         setTimeout(() => {
           router.push("/profile/edit-profile");
@@ -25,9 +25,7 @@ function LoginRedirect() {
           router.push("/profile/explore");
         }, 1000);
       }
-    } catch (error) {
-      // Handle error as needed
-    }
+    
     return <></>;
   };
 
