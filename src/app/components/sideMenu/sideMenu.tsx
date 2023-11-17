@@ -11,6 +11,7 @@ import {
   FullscreenExitOutlined,
   FullscreenOutlined,
   HomeOutlined,
+  PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
@@ -41,7 +42,6 @@ function SideMenu() {
 
           <List className="mt-0">
             <List.Item
-            
               className="text-xs"
               onClick={() => {
                 router.push("/profile/home");
@@ -81,6 +81,17 @@ function SideMenu() {
             <List.Item
               className="text-xs"
               onClick={() => {
+                router.push("/profile/add-gift");
+              }}
+            >
+              <div className="flex align-middle">
+                <PlusOutlined className="mr-2 pt-0.5" />
+                Add Gift
+              </div>
+            </List.Item>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
                 router.push("/profile/add-event");
               }}
             >
@@ -89,28 +100,7 @@ function SideMenu() {
                 Add Event
               </div>
             </List.Item>
-            <List.Item
-              className="text-xs"
-              onClick={() => {
-                router.push("/profile/followers");
-              }}
-            >
-              <div className="flex align-middle">
-                <FullscreenExitOutlined className="mr-2 pt-0.5" />
-                Followers
-              </div>
-            </List.Item>
-            <List.Item
-              className="text-xs"
-              onClick={() => {
-                router.push("/profile/followings");
-              }}
-            >
-              <div className="flex align-middle">
-                <FullscreenOutlined className="mr-2 pt-0.5" />
-                Followings
-              </div>
-            </List.Item>
+
             <List.Item
               className="text-xs"
               onClick={() => {
