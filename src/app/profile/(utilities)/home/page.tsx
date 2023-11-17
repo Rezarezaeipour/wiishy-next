@@ -1,6 +1,6 @@
 "use client";
 import { loadMyFollowingProductlist } from "@/app/api-client/gifts";
-import MyFollowingsProductList from "@/app/components/myFollowingsProductList/myFollowingsProductList";
+import HomeProductList from "@/app/components/homeProductList/homeProductList";
 import { Skeleton } from "antd";
 import { useEffect, useState } from "react";
 
@@ -26,7 +26,7 @@ function Home() {
         </h4>
         {giftlist ? (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
-            <MyFollowingsProductList productList={giftlist} />
+            <HomeProductList productList={giftlist} />
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">

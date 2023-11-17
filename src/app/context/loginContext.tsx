@@ -1,5 +1,4 @@
 "use client";
-
 import { useSession } from "next-auth/react";
 import { createContext, ReactNode, useContext } from "react";
 import { signOut } from "next-auth/react"

@@ -79,7 +79,7 @@ function EditProfile() {
 
   return (
     <>
-      <div className="p-3 pb-20">
+      <div className="p-3 pb-10">
         <form onSubmit={handleSubmit(onSubmit)} >
           <div className="flex justify-center pt-5 relative">
             <div className="min-h-[150px]">
@@ -260,7 +260,7 @@ function EditProfile() {
           <br />
           {/* SUBMIT BUTTON */}
 
-          <div className="pb-5 px-0 mt-1 ">
+          <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full">
             <Button
               loading={loading}
               type="submit"

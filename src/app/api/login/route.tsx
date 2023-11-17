@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
 
    
   const data = await response.json();
-
   ///Adding to Cookie
 
   await CookieInfoSetter({

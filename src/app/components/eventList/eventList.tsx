@@ -11,7 +11,7 @@ function EventList() {
   useEffect(() => {
     (async () => {
       const response = await getMyEventList();
-      console.log(response);
+   
       const tempeventList: [Event] = response.event;
       setEventlist(tempeventList);
     })();

@@ -1,3 +1,4 @@
+"use client"
 import { List, Avatar, Button, SpinLoading } from "antd-mobile";
 import "./style.css";
 import Image from "next/image";
@@ -18,16 +19,10 @@ import Link from "next/link";
   name: string;
   family: string;
   user_status?: number;
+  isfollow:boolean;
 }) {
-  const [isfollow, setIsfollow] = useState(true);
-  const [amIFollow, setAmIFollow] = useState(false);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await amIfollowHim(props.user_id);
-  //     setAmIFollow(res.isfollow);
-  //   })();
-  // }, []);
+  const [isfollow, setIsfollow] = useState(props.isfollow);
+   
   return (
     <>
       <div className="flex flex-row mt-2 mb-3 p-2 pb-0 items-center justify-between">
@@ -46,7 +41,7 @@ import Link from "next/link";
           </div>
         </Link>
         <div>
-          {amIFollow ? (
+          {isfollow ? (
             <Button
               onClick={async () => {
                 const result = await unFollowUser(props.user_id);
