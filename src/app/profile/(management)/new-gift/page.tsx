@@ -5,10 +5,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
 import { addHandler } from "@/app/api-client/gifts";
-import wiishy from "./../../../../../public/logo/wiishy-gray.jpg"
+import wiishy from "./../../../../../public/logo/wiishy-gray.jpg";
 
 import { AddCircleOutline } from "antd-mobile-icons";
-import scrapp from "@/app/api-client/scrap"
+import scrapp from "@/app/api-client/scrap";
 
 function NewGift() {
   const { register, handleSubmit, reset } = useForm();
@@ -17,9 +17,7 @@ function NewGift() {
   const [image, setImage] = useState(wiishy.src);
   const [desire, setDesire] = useState<SliderValue>(50);
   const [loading, setLoading] = useState(false);
- 
-  
-  
+
   /// Handle Submit
   const onSubmit = async (data: any) => {
     // const ss = await scrapp({"url" : "https://www.amazon.com/dp/B07FZ8S74R"})
@@ -40,7 +38,7 @@ function NewGift() {
         reset();
         setImage(wiishy.src);
       }
-    }else{
+    } else {
       Toast.show({
         content: "You should add an image",
         position: "bottom",
@@ -175,11 +173,12 @@ function NewGift() {
           {/* END GIFT DESCRIPTION */}
 
           {/* SUBMIT BUTTON */}
-          <div className="pb-5 px-0 mt-1 ">
+
+          <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
             <Button
               loading={loading}
               type="submit"
-              className="btn btn-regular w-full m-1"
+              className="btn btn-regular btn-big-style w-full m-1"
               style={{ fontSize: "14px" }}
             >
               Save

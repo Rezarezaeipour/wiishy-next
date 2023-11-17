@@ -35,20 +35,21 @@ export default function Navbar() {
       <div>
         <Link
           className={`flex flex-col nbutton ${
-            pathname === "/profile/search" ? "nbutton-active" : ""
+            pathname === "/profile/explore" ? "nbutton-active" : ""
           }`}
-          href={"/profile/search"}
+          href={"/profile/explore"}
         >
           <SearchOutlined className="nicon mb-2" />
-          <p className="ntext">Search</p>
+          <p className="ntext">Explore</p>
         </Link>
       </div>
+
       <div>
         <Link
           className={`flex flex-col nbutton ${
-            pathname === "/profile/search" ? "nbutton-active" : ""
+            pathname === "/profile/new-gift" ? "nbutton-active" : ""
           }`}
-          href={"/profile/search"}
+          href={"/profile/new-gift"}
         >
           <PlusOutlined className="nicon mb-2" />
           <p className="ntext">New gift</p>
@@ -65,17 +66,7 @@ export default function Navbar() {
           <p className="ntext">Events</p>
         </Link>
       </div>
-      <div>
-        <Link
-          className={`flex flex-col nbutton ${
-            pathname === "/profile/my-profile/" ? "nbutton-active" : ""
-          }`}
-          href={"/profile/my-profile"}
-        >
-          <UserOutlined className="nicon mb-2" />
-          <p className="ntext">Profile</p>
-        </Link>
-      </div>
+     
       <div>
         <div className="flex flex-col nbutton" onClick={()=>{router.back()}}>
           <LeftOutlined className="nicon mb-2" />

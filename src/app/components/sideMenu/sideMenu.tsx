@@ -7,6 +7,7 @@ import {
   BulbOutlined,
   CalendarOutlined,
   FireOutlined,
+  FormOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
   HomeOutlined,
@@ -16,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { useLoginContext } from "@/app/context/loginContext";
 import logo from "../../../../public/logo/wiishy-little.png";
 import HorizontalProfileCard from "../horizontalProfileCard/horizontalProfileCard";
+import Link from "next/link";
 
 function SideMenu() {
   const { data: session, status } = useSession();
@@ -31,14 +33,15 @@ function SideMenu() {
               alt="Wiishy"
               src={logo}
               width={100}
-              style={{ width: "70%" }}
+              style={{ width: "50%" }}
             />
           </div>
 
           <HorizontalProfileCard />
 
-          <List header="Menu" className="mt-5">
+          <List className="mt-0">
             <List.Item
+            
               className="text-xs"
               onClick={() => {
                 router.push("/profile/home");
@@ -89,17 +92,6 @@ function SideMenu() {
             <List.Item
               className="text-xs"
               onClick={() => {
-                router.push("/profile/search");
-              }}
-            >
-              <div className="flex align-middle">
-                <SearchOutlined className="mr-2 pt-0.5" />
-                Search
-              </div>
-            </List.Item>
-            <List.Item
-              className="text-xs"
-              onClick={() => {
                 router.push("/profile/followers");
               }}
             >
@@ -117,6 +109,17 @@ function SideMenu() {
               <div className="flex align-middle">
                 <FullscreenOutlined className="mr-2 pt-0.5" />
                 Followings
+              </div>
+            </List.Item>
+            <List.Item
+              className="text-xs"
+              onClick={() => {
+                router.push("/profile/edit-profile");
+              }}
+            >
+              <div className="flex align-middle">
+                <FormOutlined className="mr-2 pt-0.5" />
+                Edit profile
               </div>
             </List.Item>
           </List>

@@ -26,7 +26,7 @@ export default function Login() {
       </Button>
 
       <Button
-        onClick={() => signIn("google")}
+        onClick={() => signIn("google", { callbackUrl: "/profile/loginRedirect" })}
         className="btn btn-regular-outline w-full"
       >
         <div className="flex items-center justify-center content-center align-middle justify-items-center">
