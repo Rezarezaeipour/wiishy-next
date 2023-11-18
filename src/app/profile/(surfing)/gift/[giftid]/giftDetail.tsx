@@ -10,14 +10,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+// import {defaultGiftImage} from "../../../../../../public/logo/wiishy-gray.jpg"
 
 export default function GiftDetail(props: { giftid: number }) {
   const [isLike, setIslike] = useState<boolean>();
-  const [likecount, setLikeCount] = useState(0);
+  const [likecount, setLikeCount] = useState<number>(0);
   const [isfollow, setIsfollow] = useState(false);
   const [giftDetail, setGiftDetail] = useState<ProductComplete>();
   const [loading, setLoading] = useState(false);
   const [useId, setUserId] = useState(0);
+  const [giftImageUrl, setGiftImageUrl] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -27,6 +29,7 @@ export default function GiftDetail(props: { giftid: number }) {
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
         setLikeCount(response.gift_detail[0].gift_like);
+        setGiftImageUrl(response.gift_detail[0].user_image_url)
         setUserId(response.gift_detail[0].user_id);
         const res = await amIfollowHim(response.gift_detail[0].user_id);
         res.isfollow ? setIsfollow(true) : setIsfollow(false);
@@ -57,7 +60,7 @@ export default function GiftDetail(props: { giftid: number }) {
             >
               <div className="flex flex-row items-center justify-start">
                 <Avatar
-                  src={`https://wiishy-backend.ir/${giftDetail.user_image_url}`}
+                  src={giftImageUrl}
                   style={{ "--size": "50px", "--border-radius": "50px" }}
                 />
                 <div>
@@ -113,6 +116,7 @@ export default function GiftDetail(props: { giftid: number }) {
                   objectFit: "cover",
                   borderRadius: "15px",
                 }}
+                //  onError={()=>{this.src}}
               />
             </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import { loadMyFollowingProductlist } from "@/app/api-client/gifts";
+import { home } from "@/app/api-client/gifts";
 import HomeProductList from "@/app/components/homeProductList/homeProductList";
 import { Skeleton } from "antd";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const res = await loadMyFollowingProductlist();
+      const res = await home();
 
       setCount(res.followings_gifts_count);
       setGiftlist(res.followings_gifts);

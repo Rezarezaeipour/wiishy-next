@@ -20,7 +20,7 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <div className="adm-tab-bar navbar-light flex flex-row justify-between py-3 px-2">
+    <div className="adm-tab-bar navbar-light flex flex-row justify-center space-x-10 py-3 ">
       <div>
         <Link
           className={`flex flex-col nbutton ${

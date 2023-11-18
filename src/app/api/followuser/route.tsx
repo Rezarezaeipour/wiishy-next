@@ -9,11 +9,10 @@ export async function POST(request: NextRequest) {
 
   if (infoCookie?.value) {
     const infoCookieObject = JSON.parse(infoCookie.value);
-    const userId = infoCookieObject.userId;
     const token = infoCookieObject.token;
 
     const response = await fetch(
-      `http://wiishy-backend.ir/api/follow/${userId}/${req.userId}`,
+      `http://wiishy-backend.ir/user-home`,
       {
         method: "GET",
         headers: {
