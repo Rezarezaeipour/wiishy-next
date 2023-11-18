@@ -42,7 +42,7 @@ function EditProfile() {
             setValue("family", data.users?.family);
             setValue("user_desc", data.users?.user_desc);
             setGender(data.users?.user_gender);
-            setImage("https://wiishy-backend.ir/" + data.users?.user_image_url);
+            setImage("https://wiishy-backend.ir" + data.users?.user_image_url);
             setbirth(bd);
           })()
         : (() => {
@@ -82,6 +82,7 @@ function EditProfile() {
       <div className="p-3 pb-10">
         <form onSubmit={handleSubmit(onSubmit)} >
           <div className="flex justify-center pt-5 relative">
+          
             <div className="min-h-[150px]">
               {!status ? (
                 <Skeleton.Avatar active={true} size={150} shape={"circle"} />
@@ -120,6 +121,7 @@ function EditProfile() {
                   setImage(URL.createObjectURL(e.target.files?.[0]));
               }}
             />
+           
           </div>
 
           {/* NAME */}
