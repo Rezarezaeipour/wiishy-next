@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   const data = await request.formData();
- 
+
   const cookie = cookies();
   const infoCookie = cookie.get('w-token');
 
@@ -13,15 +13,16 @@ export async function POST(request: NextRequest) {
     const userId = infoCookieObject.userId;
     const token = infoCookieObject.token;
 
-    try {
+    // try {
       const axiosResponse = await axios.post(
-        `http://wiishy-backend.ir/api/user-update/${userId}`,
+        `https://wiishy-backend.ir/api/user-update/${userId}`,
         data,
         {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
           },
+          
         }
       );
 
@@ -33,9 +34,11 @@ export async function POST(request: NextRequest) {
       } else {
         return NextResponse.json({ message: 'Something went wrong' });
       }
-    } catch (error) {
-      console.error('Error:', error);
-      return NextResponse.json({ message: 'Something went wrong' });
-    }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    //   return NextResponse.json({ message: error });
+    // }
   }
 }
+
+
