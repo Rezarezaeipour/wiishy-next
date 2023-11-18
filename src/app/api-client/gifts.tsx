@@ -110,6 +110,15 @@ export async function explore() {
   }
 }
 
+export async function home() {
+  const res = await fetch("/api/home", {
+    method: "GET",
+  });
+  if (res.ok) {
+    return await res.json();
+  }
+}
+
 export async function unLikeGift(giftid: number) {
   const res = await fetch("/api/unlike", {
     method: "POST",
