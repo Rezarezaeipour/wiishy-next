@@ -3,7 +3,7 @@ import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
 import { Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
+import NextImage from "next/image";
 import { getMyData, updateHandler } from "@/app/api-client/users";
 import { AddCircleOutline } from "antd-mobile-icons"; 
 import wisshy from "../../../../../public/default-avatar.png";
@@ -77,9 +77,26 @@ function EditProfile() {
   };
   /// End Handle Submit
 
+  const [size, setSize] = useState<string>('')
+  const [fileSize, setFileSize] = useState<number>(0)
+  const [fileType, setFileType] = useState<string>('')
+  useEffect(() => {
+      if(image){
+        const img = new Image()
+        img.src = image 
+        img.onload = () => {
+          setSize(` Width: ${img.width} || Height: ${img.height}`)
+        }
+      }
+  }, [image])
+
   return (
     <>
       <div className="p-3 pb-10">
+
+        Dimentions: {size} <br/>
+        Size: {fileSize} <br/> 
+        Type: {fileType}
         <form onSubmit={handleSubmit(onSubmit)} >
           <div className="flex justify-center pt-5 relative">
             <div className="min-h-[150px]">
@@ -87,7 +104,7 @@ function EditProfile() {
                 <Skeleton.Avatar active={true} size={150} shape={"circle"} />
               ) : (
                 <>
-                  <Image
+                  <NextImage
                     src={image}
                     width={150}
                     height={150}
@@ -113,8 +130,16 @@ function EditProfile() {
             <input
               type="file"
               name="file"
+              // Image format. only accepts png or jpeg/jpg 
+              accept="image/png, image/jpeg"
               id="input-image-avatar"
               onChange={(e) => {
+                const files = e.target.files
+                if(files){
+                  const file = files[0]
+                  setFileSize(file.size)
+                  setFileType(file.type)
+                }
                 setFile(e.target.files?.[0]);
                 e.target.files?.[0] &&
                   setImage(URL.createObjectURL(e.target.files?.[0]));
