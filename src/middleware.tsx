@@ -6,10 +6,9 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   const info = request.cookies.get("w-token");
-  const user = request.cookies.get("w-user");
 
   if (request.nextUrl.pathname.startsWith('/profile/') && !request.nextUrl.pathname.startsWith('/profile/loginRedirect')  ) {
-   if(!info || !user){
+   if(!info){
    return NextResponse.redirect(new URL('/login', request.url))
    }
  }

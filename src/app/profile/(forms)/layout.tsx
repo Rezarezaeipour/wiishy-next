@@ -1,12 +1,9 @@
 "use client";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
 import "@/app/globals.css";
 import Header from "@/app/components/generalComponents/header/header";
-import Navbar from "@/app/components/generalComponents/navbar/navbar";
 import { useSession } from "next-auth/react";
-import { LoginProvider } from "@/app/context/loginContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +21,7 @@ export default function RootLayout({
   return (
     <>
     
-        <div className="pt-[30px]">
+        <div className="pt-[50px]">
           <Header />
           {children}
         </div>

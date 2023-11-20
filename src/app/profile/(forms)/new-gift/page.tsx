@@ -158,7 +158,7 @@ function NewGift() {
           {/* GIFT DESCRIPTION */}
           <Form.Item
             label="Gift description"
-            help="Let others know about this product"
+           
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >

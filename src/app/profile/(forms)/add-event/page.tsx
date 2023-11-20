@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { addEvent } from "@/app/api-client/events";
 
-
 function AddEvent() {
   const {
     register,
@@ -25,32 +24,67 @@ function AddEvent() {
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
-   const response = await addEvent({
+    const response = await addEvent({
       ...data,
       user_gender: gender,
-      rel : rel,
-      type : type,
+      rel: rel,
+      type: type,
       date: sbirth,
     });
     Toast.show({
       content: response,
       position: "bottom",
     });
-     reset();
+    reset();
   };
-  
+
   /// End Handle Submit
 
   return (
     <>
       <div className="p-3 pb-20">
         <h1 className="main-head">Add event</h1>
-        <h4>
-          Here you can add some important or memorial events like birthday and
-          wedding aniversary. Wiishy will aware you ten days in advance to enable you make
-          a plan for this vital parts of your life!
-        </h4>
+       
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/*  DATE */}
+          <Form.Item className="mt-4"
+            style={{ fontSize: "13px", backgroundColor: "transparent" }}
+          >
+            <Button
+              className="btn-regular"
+              style={{ fontSize: "14px" }}
+              onClick={() => {
+                setDateVisible(true);
+              }}
+            >
+              Choose the date
+            </Button>
+            <DatePicker
+              visible={datevisible}
+              onClose={() => {
+                setDateVisible(false);
+              }}
+              value={birth}
+              defaultValue={now}
+              min={minDate}
+              max={now}
+              cancelText="Cancel"
+              confirmText="Add"
+              title="Date"
+              onConfirm={(value) => {
+                setSbirth(
+                  `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
+                );
+              }}
+            >
+              {(value) => "  " + value?.toDateString()}
+            </DatePicker>
+            <p>
+              Please add the date of birthday or your wedding date. We aware you
+              annualy this important event in event feed and also by email.
+            </p>
+          </Form.Item>
+          {/* END DATE */}
           {/* NAME */}
           <Form.Item
             label="Name"
@@ -67,9 +101,7 @@ function AddEvent() {
               <p className="input-alert">Name is required</p>
             )}
           </Form.Item>
-
           {/* END NAME */}
-
           {/* FAMILY NANE */}
           <Form.Item
             label="Family"
@@ -87,6 +119,7 @@ function AddEvent() {
             )}
           </Form.Item>
           {/* END FAMILY NAME */}
+
           {/* GENDER */}
 
           <Form.Item
@@ -223,45 +256,6 @@ function AddEvent() {
             />
           </Form.Item>
           {/* END EVENT TYPE */}
-
-          {/* BIRTH DATE */}
-          <Form.Item
-            style={{ fontSize: "13px", backgroundColor: "transparent" }}
-          >
-            <Button
-              className="btn-regular"
-              style={{ fontSize: "14px" }}
-              onClick={() => {
-                setDateVisible(true);
-              }}
-            >
-              Choose the date
-            </Button>
-            <DatePicker
-              visible={datevisible}
-              onClose={() => {
-                setDateVisible(false);
-              }}
-              value={birth}
-              defaultValue={now}
-              min={minDate}
-              max={now}
-              cancelText="Cancel"
-              confirmText="Add"
-              title="Date"
-              onConfirm={(value) => {
-                setSbirth(
-                  `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
-                );
-              }}
-            >
-              {(value) => "  " + value?.toDateString()}
-            </DatePicker>
-            <p>Please add the date of birthday or your wedding date. We aware you annualy this important event 
-              in event feed and also by email.
-            </p>
-          </Form.Item>
-          {/* END BIRTH DATE */}
 
           <br />
 

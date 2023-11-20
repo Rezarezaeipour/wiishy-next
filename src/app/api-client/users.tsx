@@ -71,7 +71,6 @@ export async function updateHandler(data: {
   }
 }
 
-
 export default async function getUserData(userId: number) {
   let data;
   const res = await fetch("/api/loaduser", {
@@ -81,6 +80,21 @@ export default async function getUserData(userId: number) {
 
   if (res.ok) {
     data = await res.json();
+  } else {
+    data = { message: "Something went wrong" };
+  }
+
+  return data;
+}
+
+export  async function isNew() {
+  let data;
+  const res = await fetch("/api/isNew", {
+    method: "GET",
+  });
+
+  if (res.ok) {
+    data = res.json();
   } else {
     data = { message: "Something went wrong" };
   }
