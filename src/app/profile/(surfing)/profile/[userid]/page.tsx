@@ -1,7 +1,7 @@
 "use client";
 
-import ProductList from "@/app/components/productList/productList";
-import ProfileWrapper from "@/app/components/profileWrapper/profileWrapper";
+import ProductList from "@/app/components/profileComponents/productList/productList";
+import ProfileWrapper from "@/app/components/profileComponents/profileWrapper/profileWrapper";
 
 function Profile({ params }: { params: { userid: number } }) {
   return (

@@ -1,7 +1,7 @@
 "use client";
 import { likeGift, loadGiftHandler, unLikeGift } from "@/app/api-client/gifts";
 import { amIfollowHim, followUser, unFollowUser } from "@/app/api-client/users";
-import ProductList from "@/app/components/productList/productList";
+import ProductList from "@/app/components/profileComponents/productList/productList";
 import { Product, ProductComplete } from "@/types";
 import { HeartOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
@@ -68,7 +68,7 @@ export default function GiftDetail(props: { giftid: number }) {
                     {giftDetail.name} {giftDetail.family}
                   </p>
                   <p className="text-sm font-thin ml-2">
-                    30 years old | Berlin
+                    30 years old 
                   </p>
                 </div>
               </div>
@@ -134,7 +134,8 @@ export default function GiftDetail(props: { giftid: number }) {
                   {likecount}
                 </p>
                 <Rate
-                  character={<HeartOutlined style={{ fontSize: "25px" }} />}
+                // style={{ "--active-color" : "red" }}
+                  character={<HeartOutlined style={{ fontSize: "25px"}} />}
                   count={1}
                   allowClear
                   defaultValue={isLike ? 1 : 0}

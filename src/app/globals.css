@@ -9,6 +9,10 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+:root:root {
+  --adm-color-primary: #000000;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -73,6 +77,14 @@ body {
   width: 100%;
   top: 0px;
   z-index: 10;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.adm-nav-bar-left span{
+ display: flex;
+ font-size: 15px;
+ margin-left: 0px;
 }
 
 /* End Navbar */
@@ -103,10 +115,10 @@ body {
   vertical-align: -0.125em;
   position: absolute;
   bottom: 0px;
-  z-index: 5000;
   margin-left: 97px;
   font-size: 39px;
   cursor: pointer;
+  z-index: 9;
 }
 
 .uploaGiftBtn{

@@ -8,17 +8,14 @@ import {
   CalendarOutlined,
   FireOutlined,
   FormOutlined,
-  FullscreenExitOutlined,
-  FullscreenOutlined,
   HomeOutlined,
   PlusOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useLoginContext } from "@/app/context/loginContext";
 import logo from "../../../../public/logo/wiishy-little.png";
-import HorizontalProfileCard from "../horizontalProfileCard/horizontalProfileCard";
-import Link from "next/link";
+import HorizontalProfileCard from "../profileComponents/horizontalProfileCard/horizontalProfileCard";
+
 
 function SideMenu() {
   const { data: session, status } = useSession();
@@ -81,7 +78,7 @@ function SideMenu() {
             <List.Item
               className="text-xs"
               onClick={() => {
-                router.push("/profile/add-gift");
+                router.push("/profile/new-gift");
               }}
             >
               <div className="flex align-middle">

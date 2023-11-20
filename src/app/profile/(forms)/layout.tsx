@@ -27,9 +27,8 @@ export default function RootLayout({
         <div className="pt-[30px]">
           <Header />
           {children}
-          <Navbar />
         </div>
-    
+     
     </>
   );
 }

@@ -1,4 +1,4 @@
-import CookieInfoSetter, { CookieTokenSetter } from "@/app/components/cookieSetter/cookieSetter";
+import CookieInfoSetter, { CookieTokenSetter } from "@/app/components/generalComponents/cookieSetter/cookieSetter";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {

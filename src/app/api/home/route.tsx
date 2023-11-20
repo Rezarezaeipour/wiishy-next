@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
   
     if(Token){
         const TokenObj = JSON.parse(Token.value);
-        const userId = TokenObj.userId;
         const realToken = TokenObj.token;
         
         const res = await fetch(`http://wiishy-backend.ir/api/user-home`,{
