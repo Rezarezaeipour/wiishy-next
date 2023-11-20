@@ -8,6 +8,7 @@ import { Skeleton } from "antd";
 import { getMyData } from "@/app/api-client/users";
 import { Swiper, SwiperRef, Tabs } from "antd-mobile";
 import EventList from "@/app/components/eventComponents/eventList/eventList";
+import { chatting } from "@/app/api-client/ai";
 
 function MyProfile() {
   const [productList, setProductList] = useState();
@@ -24,7 +25,6 @@ function MyProfile() {
 
   const swiperRef = useRef<SwiperRef>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
   const tabItems = [
     { key: "Desired", title: "Desired" },
     { key: "Events", title: "Events" },
@@ -32,6 +32,7 @@ function MyProfile() {
 
   useEffect(() => {
     (async () => {
+      const xx = chatting();
       const ProductList = await myProductListHandler();
       setProductList(ProductList.gifts);
       const data = await getMyData(0);
