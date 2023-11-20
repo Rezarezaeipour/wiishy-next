@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const userId = infoCookieObject.userId;
     const token = infoCookieObject.token;
 
-    // try {
+    try {
       const axiosResponse = await axios.post(
         `https://wiishy-backend.ir/api/user-update/${userId}`,
         data,
@@ -34,10 +34,10 @@ export async function POST(request: NextRequest) {
       } else {
         return NextResponse.json({ message: 'Something went wrong' });
       }
-    // } catch (error) {
-    //   console.error('Error:', error);
-    //   return NextResponse.json({ message: error });
-    // }
+    } catch (error) {
+      console.error('Error:', error);
+      return NextResponse.json({ message: error });
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 'use client'
-import Steps from '@/app/components/steps/steps'
+import Steps from '@/app/components/generalComponents/steps/steps'
 import { Button, PageIndicator, Space, Swiper, Toast } from 'antd-mobile'
 import { LeftOutline, RightOutline } from 'antd-mobile-icons'
 import { SwiperRef } from 'antd-mobile/es/components/swiper'

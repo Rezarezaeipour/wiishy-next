@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import HorizontalProfileCardFollowing from "../horizontalProfileCardFollowing/horizontalProfileCardFollowing";
+import HorizontalProfileCardFollowing from "../profileComponents/horizontalProfileCardFollowing/horizontalProfileCardFollowing";
 import { getFollowers } from "@/app/api-client/users";
 import { Skeleton } from "antd";
 

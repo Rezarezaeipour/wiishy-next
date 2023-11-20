@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
 import { getFollowings } from "@/app/api-client/users";
 import { Skeleton } from "antd";
-import HorizontalProfileCardFollowing from "../horizontalProfileCardFollowing/horizontalProfileCardFollowing";
+import HorizontalProfileCardFollowing from "../profileComponents/horizontalProfileCardFollowing/horizontalProfileCardFollowing";
 
 function FollowingList(props: { userId: number }) {
   const [followingsList, setFollowingsList] = useState<

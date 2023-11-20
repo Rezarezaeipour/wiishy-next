@@ -1,30 +1,31 @@
-"use client";
-import { getGiftIdea } from "@/app/api-client/gifts";
+"use client"
+import { explore } from "@/app/api-client/gifts";
 import MyFollowingsProductList from "@/app/components/profileComponents/myFollowingsProductList/myFollowingsProductList";
+import ProductList from "@/app/components/profileComponents/productList/productList";
 import { Skeleton } from "antd";
+
 import { useEffect, useState } from "react";
 
-function GiftIdeas() {
+function Explore() {
   const [count, setCount] = useState(0);
   const [giftlist, setGiftlist] = useState();
 
   useEffect(() => {
     (async () => {
-      const res = await getGiftIdea();
-
+      const res = await explore();
+      setCount(res.explore);
+      setGiftlist(res.explore);
+   
     })();
   }, []);
-
   return (
     <>
       <div className="py-5 px-2 w-full h-screen">
-        <h1 className="main-head">Gift idea</h1>
-        <h4>Here you can find all the gifts, people you are following wish to have. Wiishy AI agent, will add 
-          some gifts you may wish to have or some idea that you should have desired to know to buy for yourself or your family and friends.
-        </h4>
+        <h1 className="main-head">Explore</h1>
+       
         {giftlist ? (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
-            {/* <MyFollowingsProductList productList={giftlist} /> */}
+            <MyFollowingsProductList productList={giftlist} />
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
@@ -41,4 +42,4 @@ function GiftIdeas() {
   );
 }
 
-export default GiftIdeas;
+export default Explore;
