@@ -26,8 +26,9 @@ function EditProfile() {
   const [loading, setLoading] = useState(false);
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
-  const minDate = new Date(1960, 1, 1);
+  const minDate = new Date(1950, 1, 1);
   const [status, setStatuse] = useState(false);
+
 
   /// Handle Load
   useEffect(() => {
@@ -161,10 +162,12 @@ function EditProfile() {
           </Form.Item>
           {/* END FAMILY NAME */}
 
+         
           {/* BIRTH DATE */}
           <Form.Item
             style={{ fontSize: "13px", backgroundColor: "transparent" }}
           >
+            
             <Button
               className="btn-regular"
               style={{ fontSize: "14px" }}
@@ -174,6 +177,7 @@ function EditProfile() {
             >
               Birth Date
             </Button>
+
             <DatePicker
               visible={datevisible}
               onClose={() => {
@@ -187,9 +191,8 @@ function EditProfile() {
               confirmText="Add"
               title="Your birthday"
               onConfirm={(value) => {
-                setSbirth(
-                  `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
-                );
+                setbirth(value);
+                setSbirth(`${value?.getFullYear()}-${value?.getMonth()+1}-${value?.getDate()}`);
               }}
             >
               {(value) => "  " + value?.toDateString()}
@@ -243,7 +246,7 @@ function EditProfile() {
           <Form.Item
             label="Bio"
             help="Let others know about you"
-            className="font-extrabold text-3xl"
+            className="font-extrabold text-3xl mb-5"
             style={{ backgroundColor: "transparent" }}
           >
             <textarea

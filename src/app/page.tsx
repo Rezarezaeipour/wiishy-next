@@ -1,23 +1,25 @@
-"use client"
-import { useSession } from "next-auth/react";
+"use client";
+
 import Image from "next/image";
+import logo from "../../public/logo/wiishy-little.png";
+import { cookies } from "next/headers";
+import { isNew } from "./api-client/users";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import logo from "../../public/logo/wiishy-little.png"
 
 export default function Home() {
-  const { data: session, status } = useSession();
   const router = useRouter();
 
-    useEffect(() => { 
-      setTimeout(  () => {
-        session ? 
-        router.push("/profile/explore")
-         :
-         router.push("/steps")
-        }, 1000);
-    }, [session,router]);
- 
+  useEffect(() => {
+    setTimeout(async() => {
+      const token = await isNew();
+      token ? router.push("/profile/explore") : router.push("/steps");
+    }, 1000);
+  
+  }, [router]);
+  
+
+  
   return (
     <>
       <div className="h-full">
@@ -30,7 +32,7 @@ export default function Home() {
               src={logo}
             ></Image>
             <p className="text-center font-bold text-xl">
-              An ultimate wishlist 
+              An ultimate wishlist
             </p>
           </div>
         </>

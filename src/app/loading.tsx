@@ -8,7 +8,7 @@ function Loading() {
       <div className="w-full h-full flex flex-row align-middle justify-center" >
         <div>
           <p>Loading</p>
-          {/* <SpinLoading color="black" style={{ "--size": "24px" }} /> */}
+          <SpinLoading color="black" style={{ "--size": "24px" }} />
         </div>
       </div>
     </>

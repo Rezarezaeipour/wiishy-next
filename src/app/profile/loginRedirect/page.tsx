@@ -39,7 +39,7 @@ function LoginRedirect() {
     <>
       <div className="h-full w-full flex flex-col items-center justify-center">
         <SpinLoading color="currentColor" className="mb-2"/>
-        Redirecting to the wiishy
+        Redirecting to the iishy
       </div>
     </>
   );
