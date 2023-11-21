@@ -9,6 +9,7 @@ import wiishy from "./../../../../../public/logo/wiishy-gray.jpg";
 
 import { AddCircleOutline } from "antd-mobile-icons";
 import scrapp from "@/app/api-client/scrap";
+import { useRouter } from "next/router";
 
 function NewGift() {
   const { register, handleSubmit, reset } = useForm();
@@ -17,6 +18,7 @@ function NewGift() {
   const [image, setImage] = useState(wiishy.src);
   const [desire, setDesire] = useState<SliderValue>(50);
   const [loading, setLoading] = useState(false);
+
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
@@ -42,6 +44,11 @@ function NewGift() {
         content: "You should add an image",
         position: "bottom",
       });
+      // (() => {
+      //   setTimeout(() => {
+      //     router.push("/profile/my-profile");
+      //   }, 1000);
+      // })();
     }
   };
   /// End Handle Submit
@@ -55,6 +62,7 @@ function NewGift() {
     5: 5,
   };
 
+  
   return (
     <>
       <div className="p-3 pb-20">

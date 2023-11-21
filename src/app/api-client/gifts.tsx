@@ -45,7 +45,6 @@ export async function updateHandler(data: any) {
     const response = await res.json();
     return response;
   }
-
   return "Something went wrong";
 }
 

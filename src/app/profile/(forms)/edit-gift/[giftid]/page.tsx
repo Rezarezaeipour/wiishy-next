@@ -24,8 +24,8 @@ import { Skeleton } from "antd";
 
 
 function EditGift({ params }: { params: { giftid: string } }) {
+  
   const { register, handleSubmit, reset, setValue } = useForm();
-
   const [file, setFile] = useState<File>();
   const [image, setImage] = useState("");
   const [desire, setDesire] = useState<SliderValue>(5);
@@ -76,7 +76,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
       Toast.show({
         content: response.message,
         position: "bottom",
-      });
+      }); 
       (() => {
         setTimeout(() => {
           router.push("/profile/my-profile");
@@ -229,7 +229,8 @@ function EditGift({ params }: { params: { giftid: string } }) {
               </Form.Item>
               {/* END GIFT DESCRIPTION */}
               {/* SUBMIT BUTTON */}
-              <div className="flex flex-row pb-5 px-0 mt-1 ">
+              {/* <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10"> */}
+              <div className="flex flex-row pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
                 <Button
                   loading={loading}
                   type="submit"
