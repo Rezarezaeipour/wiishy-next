@@ -21,7 +21,7 @@ function FollowerList(props: { userId: number }) {
   useEffect(() => {
     (async () => {
       const response = await getFollowers(props.userId);
-   
+     
       setFollowerList(response.followers);
     })();
   }, [props.userId]);

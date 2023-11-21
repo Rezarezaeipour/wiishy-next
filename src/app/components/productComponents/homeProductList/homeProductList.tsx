@@ -21,6 +21,7 @@ function HomeProductList(props: { productList: [ProductComplete] }) {
             family={Item.family}
             user_image_url={Item.user_image_url}
             user_id={Item.user_id}
+            age={Item.age}
           />
         );
       })}

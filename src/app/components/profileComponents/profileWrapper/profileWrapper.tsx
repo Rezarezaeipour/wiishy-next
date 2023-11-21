@@ -20,17 +20,18 @@ export default function ProfileWrapper(props: { id: number }) {
     followers: number;
     user_desc: string;
     user_image_url: string;
-    age?:string;
+    age?: string;
   }>();
 
   const [isfollow, setIsfollow] = useState(false);
   const [followers, setFollowers] = useState(0);
   const [followings, setFollowings] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       const data = await getUserData(props.id);
-      
+
       setNewuser(data.users);
       setFollowings(data.users.followings);
       setFollowers(data.users.followers);
@@ -77,8 +78,8 @@ export default function ProfileWrapper(props: { id: number }) {
             {newuser.name || "Name"} {newuser.family || "Family"}
           </h1>
           <div className="flex flex-row mt-1">
-          <p>  {newuser.age ? newuser.age.toString()+"years old" : ""}  </p>
-        </div>
+            <p> {newuser.age ? newuser.age.toString() + " years old" : ""} </p>
+          </div>
           <h2 className="mt-1">
             (
             {(() => {
@@ -120,13 +121,16 @@ export default function ProfileWrapper(props: { id: number }) {
               <div className="flex flex-col">
                 <p>Youre following</p>
                 <Button
+                  loading={loading}
                   onClick={async () => {
+                    setLoading(true);
                     const result = await unFollowUser(props.id);
 
                     result.status == "success"
                       ? setIsfollow(false)
                       : setIsfollow(true);
                     setFollowers((old) => old - 1);
+                    setLoading(false);
                   }}
                   color="default"
                   fill="outline"
@@ -139,12 +143,15 @@ export default function ProfileWrapper(props: { id: number }) {
               <div className="flex flex-col">
                 <p>Follow to learn more...</p>
                 <Button
+                  loading={loading}
                   onClick={async () => {
+                    setLoading(true);
                     const result = await followUser(props.id);
                     result.status == "success"
                       ? setIsfollow(true)
                       : setIsfollow(false);
                     setFollowers((old) => old + 1);
+                    setLoading(false);
                   }}
                   color="default"
                   fill="outline"
