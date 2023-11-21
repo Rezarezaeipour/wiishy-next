@@ -1,4 +1,5 @@
 "use client";
+
 import { GoogleOutlined, LinkedinOutlined } from "@ant-design/icons";
 import { Button } from "antd-mobile";
 import { signIn } from "next-auth/react";
@@ -33,6 +34,7 @@ export default function Login() {
           <span>Google</span>
         </div>
       </Button>
+     
     </div>
   );
 }
