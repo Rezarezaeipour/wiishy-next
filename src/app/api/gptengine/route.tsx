@@ -22,12 +22,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     const data = await response.json();
-    console.log(data.choices);
+    // console.log(data.choices);
     
     return NextResponse.json(data)
   } catch (error) {
-    console.log(error);
-    console.error(error);
+    // console.log(error);
+    // console.error(error);
     return NextResponse.json(error)
   }
 }

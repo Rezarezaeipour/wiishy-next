@@ -12,7 +12,7 @@ function HorizontalProfileCard() {
   useEffect(() => {
     (async () => {
       const data = await getMyData(0);
-      console.log("xxx",data );
+     
       setNewuser(data?.users);
     })();
   }, [setNewuser]);

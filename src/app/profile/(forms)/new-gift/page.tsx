@@ -20,8 +20,7 @@ function NewGift() {
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
-    // const ss = await scrapp({"url" : "https://www.amazon.com/dp/B07FZ8S74R"})
-    // console.log('djwiud',ss);
+  
     if (file) {
       setLoading(true);
       const response = await addHandler({

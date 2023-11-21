@@ -10,7 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-// import {defaultGiftImage} from "../../../../../../public/logo/wiishy-gray.jpg"
 
 export default function GiftDetail(props: { giftid: number }) {
   const [isLike, setIslike] = useState<boolean>();
@@ -29,7 +28,7 @@ export default function GiftDetail(props: { giftid: number }) {
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
         setLikeCount(response.gift_detail[0].gift_like);
-        setGiftImageUrl(response.gift_detail[0].user_image_url)
+        setGiftImageUrl(response.gift_detail[0].user_image_url);
         setUserId(response.gift_detail[0].user_id);
         const res = await amIfollowHim(response.gift_detail[0].user_id);
         res.isfollow ? setIsfollow(true) : setIsfollow(false);
@@ -67,9 +66,7 @@ export default function GiftDetail(props: { giftid: number }) {
                   <p className="text-l font-normal ml-2">
                     {giftDetail.name} {giftDetail.family}
                   </p>
-                  <p className="text-sm font-thin ml-2">
-                    30 years old 
-                  </p>
+                  <p className="text-sm font-thin ml-2">30 years old</p>
                 </div>
               </div>
             </Link>
@@ -78,7 +75,6 @@ export default function GiftDetail(props: { giftid: number }) {
                 <Button
                   onClick={async () => {
                     const result = await unFollowUser(useId);
-                    console.log("result", result);
                     result.status == "success"
                       ? setIsfollow(false)
                       : setIsfollow(true);
@@ -134,8 +130,8 @@ export default function GiftDetail(props: { giftid: number }) {
                   {likecount}
                 </p>
                 <Rate
-                // style={{ "--active-color" : "red" }}
-                  character={<HeartOutlined style={{ fontSize: "25px"}} />}
+                  style={{ "--active-color": "red" }}
+                  character={<HeartOutlined style={{ fontSize: "25px" }} />}
                   count={1}
                   allowClear
                   defaultValue={isLike ? 1 : 0}

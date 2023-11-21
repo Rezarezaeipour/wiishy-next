@@ -11,10 +11,10 @@ export  async function chatting() {
     });
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
   } catch (error) {
     console.error(error);
-    console.log(error)
+    // console.log(error)
   }
 
 }

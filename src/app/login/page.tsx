@@ -1,6 +1,5 @@
 "use client";
 import { GoogleOutlined, LinkedinOutlined } from "@ant-design/icons";
-import { Card } from "antd";
 import { Button } from "antd-mobile";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
