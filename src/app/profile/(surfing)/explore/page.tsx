@@ -15,7 +15,7 @@ function Explore() {
       const res = await explore();
       setCount(res.explore);
       setGiftlist(res.explore);
-   
+     
     })();
   }, []);
   return (

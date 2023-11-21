@@ -32,7 +32,7 @@ export interface ProductComplete {
   family:string,
   user_image_url:string
   user_id:number
-
+  age? : string
 }
 
 export interface Event {

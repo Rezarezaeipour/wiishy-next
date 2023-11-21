@@ -25,7 +25,7 @@ function ProductCardComplete(props: ProductComplete) {
             <p className="text-xs font-normal ml-2">
               {props.name} {props.family}
             </p>
-            <p className="text-xs font-thin ml-2">30 years old</p>
+            <p className="text-xs font-thin ml-2">{`${props.age} years old`}</p>
           </div>
         </div>
       </Link>

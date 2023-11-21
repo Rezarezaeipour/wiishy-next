@@ -12,6 +12,7 @@ function Home() {
     (async () => {
       const res = await home();
       setGiftlist(res.followings_gifts);
+     
     })();
   }, []);
  

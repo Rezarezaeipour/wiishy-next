@@ -176,9 +176,9 @@ function NewGift() {
               autoComplete="false"
               placeholder="Write atleast three lines about the gift"
               maxLength={100}
-              rows={5}
+              rows={3}
               className="font-normal wiishy-input-text"
-              {...register("giftdescription", { required: true })}
+              {...register("giftdescription")}
             />
           </Form.Item>
           {/* END GIFT DESCRIPTION */}
