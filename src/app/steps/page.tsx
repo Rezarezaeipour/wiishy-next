@@ -64,7 +64,7 @@ function Page() {
 
           {current !== 4 ? (
             <Button
-              className="btn-regular"
+              className="btn-regular btn-big-style"
               onClick={() => {
                 ref.current?.swipeNext();
                 setCurrent(current => current + 1);
@@ -75,7 +75,7 @@ function Page() {
             </Button>
           ) : (
             <Button
-              className="btn-regular"
+              className="btn-regular btn-big-style"
               onClick={() => { router.push('/login') }}
             >
               Try wiishy

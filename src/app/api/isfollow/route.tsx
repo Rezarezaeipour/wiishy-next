@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const giftid = await request.json();
-  console.log(giftid);
+  // console.log(giftid);
   const originId = giftid.orId;
   const destId = giftid.desId;
 

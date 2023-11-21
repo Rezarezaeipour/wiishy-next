@@ -1,6 +1,6 @@
 "use client";
-import { GoogleOutlined, LinkedinOutlined, TwitterOutlined } from "@ant-design/icons";
-import { Card } from "antd";
+
+import { GoogleOutlined, LinkedinOutlined } from "@ant-design/icons";
 import { Button } from "antd-mobile";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -34,15 +34,7 @@ export default function Login() {
           <span>Google</span>
         </div>
       </Button>
-      <Button
-        onClick={() => signIn("twitter")}
-        className="btn btn-regular-outline w-full"
-      >
-        <div className="flex items-center justify-center content-center align-middle justify-items-center">
-          <TwitterOutlined className="mr-1" />
-          <span>Twitter</span>
-        </div>
-      </Button>
+     
     </div>
   );
 }
