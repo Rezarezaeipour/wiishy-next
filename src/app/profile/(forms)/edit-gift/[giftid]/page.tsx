@@ -17,11 +17,11 @@ import {
   updateHandler,
   deleteGift,
 } from "@/app/api-client/gifts";
-import wisshy from "../../../../../../public/logo/wiishy-gray.jpg";
+
 import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "antd";
-import { DotChartOutlined } from "@ant-design/icons";
+
 
 function EditGift({ params }: { params: { giftid: string } }) {
   const { register, handleSubmit, reset, setValue } = useForm();
@@ -77,7 +77,11 @@ function EditGift({ params }: { params: { giftid: string } }) {
         content: response.message,
         position: "bottom",
       });
-      // reset();
+      (() => {
+        setTimeout(() => {
+          router.push("/profile/my-profile");
+        }, 1000);
+      })();
     }
   };
   /// End Handle Submit
