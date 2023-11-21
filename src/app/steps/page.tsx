@@ -65,20 +65,21 @@ function Page() {
           {current !== 4 ? (
             <Button
               className="btn-regular btn-big-style"
+
               onClick={() => {
                 ref.current?.swipeNext();
                 setCurrent(current => current + 1);
                 current === 4 ? setCurrent(0) : setCurrent(current + 1);
               }}
             >
-              Next <RightOutline style={{ display: 'inline-block' }} />
+             &nbsp;&nbsp; Next &nbsp;&nbsp;<RightOutline style={{ display: 'inline-block' }} />
             </Button>
           ) : (
             <Button
               className="btn-regular btn-big-style"
               onClick={() => { router.push('/login') }}
             >
-              Try wiishy
+              &nbsp;&nbsp;Try wiishy&nbsp;&nbsp;
             </Button>
           )}
         </div>
