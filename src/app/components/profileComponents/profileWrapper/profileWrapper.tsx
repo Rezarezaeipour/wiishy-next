@@ -20,6 +20,7 @@ export default function ProfileWrapper(props: { id: number }) {
     followers: number;
     user_desc: string;
     user_image_url: string;
+    age?:string;
   }>();
 
   const [isfollow, setIsfollow] = useState(false);
@@ -29,7 +30,7 @@ export default function ProfileWrapper(props: { id: number }) {
   useEffect(() => {
     (async () => {
       const data = await getUserData(props.id);
-
+      
       setNewuser(data.users);
       setFollowings(data.users.followings);
       setFollowers(data.users.followers);
@@ -75,6 +76,9 @@ export default function ProfileWrapper(props: { id: number }) {
           <h1 className="font-bold text-xl mt-3">
             {newuser.name || "Name"} {newuser.family || "Family"}
           </h1>
+          <div className="flex flex-row mt-1">
+          <p>  {newuser.age ? newuser.age.toString()+"years old" : ""}  </p>
+        </div>
           <h2 className="mt-1">
             (
             {(() => {
@@ -83,16 +87,16 @@ export default function ProfileWrapper(props: { id: number }) {
                   return "Man";
                 case "2":
                   return "Woman";
-                default:
+                case "3":
                   return "Unknown";
               }
             })()}
             )
           </h2>
-          <div className="flex flex-row mt-1">
+          {/* <div className="flex flex-row mt-1">
             <LocationFill className="mt-0.5 mr-1" />
             <p>{"Berlin | Gernmany"}</p>
-          </div>
+          </div> */}
           <div className="flex flex-row gap-4 mt-2 mb-2">
             <Link href={`/profile/followings/${props.id}/${newuser.name}`}>
               <div className="flex flex-col items-center align-middle">

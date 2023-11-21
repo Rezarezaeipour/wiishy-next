@@ -13,11 +13,11 @@ function MyProfileWrapper(props: {
   followings: any;
   followers: any;
   bio: any;
+  age?: string;
 }) {
   return (
     <>
       <div className="flex flex-col items-center pt-5">
-    
         <Image
           width={150}
           height={150}
@@ -36,15 +36,18 @@ function MyProfileWrapper(props: {
         <h1 className="font-bold text-xl mt-3">
           {props.name || "Name"} {props.family || "Family"}
         </h1>
+        <div className="flex flex-row mt-1">
+          <p>{props.age }</p>
+        </div>
         <h2 className="mt-1">
           (
           {(() => {
             switch (props.gender) {
-              case 1:
+              case "1":
                 return "Man";
-              case 2:
+              case "2":
                 return "Woman";
-              default:
+              case "3":
                 return "Other";
             }
           })()}
@@ -54,6 +57,7 @@ function MyProfileWrapper(props: {
           <LocationFill className="mt-0.5 mr-1" />
           <p>{props.location || "Berlin | Gernmany"}</p>
         </div> */}
+       
         <div className="flex flex-row gap-4 mt-2 mb-2">
           <Link href={`/profile/followings/${props.id}/${props.name}`}>
             <div className="flex flex-col items-center align-middle">

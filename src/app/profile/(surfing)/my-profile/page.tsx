@@ -18,6 +18,7 @@ function MyProfile() {
     followers: number;
     user_desc: string;
     user_image_url: string;
+    age: string;
   }>();
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function MyProfile() {
       const xx = await chatting();
       const data = await getMyData(0);
       setNewuser(data.users);
+      console.log("data",data);
     })();
   }, [setNewuser]);
 
@@ -56,6 +58,7 @@ function MyProfile() {
             followers={newuser?.followers}
             bio={newuser && newuser.user_desc ? newuser?.user_desc : "..."}
             id={newuser && newuser.id ? newuser?.id : 0}
+            age={newuser && newuser.age ? newuser?.age+ " years old " : ""}
           />
         )}
 

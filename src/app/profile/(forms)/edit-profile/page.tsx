@@ -7,8 +7,7 @@ import Image from "next/image";
 import { getMyData, updateHandler } from "@/app/api-client/users";
 import { AddCircleOutline } from "antd-mobile-icons"; 
 import wisshy from "../../../../../public/default-avatar.png";
-
-
+import { useRouter } from "next/navigation";
 
 function EditProfile() {
   const {
@@ -28,7 +27,7 @@ function EditProfile() {
   const [birth, setbirth] = useState<Date>();
   const minDate = new Date(1950, 1, 1);
   const [status, setStatuse] = useState(false);
-
+  const router = useRouter();
 
   /// Handle Load
   useEffect(() => {
@@ -75,6 +74,11 @@ function EditProfile() {
         position: "bottom",
       });
     }
+    (() => {
+      setTimeout(() => {
+        router.push("/profile/my-profile");
+      }, 1000);
+    })();
   };
   /// End Handle Submit
 
@@ -254,10 +258,10 @@ function EditProfile() {
             <textarea
               autoComplete="off"
               placeholder="Write atleast three lines about yourself"
-              maxLength={300}
+              maxLength={500}
               rows={5}
               className="font-normal wiishy-input-text"
-              {...register("user_desc", { required: true, maxLength: 300 })}
+              {...register("user_desc", { required: true, maxLength: 500 })}
             />
             <div style={{ clear: "both" }}></div>
             {errors.user_desc?.type === "required" && (

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     const token = parsedInf.token;
     const userid = parsedInf.userId;
     const List = await fetch(
-      `http://wiishy-backend.ir/api/usergifts/${userid}/${userid}`,
+      `http://wiishy-backend.ir/api/usergifts/${userid}`,
       {
         method: "GET",
         headers: {
