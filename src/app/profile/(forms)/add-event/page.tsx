@@ -92,6 +92,7 @@ function AddEvent() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               placeholder="Your name"
               className="font-normal wiishy-input-text"
               {...register("name", { required: true, maxLength: 200 })}
@@ -109,6 +110,7 @@ function AddEvent() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               placeholder="Your family name"
               className="font-normal  wiishy-input-text"
               {...register("family", { required: true, maxLength: 200 })}

@@ -1,17 +1,14 @@
 "use client";
-import MyProductList from "@/app/components/productComponents/myProductList/myProductList";
+
 import MyProfileWrapper from "@/app/components/profileComponents/myProfileWrapper/myProfileWrapper";
 
 import { useEffect, useRef, useState } from "react";
-import { myProductListHandler } from "@/app/api-client/gifts";
 import { Skeleton } from "antd";
 import { getMyData } from "@/app/api-client/users";
-import { Swiper, SwiperRef, Tabs } from "antd-mobile";
-import EventList from "@/app/components/eventComponents/eventList/eventList";
 import { chatting } from "@/app/api-client/ai";
+import ProductEventContainer from "@/app/components/profileComponents/productEventcontainer/productEventContainer";
 
 function MyProfile() {
-  const [productList, setProductList] = useState();
   const [newuser, setNewuser] = useState<{
     id: number;
     name: string;
@@ -23,22 +20,14 @@ function MyProfile() {
     user_image_url: string;
   }>();
 
-  const swiperRef = useRef<SwiperRef>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const tabItems = [
-    { key: "Desired", title: "Desired" },
-    { key: "Events", title: "Events" },
-  ];
-
   useEffect(() => {
     (async () => {
-      const xx = chatting();
-      const ProductList = await myProductListHandler();
-      setProductList(ProductList.gifts);
+      // Temp ChatGpt API
+      const xx = await chatting();
       const data = await getMyData(0);
       setNewuser(data.users);
     })();
-  }, [setNewuser, setProductList]);
+  }, [setNewuser]);
 
   return (
     <>
@@ -71,66 +60,7 @@ function MyProfile() {
         )}
 
         <div className="mt-7">
-          <Tabs
-            activeKey={tabItems[activeIndex].key}
-            onChange={(key) => {
-              const index = tabItems.findIndex((item) => item.key === key);
-              setActiveIndex(index);
-              swiperRef.current?.swipeTo(index);
-            }}
-            style={{ "--title-font-size": "13px" }}
-          >
-            {tabItems.map((item) => (
-              <Tabs.Tab title={item.title} key={item.key} />
-            ))}
-          </Tabs>
-
-          <Swiper
-            direction="horizontal"
-            loop
-            indicator={() => null}
-            ref={swiperRef}
-            defaultIndex={activeIndex}
-            onIndexChange={(index) => {
-              setActiveIndex(index);
-            }}
-          >
-            <Swiper.Item>
-              <div className="grid grid-cols-2 gap-0 mt-3 mb-10">
-                {productList ? (
-                  <MyProductList productList={productList} />
-                ) : (
-                  <>
-                    <Skeleton
-                      paragraph={{ rows: 5 }}
-                      active
-                      className="mt-3 p-3 text-center"
-                    />
-                    <Skeleton
-                      paragraph={{ rows: 5 }}
-                      active
-                      className="mt-3 p-3 text-center"
-                    />
-                    <Skeleton
-                      paragraph={{ rows: 5 }}
-                      active
-                      className="mt-3 p-3 text-center"
-                    />
-                    <Skeleton
-                      paragraph={{ rows: 5 }}
-                      active
-                      className="mt-3 p-3 text-center"
-                    />
-                  </>
-                )}
-              </div>
-            </Swiper.Item>
-            <Swiper.Item>
-              <div className="mt-2 mb-10">
-                <EventList />
-              </div>
-            </Swiper.Item>
-          </Swiper>
+          <ProductEventContainer />
         </div>
       </div>
     </>

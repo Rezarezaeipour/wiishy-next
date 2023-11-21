@@ -101,6 +101,7 @@ function NewGift() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               placeholder="https://amazon.com/xxx"
               className="font-normal wiishy-input-text"
               {...register("gift_url")}
@@ -115,6 +116,7 @@ function NewGift() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               placeholder="Electric bicycle"
               className="font-normal wiishy-input-text"
               {...register("giftname", { required: true, maxLength: 200 })}
@@ -130,6 +132,7 @@ function NewGift() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               type="number"
               placeholder="250"
               className="font-normal  wiishy-input-text"
@@ -163,6 +166,7 @@ function NewGift() {
             style={{ backgroundColor: "transparent" }}
           >
             <textarea
+              autoComplete="false"
               placeholder="Write atleast three lines about the gift"
               maxLength={100}
               rows={5}

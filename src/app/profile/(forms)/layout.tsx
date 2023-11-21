@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <>
     
-        <div className="pt-[50px]">
+        <div className="pt-[50px] h-full">
           <Header />
           {children}
         </div>

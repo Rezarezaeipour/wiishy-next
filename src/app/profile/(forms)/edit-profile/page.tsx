@@ -132,6 +132,7 @@ function EditProfile() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               placeholder="Your name"
               className="font-normal wiishy-input-text"
               {...register("name", { required: true, maxLength: 200 })}
@@ -151,6 +152,7 @@ function EditProfile() {
             style={{ backgroundColor: "transparent" }}
           >
             <input
+              autoComplete="off"
               placeholder="Your family name"
               className="font-normal  wiishy-input-text"
               {...register("family", { required: true, maxLength: 200 })}
@@ -250,6 +252,7 @@ function EditProfile() {
             style={{ backgroundColor: "transparent" }}
           >
             <textarea
+              autoComplete="off"
               placeholder="Write atleast three lines about yourself"
               maxLength={300}
               rows={5}
