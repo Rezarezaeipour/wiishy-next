@@ -5,17 +5,26 @@ import { Button } from "antd-mobile";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import wiishylogo from "../../../public/logo/wiishy-little.png";
+import { useState } from "react";
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   return (
     <div className="flex flex-col items-center space-y-3 justify-center h-full bg-white p-4">
-      <Image src={wiishylogo}
-      style={{width:"100%"}}
-      alt="wiishyLogo"></Image>
-      <h1 style={{marginTop:"50px"}} className="text-xl">Login to your account</h1>
+      <Image
+        src={wiishylogo}
+        style={{ width: "100%" }}
+        alt="wiishyLogo"
+      ></Image>
+      <h1 style={{ marginTop: "50px" }} className="text-xl">
+        Login to your account
+      </h1>
       <Button
-        onClick={() =>
-          signIn("linkedin", { callbackUrl: "/profile/loginRedirect" })
-        }
+        loading={loading}
+        onClick={ () => {
+          setLoading(true);
+          signIn("linkedin", { callbackUrl: "/profile/loginRedirect" });
+        
+        }}
         className="btn btn-regular-outline w-full"
         style={{ marginTop: "20px" }}
       >
@@ -26,7 +35,12 @@ export default function Login() {
       </Button>
 
       <Button
-        onClick={() => signIn("google", { callbackUrl: "/profile/loginRedirect" })}
+        loading={loading}
+        onClick={() => {
+          setLoading(true);
+          signIn("google", { callbackUrl: "/profile/loginRedirect" });
+         
+        }}
         className="btn btn-regular-outline w-full"
       >
         <div className="flex items-center justify-center content-center align-middle justify-items-center">
@@ -34,7 +48,6 @@ export default function Login() {
           <span>Google</span>
         </div>
       </Button>
-     
     </div>
   );
 }

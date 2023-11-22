@@ -14,6 +14,7 @@ function FollowerList(props: { userId: number }) {
         family: string;
         user_status?: number;
         isfollow: boolean;
+        age:string;
       }
     ]
   >();
@@ -22,6 +23,7 @@ function FollowerList(props: { userId: number }) {
     (async () => {
       const response = await getFollowers(props.userId);
      
+      console.log(response);
       setFollowerList(response.followers);
     })();
   }, [props.userId]);
@@ -39,6 +41,7 @@ function FollowerList(props: { userId: number }) {
                 family={item.family}
                 user_image_url={item.user_image_url}
                 isfollow={item.isfollow}
+                age={item.age}
               />
             );
           })
