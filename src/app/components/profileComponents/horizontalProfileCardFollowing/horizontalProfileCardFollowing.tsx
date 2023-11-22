@@ -20,6 +20,7 @@ function HorizontalProfileCardFollowing(props: {
   family: string;
   user_status?: number;
   isfollow: boolean;
+  age: string;
 }) {
   const [isfollow, setIsfollow] = useState(props.isfollow);
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ function HorizontalProfileCardFollowing(props: {
               <p className="text-l font-normal ml-2">
                 {props.name} {props.family}
               </p>
-              <p className="text-sm font-thin ml-2">30 years old </p>
+              <p className="text-sm font-thin ml-2">{`${props.age} years old`}</p>
             </div>
           </div>
         </Link>

@@ -17,6 +17,7 @@ export default function GiftDetail(props: { giftid: number }) {
   const [isfollow, setIsfollow] = useState(false);
   const [giftDetail, setGiftDetail] = useState<ProductComplete>();
   const [loading, setLoading] = useState(false);
+  const [floading, setFloading] = useState(false);
   const [useId, setUserId] = useState(0);
   const [giftImageUrl, setGiftImageUrl] = useState("");
   const router = useRouter();
@@ -59,25 +60,31 @@ export default function GiftDetail(props: { giftid: number }) {
             >
               <div className="flex flex-row items-center justify-start">
                 <Avatar
-                  src={giftImageUrl}
+                  src={`https://wiishy-backend.ir${giftImageUrl}`}
                   style={{ "--size": "50px", "--border-radius": "50px" }}
                 />
                 <div>
                   <p className="text-l font-normal ml-2">
                     {giftDetail.name} {giftDetail.family}
                   </p>
-                  <p className="text-sm font-thin ml-2">30 years old</p>
+                  <p className="text-sm font-thin ml-2">
+                    {" "}
+                    {`${giftDetail.age} years old`}
+                  </p>
                 </div>
               </div>
             </Link>
             <div>
               {isfollow ? (
                 <Button
+                  loading={floading}
                   onClick={async () => {
+                    setFloading(true);
                     const result = await unFollowUser(useId);
                     result.status == "success"
                       ? setIsfollow(false)
                       : setIsfollow(true);
+                    setFloading(false );
                   }}
                   className="btn btn-regular-outline"
                 >
@@ -85,11 +92,14 @@ export default function GiftDetail(props: { giftid: number }) {
                 </Button>
               ) : (
                 <Button
+                  loading={floading}
                   onClick={async () => {
+                    setFloading(true);
                     const result = await followUser(useId);
                     result.status == "success"
                       ? setIsfollow(true)
                       : setIsfollow(false);
+                    setFloading(false);
                   }}
                   className="btn btn-regular-outline"
                 >

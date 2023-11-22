@@ -17,6 +17,7 @@ function FollowingList(props: { userId: number }) {
         family: string;
         user_status?: number;
         isfollow: boolean;
+        age: string;
       }
     ]
   >();
@@ -42,6 +43,7 @@ function FollowingList(props: { userId: number }) {
                 family={item.family}
                 user_image_url={item.user_image_url}
                 isfollow={item.isfollow}
+                age={item.age}
               />
             );
           })
