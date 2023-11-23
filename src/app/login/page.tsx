@@ -7,7 +7,12 @@ import Image from "next/image";
 import wiishylogo from "../../../public/logo/wiishy-little.png";
 import { useState } from "react";
 export default function Login() {
-  const [loading, setLoading] = useState(false);
+
+  const [linkeinloading, setLinkeinloading] = useState(false);
+  const [linkedin,setLinkedin] = useState(false);
+  const [googleloading, setGoogleloading] = useState(false);
+  const [google,setGoogle] = useState(false);
+
   return (
     <div className="flex flex-col items-center space-y-3 justify-center h-full bg-white p-4">
       <Image
@@ -19,11 +24,12 @@ export default function Login() {
         Login to your account
       </h1>
       <Button
-        loading={loading}
-        onClick={ () => {
-          setLoading(true);
+        disabled={linkedin}
+        loading={linkeinloading}
+        onClick={() => {
+          setLinkeinloading(true);
+          setGoogle(true);
           signIn("linkedin", { callbackUrl: "/profile/loginRedirect" });
-        
         }}
         className="btn btn-regular-outline w-full"
         style={{ marginTop: "20px" }}
@@ -35,11 +41,12 @@ export default function Login() {
       </Button>
 
       <Button
-        loading={loading}
+        disabled={google}
+        loading={googleloading}
         onClick={() => {
-          setLoading(true);
+          setGoogleloading(true);
+          setLinkedin(true);
           signIn("google", { callbackUrl: "/profile/loginRedirect" });
-         
         }}
         className="btn btn-regular-outline w-full"
       >

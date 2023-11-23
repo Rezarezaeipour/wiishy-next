@@ -31,7 +31,7 @@ function FollowingList(props: { userId: number }) {
   }, [props.userId]);
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full pb-12">
       {followingsList ? (
         followingsList && followingsList.length > 0 ? (
           followingsList.map((item, index) => {
