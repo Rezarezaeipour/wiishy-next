@@ -29,7 +29,7 @@ function FollowerList(props: { userId: number }) {
   }, [props.userId]);
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full  pb-12">
       {followerList ? (
         followerList && followerList.length > 0 ? (
           followerList.map((item, index) => {
@@ -47,7 +47,7 @@ function FollowerList(props: { userId: number }) {
           })
         ) : (
           <div className="mt-3">
-            <p className="text-center">No records</p>
+            <p className="text-center">No record</p>
           </div>
         )
       ) : (
