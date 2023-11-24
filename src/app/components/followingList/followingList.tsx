@@ -49,7 +49,7 @@ function FollowingList(props: { userId: number }) {
           })
         ) : (
           <div className="mt-3">
-            <p className="text-center">No records</p>
+            <p className="text-center">No record</p>
           </div>
         )
       ) : (

@@ -1,16 +1,24 @@
 "use client";
-import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
+import {
+  Button,
+  DatePicker,
+  Form,
+  Selector,
+  TextArea,
+  Toast,
+} from "antd-mobile";
 import { Skeleton } from "antd";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Image from "next/image";
 import { getMyData, updateHandler } from "@/app/api-client/users";
-import { AddCircleOutline } from "antd-mobile-icons"; 
+import { AddCircleOutline } from "antd-mobile-icons";
 import wisshy from "../../../../../public/default-avatar.png";
 import { useRouter } from "next/navigation";
 
 function EditProfile() {
   const {
+    control,
     register,
     setValue,
     handleSubmit,
@@ -37,13 +45,14 @@ function EditProfile() {
       data
         ? (() => {
             data ? setStatuse(true) : setStatuse(false);
-            const bd = new Date(data?.users.user_birthday);
+            const bd = data?.users.user_birthday ? new Date(data?.users.user_birthday) : new Date() ;
             setValue("name", data.users?.name);
             setValue("family", data.users?.family);
             setValue("user_desc", data.users?.user_desc);
             setGender(data.users?.user_gender);
             setImage("https://wiishy-backend.ir" + data.users?.user_image_url);
             setbirth(bd);
+           
           })()
         : (() => {
             Toast.show({
@@ -57,8 +66,8 @@ function EditProfile() {
   }, [setValue, setGender, setbirth]);
   // End handle load
 
-  /// Handle Submit
-  const onSubmit = async (data: any) => {
+  async function updateProfile(data: any) {
+   
     setLoading(true);
     const response = await updateHandler({
       ...data,
@@ -79,15 +88,28 @@ function EditProfile() {
         router.push("/profile/my-profile");
       }, 1000);
     })();
+   
+  }
+
+  /// Handle Submit
+  const onSubmit = async (data: any) => {
+    gender
+      ? (sbirth  ? updateProfile(data) : Toast.show({
+        content: "Please add your birth date",
+        position: "bottom",
+      }))
+      : Toast.show({
+          content: "Please add your gender",
+          position: "bottom",
+        });
   };
   /// End Handle Submit
 
   return (
     <>
       <div className="p-3 pb-7">
-        <form onSubmit={handleSubmit(onSubmit)} >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex justify-center pt-5 relative">
-          
             <div className="min-h-[150px]">
               {!status ? (
                 <Skeleton.Avatar active={true} size={150} shape={"circle"} />
@@ -126,7 +148,6 @@ function EditProfile() {
                   setImage(URL.createObjectURL(e.target.files?.[0]));
               }}
             />
-           
           </div>
 
           {/* NAME */}
@@ -135,6 +156,7 @@ function EditProfile() {
             className="font-extrabold text-3xl "
             style={{ backgroundColor: "transparent" }}
           >
+            
             <input
               autoComplete="off"
               placeholder="Your name"
@@ -168,12 +190,10 @@ function EditProfile() {
           </Form.Item>
           {/* END FAMILY NAME */}
 
-         
           {/* BIRTH DATE */}
           <Form.Item
             style={{ fontSize: "13px", backgroundColor: "transparent" }}
           >
-            
             <Button
               className="btn-regular"
               style={{ fontSize: "14px" }}
@@ -198,7 +218,11 @@ function EditProfile() {
               title="Your birthday"
               onConfirm={(value) => {
                 setbirth(value);
-                setSbirth(`${value?.getFullYear()}-${value?.getMonth()+1}-${value?.getDate()}`);
+                setSbirth(
+                  `${value?.getFullYear()}-${
+                    value?.getMonth() + 1
+                  }-${value?.getDate()}`
+                );
               }}
             >
               {(value) => "  " + value?.toDateString()}
@@ -255,14 +279,23 @@ function EditProfile() {
             className="font-extrabold text-3xl mb-5"
             style={{ backgroundColor: "transparent" }}
           >
-            <textarea
-              autoComplete="off"
-              placeholder="Write atleast three lines about yourself"
-              maxLength={500}
-              rows={5}
-              className="font-normal wiishy-input-text"
-              {...register("user_desc", { required: true, maxLength: 500 })}
+            <Controller
+              name="user_desc"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextArea
+                  autoComplete="off"
+                  placeholder="Write at least three lines about yourself"
+                  maxLength={300}
+                  rows={4}
+                  showCount
+                  className="font-normal wiishy-input-text bg-white"
+                  {...field}
+                />
+              )}
             />
+
             <div style={{ clear: "both" }}></div>
             {errors.user_desc?.type === "required" && (
               <p className="input-alert">Bio is required</p>

@@ -22,11 +22,11 @@ function Home() {
         <h1 className="main-head">Home</h1>
         
         {giftlist ? (
-          <div className="grid grid-cols-2 gap-0 mt-7" style={{marginBottom:"50px !important"}}>
+          <div className="grid grid-cols-1 gap-0 mt-7 mb-10" style={{marginBottom:"50px !important"}}>
             <HomeProductList productList={giftlist} />
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
+          <div className="grid grid-cols-1 gap-0 mt-7 pb-10 ">
             <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
             <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
             <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />

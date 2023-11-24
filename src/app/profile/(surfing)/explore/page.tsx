@@ -24,11 +24,11 @@ function Explore() {
         <h1 className="main-head">Explore</h1>
        
         {giftlist ? (
-          <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
+          <div className="grid grid-cols-1 gap-0 mt-7 mb-10 ">
             <MyFollowingsProductList productList={giftlist} />
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-0 mt-7 mb-10 ">
+          <div className="grid grid-cols-1 gap-0 mt-7 pb-10 ">
             <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
             <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />
             <Skeleton className="mb-2"  avatar paragraph={{ rows: 3 }} />

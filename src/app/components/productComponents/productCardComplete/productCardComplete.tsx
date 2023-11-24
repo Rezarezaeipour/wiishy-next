@@ -5,7 +5,7 @@ import "@/app/globals.css";
 import { ProductComplete } from "@/types";
 import Link from "next/link";
 import { Skeleton } from "antd";
-import grayLogo from "../../../../../public/logo/wiishy-gray.jpg"
+import grayLogo from "../../../../../public/logo/wiishy-gray.jpg";
 import Image from "next/image";
 import { HeartOutlined } from "@ant-design/icons";
 
@@ -13,7 +13,7 @@ function ProductCardComplete(props: ProductComplete) {
   return !props ? (
     <Skeleton.Image active />
   ) : (
-    <div className="flex flex-col pb-7">
+    <div className="flex flex-col pb-5">
       <Link href={`/profile/profile/${props.user_id}`}>
         <div className="flex flex-row mt-2 p-2 pb-0 items-end justify-left">
           <Avatar
@@ -21,10 +21,9 @@ function ProductCardComplete(props: ProductComplete) {
             style={{ "--size": "32px", "--border-radius": "30px" }}
           />
           <div>
-           
-            <p className="text-xs font-normal ml-2">
-              {props.name} {props.family}
-            </p>
+            <div className="text-xs font-normal ml-2">
+              {props.name} {props.family} 
+            </div>
             <p className="text-xs font-thin ml-2">{`${props.age} years old`}</p>
           </div>
         </div>
@@ -57,7 +56,7 @@ function ProductCardComplete(props: ProductComplete) {
             </div>
           </div>
           <div>
-            <h2 className="font-bold text-md mt-5">
+            <h2 className="font-bold text-md mt-3 ">
               {props.gift_name || "Macbook Air M2 15"}
             </h2>
             <div className="flex flex-row mt-2 align-middle justify-between">
