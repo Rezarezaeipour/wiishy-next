@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 export default function GiftDetail(props: { giftid: number }) {
   const [isLike, setIslike] = useState<boolean>();
-  const [likecount, setLikeCount] = useState<number>();
+  const [likecount, setLikeCount] = useState<number>(0);
   const [isfollow, setIsfollow] = useState(false);
   const [giftDetail, setGiftDetail] = useState<ProductComplete>();
   const [loading, setLoading] = useState(false);
