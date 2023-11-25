@@ -125,7 +125,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
                   alt="wiishy user"
                   style={{
                     width: "100%",
-                    height: "250px",
+                    height: "350px",
                     objectFit: "cover",
                   }}
                 />
