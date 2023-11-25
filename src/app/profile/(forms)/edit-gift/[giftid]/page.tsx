@@ -230,7 +230,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
               {/* END GIFT DESCRIPTION */}
               {/* SUBMIT BUTTON */}
               {/* <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10"> */}
-              <div className="flex flex-row pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
+              <div className="flex flex-row pb-5 px-3 mt-1 fixed bottom-0 left-0 w-full z-10">
                 <Button
                   loading={loading}
                   type="submit"
@@ -242,8 +242,8 @@ function EditGift({ params }: { params: { giftid: string } }) {
                 <Button
                   loading={loading}
                   type="button"
-                  className="btn btn-regular-outline btn-big-style w-full m-1 basis-1/4"
-                  style={{ fontSize: "14px" }}
+                  className="btn btn-regular-outline btn-big-style w-full m-1 basis-1/4 backdrop-blur-sm"
+                  style={{ fontSize: "14px"}}
                   onClick={async () => {
                     const result = await Dialog.confirm({
                       content: "Are you sure to delete this Gift?",

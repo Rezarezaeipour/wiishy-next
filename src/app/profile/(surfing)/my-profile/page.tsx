@@ -27,7 +27,7 @@ function MyProfile() {
       const xx = await chatting();
       const data = await getMyData(0);
       setNewuser(data.users);
-      console.log("data",data);
+    
     })();
   }, [setNewuser]);
 

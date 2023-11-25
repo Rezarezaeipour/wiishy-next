@@ -47,8 +47,10 @@ function AddEvent() {
        
         <form onSubmit={handleSubmit(onSubmit)}>
           {/*  DATE */}
-          <Form.Item className="mt-4"
-            style={{ fontSize: "13px", backgroundColor: "transparent" }}
+          <h2 className="mt-4 text-[20px]">When?</h2>
+          <Form.Item  
+            style={{paddingTop:'5px', fontSize: "13px", backgroundColor: "transparent" }}
+           
           >
             <Button
               className="btn-regular"
@@ -85,6 +87,8 @@ function AddEvent() {
             </p>
           </Form.Item>
           {/* END DATE */}
+
+          <h2 className="mt-4 text-[20px]">Abou who?</h2>
           {/* NAME */}
           <Form.Item
             label="Name"
@@ -262,11 +266,10 @@ function AddEvent() {
           <br />
 
           {/* SUBMIT BUTTON */}
-
-          <div className="pb-5 px-0 mt-1 ">
+          <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
             <Button
               type="submit"
-              className="btn btn-regular btn-big-style  w-full m-1"
+              className="btn btn-regular btn-big-style w-full m-1"
               style={{ fontSize: "14px" }}
             >
               Save event
