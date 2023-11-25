@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 export default function GiftDetail(props: { giftid: number }) {
   const [isLike, setIslike] = useState<boolean>();
-  const [likecount, setLikeCount] = useState<number>(0);
+  const [likecount, setLikeCount] = useState<number>();
   const [isfollow, setIsfollow] = useState(false);
   const [giftDetail, setGiftDetail] = useState<ProductComplete>();
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ export default function GiftDetail(props: { giftid: number }) {
       if (response) {
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
-        setLikeCount(response.gift_detail[0].gift_like);
+        setLikeCount(parseInt(response.gift_detail[0].gift_like));
         setGiftImageUrl(response.gift_detail[0].user_image_url);
         setUserId(response.gift_detail[0].user_id);
         const res = await amIfollowHim(response.gift_detail[0].user_id);

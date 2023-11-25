@@ -10,6 +10,7 @@ import wiishy from "./../../../../../public/logo/wiishy-gray.jpg";
 import { AddCircleOutline } from "antd-mobile-icons";
 import scrapp from "@/app/api-client/scrap";
 import { useRouter } from "next/navigation";
+import { HeartOutlined } from "@ant-design/icons";
 
 function NewGift() {
   const { register, handleSubmit, reset } = useForm();
@@ -37,19 +38,22 @@ function NewGift() {
           content: response,
           position: "bottom",
         });
-        reset();
-        setImage(wiishy.src);
+        (() => {
+        setTimeout(() => {
+          router.push("/profile/my-profile");
+        }, 1000);
+      })();
       }
     } else {
       Toast.show({
         content: "You should add an image",
         position: "bottom",
       });
-      (() => {
-        setTimeout(() => {
-          router.push("/profile/my-profile");
-        }, 1000);
-      })();
+      // (() => {
+      //   setTimeout(() => {
+      //     router.push("/profile/my-profile");
+      //   }, 1000);
+      // })();
     }
   };
   /// End Handle Submit
@@ -151,7 +155,7 @@ function NewGift() {
 
           {/* GIFT DESIRE */}
           <Form.Item
-            label="Gift desire"
+            label="How much do you love it?"
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >
@@ -162,6 +166,8 @@ function NewGift() {
                 onAfterChange={(value) => setDesire(value)}
                 defaultValue={3}
                 max={5}
+                icon={<HeartOutlined className="mx-auto flex justify-center items-center h-full w-full text-[15px]" />}
+
               />
             </div>
           </Form.Item>
@@ -179,6 +185,7 @@ function NewGift() {
               maxLength={100}
               rows={3}
               className="font-normal wiishy-input-text"
+             
               {...register("giftdescription")}
             />
           </Form.Item>
