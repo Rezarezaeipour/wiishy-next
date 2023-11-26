@@ -5,8 +5,8 @@ import TwitterProvider from "next-auth/providers/twitter";import GoogleProvider 
 import LinkedInProvider, { LinkedInProfile } from "next-auth/providers/linkedin";
 import { signIn } from "next-auth/react";
 
-console.log('client id: ', process.env.TWITTER_CLIENT_ID)
-console.log('client sectet: ', process.env.TWITTER_CLIENT_SECRET)
+// console.log('client id: ', process.env.TWITTER_CLIENT_ID)
+// console.log('client sectet: ', process.env.TWITTER_CLIENT_SECRET)
 
 const handler = NextAuth({
 
