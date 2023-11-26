@@ -23,8 +23,7 @@ function MyProfile() {
 
   useEffect(() => {
     (async () => {
-      // Temp ChatGpt API
-      const xx = await chatting();
+     
       const data = await getMyData(0);
       setNewuser(data.users);
     
