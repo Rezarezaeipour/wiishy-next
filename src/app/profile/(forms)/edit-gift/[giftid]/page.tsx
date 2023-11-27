@@ -40,7 +40,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
     (async () => {
       const data = await loadGiftHandler(Number.parseInt(params.giftid));
       const loadedGift = data.gift_detail[0];
-
+     
       data
         ? (() => {
             setValue("gift_url", loadedGift.gift_url);
