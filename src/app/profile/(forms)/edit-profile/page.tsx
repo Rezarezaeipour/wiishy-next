@@ -15,6 +15,7 @@ import { getMyData, updateHandler } from "@/app/api-client/users";
 import { AddCircleOutline } from "antd-mobile-icons";
 import wisshy from "../../../../../public/default-avatar.png";
 import { useRouter } from "next/navigation";
+import { url } from "inspector";
 
 function EditProfile() {
   const {
@@ -42,8 +43,10 @@ function EditProfile() {
     (async () => {
       ///Load user info
       const data = await getMyData(0);
+    
       data
         ? (() => {
+           
             data ? setStatuse(true) : setStatuse(false);
             const bd = data?.users.user_birthday ? new Date(data?.users.user_birthday) : new Date() ;
             setValue("name", data.users?.name);

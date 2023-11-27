@@ -2,6 +2,7 @@
 import {
   Button,
   DatePicker,
+  DotLoading,
   Dropdown,
   Form,
   Selector,
@@ -22,13 +23,14 @@ import { HeartOutlined } from "@ant-design/icons";
 import { chatting } from "@/app/api-client/ai";
 
 function NewGift() {
-  const { register, handleSubmit,setValue, reset } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm();
 
   const [file, setFile] = useState<File>();
   const [image, setImage] = useState(wiishy.src);
   const [desire, setDesire] = useState<SliderValue>(50);
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState("");
+  const [aiload, setAiload] = useState(false);
 
   const router = useRouter();
   const urlRef = useRef<any>();
@@ -37,23 +39,34 @@ function NewGift() {
 
   // Temp ChatGpt API
   const getUrl = async (url: string) => {
-    const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product in this 
+    url.length > 0
+      ? ((async() => {
+          setAiload(true);
+          const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product in this 
     page in a object with JSON format with these keys: name, price, price_unit, image_url
     here is the link : ${url}. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
      please dont add anyhting else, return just an json structure without json word. 
      `;
-   
-    const response = await chatting(prompt);
-    const resObj = await JSON.parse(response);
-    const product = resObj.product;
-   
 
-   
-    setValue("giftname",product.name);
-    setValue("giftprice",product.price);
-   
-    const price_unit = product.price_unit;
-    //  imageRef.current.value = product.price_unit;
+          const response = await chatting(prompt);
+          const resObj = await JSON.parse(response);
+          const product = resObj.product;
+
+          console.log("product", product);
+
+          setValue("giftname", product.name);
+          setValue("giftprice", product.price);
+
+          const price_unit = product.price_unit;
+          //  imageRef.current.value = product.price_unit;
+          setAiload(false);
+        })())
+      : ((() => {
+          Toast.show({
+            content: "Add a product link",
+            position: "bottom",
+          });
+        })())
   };
 
   /// Handle Submit
@@ -150,7 +163,7 @@ function NewGift() {
               placeholder="https://amazon.com/xxx"
               className="font-normal wiishy-input-text"
               {...register("gift_url")}
-               ref={urlRef}
+              ref={urlRef}
             />
           </Form.Item>
           {/* END URL */}
@@ -159,7 +172,7 @@ function NewGift() {
               className="float-right"
               onClick={() => getUrl(urlRef.current.value)}
             >
-             <span>AI Fetch&nbsp;&gt;&gt;</span> 
+              {aiload ? <DotLoading /> : <span>AI Fetch&nbsp;&gt;&gt;</span>}
             </div>
             <div className="clear-both"></div>
           </div>
@@ -176,7 +189,6 @@ function NewGift() {
               placeholder="Electric bicycle"
               className="font-normal wiishy-input-text"
               {...register("giftname", { required: true, maxLength: 200 })}
-            
             />
           </Form.Item>
 
@@ -203,7 +215,6 @@ function NewGift() {
               className="font-normal  wiishy-input-text py-3 basis-3/4"
               style={{ borderRight: "none", borderRadius: "5px 0px 0px 5px" }}
               {...register("giftprice", { required: true })}
-              
             />
             {/* <Dropdown className="basis-1/4 " style={{border:"solid thin silver",borderRadius:"0px 5px 5px 0px"}}>
               <Dropdown.Item key="sorter" title="Unit">
