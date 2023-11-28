@@ -24,8 +24,8 @@ export default function ProfileWrapper(props: { id: number }) {
   }>();
 
   const [isfollow, setIsfollow] = useState(false);
-  const [followers, setFollowers] = useState(0);
-  const [followings, setFollowings] = useState(0);
+  const [followers, setFollowers] = useState<number>(0);
+  const [followings, setFollowings] = useState<number>(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ export default function ProfileWrapper(props: { id: number }) {
       const data = await getUserData(props.id);
 
       setNewuser(data.users);
-      setFollowings(data.users.followings);
-      setFollowers(data.users.followers);
+      setFollowings(parseInt(data.users.followings));
+      setFollowers(parseInt(data.users.followers));
     })();
   }, [props.id]);
 
