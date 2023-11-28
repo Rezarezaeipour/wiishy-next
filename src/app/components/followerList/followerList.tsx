@@ -23,7 +23,7 @@ function FollowerList(props: { userId: number }) {
     (async () => {
       const response = await getFollowers(props.userId);
      
-      // console.log(response);
+       console.log("response",await response);
       setFollowerList(response.followers);
     })();
   }, [props.userId]);
