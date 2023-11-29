@@ -21,7 +21,7 @@ function EventList() {
     <div className="h-full w-full">
       {eventlist && eventlist.length > 0 ? (
         eventlist.map((item, index) => {
-          return <HorizontalEventCard event={item} key={10} />;
+          return <HorizontalEventCard event={item} key={`evennt${index}`} />;
         })
       ) : (
         <div className="mt-3">

@@ -1,5 +1,5 @@
 "use client";
-import { List, Avatar, Button } from "antd-mobile";
+import { List, Button } from "antd-mobile";
 import "./style.css";
 import { Event } from "@/types";
 import Image from "next/image";
@@ -9,14 +9,14 @@ function HorizontalEventCard(props: { event: Event }) {
   const router = useRouter();
   return (
     <>
-      <List.Item className="mb-2">
-        <div className="flex justify-between items-center rounded-[10px] py-1 px-3">
-          <div className="flex items-center ">
+      <List.Item className="mb-2 px-3  rounded-md" onClick={()=>{router.push(`/profile/edit-event/${props.event.id}`)}}>
+        {/* <div className="flex justify-between items-center rounded-[10px] py-1 px-3"> */}
+          <div className="flex items-center py-1 px-3">
             <Image
-              className="basia mr-5 w-[50px] h-[auto]"
+              className="basia mr-5 w-[40px] h-[auto]"
               src={`/events/${props.event.event_type_id}.png`}
-              width={100}
-              height={100}
+              width={40}
+              height={40}
               alt=""
             />
             <div className="flex flex-col">
@@ -24,10 +24,8 @@ function HorizontalEventCard(props: { event: Event }) {
               <p>{props.event.name}&nbsp;{props.event.family} : {props.event.event_type}</p>
             </div>
           </div>
-          <div>
-            <Button onClick={()=>{router.push(`/profile/idea/${props.event.id}`)}} className="bt btn-regular-outline" style={{fontSize:"10px !important"}}>Gift idea</Button>
-          </div>
-        </div>
+      
+        {/* </div> */}
       </List.Item>
     </>
   );
