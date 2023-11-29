@@ -31,3 +31,16 @@ export async function getMyEventList() {
     return "something went wrong";
   }
 }
+
+export async function getEventDetail(eventid : number) {
+ 
+  const response = await fetch("/api/geteventdetail", {
+    method: "POST",
+    body : JSON.stringify(eventid) 
+  });
+  if (response.ok) {
+    return response.json();
+  } else {
+    return "something went wrong";
+  }
+}
