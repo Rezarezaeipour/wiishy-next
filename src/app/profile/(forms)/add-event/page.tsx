@@ -3,6 +3,7 @@ import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { addEvent } from "@/app/api-client/events";
+import { useRouter } from "next/navigation";
 
 function AddEvent() {
   const {
@@ -20,8 +21,10 @@ function AddEvent() {
   const [datevisible, setDateVisible] = useState(false);
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
+  const [loading, setLoading] = useState(false);
   const minDate = new Date(1960, 1, 1);
 
+  const router = useRouter();
   /// Handle Submit
   const onSubmit = async (data: any) => {
     const response = await addEvent({
@@ -35,7 +38,10 @@ function AddEvent() {
       content: response,
       position: "bottom",
     });
-    reset();
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/profile/events");
+    }, 1000);
   };
 
   /// End Handle Submit
@@ -44,13 +50,16 @@ function AddEvent() {
     <>
       <div className="p-3 pb-20">
         <h1 className="main-head">Add event</h1>
-       
+
         <form onSubmit={handleSubmit(onSubmit)}>
           {/*  DATE */}
           <h2 className="mt-4 text-[20px]">When?</h2>
-          <Form.Item  
-            style={{paddingTop:'5px', fontSize: "13px", backgroundColor: "transparent" }}
-           
+          <Form.Item
+            style={{
+              paddingTop: "5px",
+              fontSize: "13px",
+              backgroundColor: "transparent",
+            }}
           >
             <Button
               className="btn-regular"
@@ -268,6 +277,7 @@ function AddEvent() {
           {/* SUBMIT BUTTON */}
           <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
             <Button
+              loading={loading}
               type="submit"
               className="btn btn-regular btn-big-style w-full m-1"
               style={{ fontSize: "14px" }}

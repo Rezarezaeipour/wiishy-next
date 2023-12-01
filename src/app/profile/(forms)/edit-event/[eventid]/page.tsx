@@ -2,6 +2,7 @@
 import {
   Button,
   DatePicker,
+  Dialog,
   Divider,
   Form,
   Selector,
@@ -9,7 +10,13 @@ import {
 } from "antd-mobile";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { addEvent, getEventDetail } from "@/app/api-client/events";
+import {
+  DeleteEvent,
+  addEvent,
+  editEvent,
+  getEventDetail,
+} from "@/app/api-client/events";
+import { useRouter } from "next/navigation";
 
 function EditEvent({ params }: { params: { eventid: number } }) {
   const {
@@ -26,46 +33,84 @@ function EditEvent({ params }: { params: { eventid: number } }) {
   const [sbirth, setSbirth] = useState<string>("");
   const [datevisible, setDateVisible] = useState(false);
   const [event, setEvent] = useState<Object>();
+  const [loading, setLoading] = useState(false);
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
   const minDate = new Date(1960, 1, 1);
 
+  const router = useRouter();
   useEffect(() => {
     (async () => {
       const response = await getEventDetail(params.eventid);
-      console.log("response", await response);
       response && response.status == "success"
         ? (() => {
-          console.log(response.event.name );
-            const date = response.event.event_date ? new Date(response.event.event_date) : new Date() ;
+            const date = response.event.event_date
+              ? new Date(response.event.event_date)
+              : new Date();
             setValue("name", response.event.name);
             setValue("family", response.event.family);
             setGender(response.event.gender);
             setRel(response.event.relationship);
             setType(response.event.event_type);
-            setbirth(date)
+            setbirth(date);
+            setSbirth(
+              `${date?.getFullYear()}-${
+                date?.getMonth() + 1
+              }-${date?.getDate()}`
+            );
           })()
-        : (()=>{setEvent("");console.log(response.status)})()
+        : (() => {
+            setEvent("");
+            console.log(response.status);
+          })();
     })();
   }, []);
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
-    const response = await addEvent({
+    console.log("xx", sbirth);
+    const response = await editEvent({
       ...data,
       user_gender: gender,
       rel: rel,
       type: type,
       date: sbirth,
+      id: params.eventid,
     });
     Toast.show({
       content: response,
       position: "bottom",
     });
-    reset();
+    (() => {
+      setLoading(true);
+      setTimeout(() => {
+        router.push("/profile/events");
+      }, 1000);
+    })();
   };
 
   /// End Handle Submit
+
+  /// Delete Handler
+  const deleteHandler = async() => {
+    const res = await DeleteEvent(params.eventid);
+    res && res.status === "success" ? (
+      (()=>{
+        Toast.show({
+          content: res.message,
+          position: "bottom",
+        });
+
+        setLoading(true);
+        setTimeout(() => {
+          router.push("/profile/events");
+        }, 1000);
+      })()
+      ) : (
+      ""
+    )
+  };
+  /// End Delete Handler
 
   return (
     <>
@@ -103,8 +148,11 @@ function EditEvent({ params }: { params: { eventid: number } }) {
               confirmText="Add"
               title="Date"
               onConfirm={(value) => {
+                setbirth(value);
                 setSbirth(
-                  `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
+                  `${value?.getFullYear()}-${
+                    value?.getMonth() + 1
+                  }-${value?.getDate()}`
                 );
               }}
             >
@@ -295,13 +343,38 @@ function EditEvent({ params }: { params: { eventid: number } }) {
           <br />
 
           {/* SUBMIT BUTTON */}
-          <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
+          <div className="flex flex-row pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
             <Button
+              loading={loading}
               type="submit"
-              className="btn btn-regular btn-big-style w-full m-1"
+              className="btn btn-regular btn-big-style w-full m-1  basis-3/4"
               style={{ fontSize: "14px" }}
             >
-              Save event
+              Update event
+            </Button>
+            <Button
+              loading={loading}
+              type="button"
+              className="btn btn-regular-outline btn-big-style w-full m-1 basis-1/4 backdrop-blur-sm"
+              style={{ fontSize: "14px" }}
+              onClick={async () => {
+                const result = await Dialog.confirm({
+                  content: "Are you sure to delete this event?",
+                  confirmText: "Yes",
+                  cancelText: "No",
+                  onConfirm: async () => {
+                    deleteHandler();
+                  },
+                  onCancel: async () => {
+                    Toast.show({
+                      content: "Delete aborted",
+                      position: "bottom",
+                    });
+                  },
+                });
+              }}
+            >
+              Delete
             </Button>
           </div>
 
