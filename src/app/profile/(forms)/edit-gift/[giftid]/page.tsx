@@ -237,7 +237,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
                   className="btn btn-regular btn-big-style w-full m-1 basis-3/4"
                   style={{ fontSize: "14px" }}
                 >
-                  Save
+                  Update
                 </Button>
                 <Button
                   loading={loading}
