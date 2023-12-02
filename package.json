@@ -29,6 +29,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
+    "shamsi-date-converter": "^1.0.5",
+    "sharp": "^0.33.0",
     "typescript": "5.1.6"
   },
   "devDependencies": {

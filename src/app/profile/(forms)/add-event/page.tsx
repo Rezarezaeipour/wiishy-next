@@ -1,9 +1,11 @@
 "use client";
-import { Button, DatePicker, Form, Selector, Toast } from "antd-mobile";
+import { Button, DatePicker, Form, Picker, Selector, Toast } from "antd-mobile";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { addEvent } from "@/app/api-client/events";
 import { useRouter } from "next/navigation";
+import * as shamsi from "shamsi-date-converter";
+
 
 function AddEvent() {
   const {
@@ -17,12 +19,31 @@ function AddEvent() {
   const [gender, setGender] = useState("1");
   const [rel, setRel] = useState("1");
   const [type, setType] = useState("1");
+  const [loading, setLoading] = useState(false);
+
+  /// Georgian Calendar
   const [sbirth, setSbirth] = useState<string>("");
-  const [datevisible, setDateVisible] = useState(false);
+  const minDate = new Date(1960, 1, 1);
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
-  const [loading, setLoading] = useState(false);
-  const minDate = new Date(1960, 1, 1);
+  const [datevisible, setDateVisible] = useState(false);
+
+  /// Shamsi Calendar
+  const [shamsidatevisible, setShamsiDateVisible] = useState(false);
+  var yeararray = [];
+  for (let i = 1395; i >= 1340; i--) {
+    yeararray.push({ label: i.toString(), value: i.toString() });
+  }
+  var montharray = [];
+  for (let j = 1; j <= 12; j++) {
+    montharray.push({ label: j.toString(), value: j.toString() });
+  }
+  var dayarray = [];
+  for (let x = 1; x <= 31; x++) {
+    dayarray.push({ label: x.toString(), value: x.toString() });
+  }
+
+  const basicColumns = [yeararray, montharray, dayarray];
 
   const router = useRouter();
   /// Handle Submit
@@ -70,6 +91,15 @@ function AddEvent() {
             >
               Choose the date
             </Button>
+            <Button
+              className="btn-regular"
+              style={{ fontSize: "14px" }}
+              onClick={() => {
+                setShamsiDateVisible(true);
+              }}
+            >
+              Shamsi
+            </Button>
             <DatePicker
               visible={datevisible}
               onClose={() => {
@@ -90,6 +120,43 @@ function AddEvent() {
             >
               {(value) => "  " + value?.toDateString()}
             </DatePicker>
+
+            {/* Shamsi */}
+            <Picker
+              columns={basicColumns}
+              visible={shamsidatevisible}
+              onClose={() => {
+                setShamsiDateVisible(false);
+              }}
+              cancelText="Cancel"
+              confirmText="Add"
+              title="Date"
+              onConfirm={(value) => {
+                value[0] && value[1] && value[2]
+                  ? (() => {
+                      console.log(parseInt(value[1].toString()));
+                      console.log(
+                        parseInt(value[0].toString()),
+                        parseInt(value[1].toString()),
+                        parseInt(value[2].toString())
+                      );
+                      console.log(
+                        shamsi.jalaliToGregorian(
+                          parseInt(value[0].toString()), 
+                          parseInt(value[1].toString()),         
+                          parseInt(value[2].toString())           
+                        )
+                      );
+                    })()
+                  : "";
+
+                // setSbirth(
+                //   `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
+                // );
+              }}
+            >
+              {(value) => "  "}
+            </Picker>
             <p>
               Please add the date of birthday or your wedding date. We aware you
               annualy this important event in event feed and also by email.
