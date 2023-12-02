@@ -13,7 +13,9 @@ function EventList() {
       const response = await getMyEventList();
    
       const tempeventList: [Event] = response.event;
+     
       setEventlist(tempeventList);
+
     })();
   }, []);
 
