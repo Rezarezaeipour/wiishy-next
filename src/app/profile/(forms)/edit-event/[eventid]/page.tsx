@@ -5,6 +5,7 @@ import {
   Dialog,
   Divider,
   Form,
+  Picker,
   Selector,
   Toast,
 } from "antd-mobile";
@@ -17,6 +18,8 @@ import {
   getEventDetail,
 } from "@/app/api-client/events";
 import { useRouter } from "next/navigation";
+import * as shamsi from "shamsi-date-converter";
+import { Radio, Space } from "antd";
 
 function EditEvent({ params }: { params: { eventid: number } }) {
   const {
@@ -37,8 +40,26 @@ function EditEvent({ params }: { params: { eventid: number } }) {
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
   const minDate = new Date(1960, 1, 1);
+  const [repeatable, setRepeatable] = useState(0);
 
   const router = useRouter();
+
+  /// Shamsi Calendar
+  const [shamsidatevisible, setShamsiDateVisible] = useState(false);
+  var yeararray = [];
+  for (let i = 1404; i >= 1340; i--) {
+    yeararray.push({ label: i.toString(), value: i.toString() });
+  }
+  var montharray = [];
+  for (let j = 1; j <= 12; j++) {
+    montharray.push({ label: j.toString(), value: j.toString() });
+  }
+  var dayarray = [];
+  for (let x = 1; x <= 31; x++) {
+    dayarray.push({ label: x.toString(), value: x.toString() });
+  }
+  const basicColumns = [yeararray, montharray, dayarray];
+
   useEffect(() => {
     (async () => {
       const response = await getEventDetail(params.eventid);
@@ -68,7 +89,6 @@ function EditEvent({ params }: { params: { eventid: number } }) {
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
-    console.log("xx", sbirth);
     const response = await editEvent({
       ...data,
       user_gender: gender,
@@ -76,6 +96,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
       type: type,
       date: sbirth,
       id: params.eventid,
+      repeatable: repeatable,
     });
     Toast.show({
       content: response,
@@ -92,23 +113,21 @@ function EditEvent({ params }: { params: { eventid: number } }) {
   /// End Handle Submit
 
   /// Delete Handler
-  const deleteHandler = async() => {
+  const deleteHandler = async () => {
     const res = await DeleteEvent(params.eventid);
-    res && res.status === "success" ? (
-      (()=>{
-        Toast.show({
-          content: res.message,
-          position: "bottom",
-        });
+    res && res.status === "success"
+      ? (() => {
+          Toast.show({
+            content: res.message,
+            position: "bottom",
+          });
 
-        setLoading(true);
-        setTimeout(() => {
-          router.push("/profile/events");
-        }, 1000);
-      })()
-      ) : (
-      ""
-    )
+          setLoading(true);
+          setTimeout(() => {
+            router.push("/profile/events");
+          }, 1000);
+        })()
+      : "";
   };
   /// End Delete Handler
 
@@ -135,6 +154,19 @@ function EditEvent({ params }: { params: { eventid: number } }) {
             >
               Choose the date
             </Button>
+            <Button
+              className="btn-regular"
+              style={{ fontSize: "14px" }}
+              onClick={() => {
+                setShamsiDateVisible(true);
+              }}
+            >
+              Shamsi Calendar
+            </Button>
+            <p className="inline-block ml-3 font-bold">
+              {"  " + sbirth + "  "}
+            </p>
+
             <DatePicker
               visible={datevisible}
               onClose={() => {
@@ -148,7 +180,6 @@ function EditEvent({ params }: { params: { eventid: number } }) {
               confirmText="Add"
               title="Date"
               onConfirm={(value) => {
-                setbirth(value);
                 setSbirth(
                   `${value?.getFullYear()}-${
                     value?.getMonth() + 1
@@ -156,11 +187,56 @@ function EditEvent({ params }: { params: { eventid: number } }) {
                 );
               }}
             >
-              {(value) => "  " + value?.toDateString()}
+              {/* {(value) => "  " + value?.toDateString()} */}
+              {(value) => "  "}
             </DatePicker>
-            <p>
-              Please add the date of birthday or your wedding date. We aware you
-              annualy this important event in event feed and also by email.
+
+            {/* Shamsi */}
+            <Picker
+              columns={basicColumns}
+              visible={shamsidatevisible}
+              onClose={() => {
+                setShamsiDateVisible(false);
+              }}
+              cancelText="Cancel"
+              confirmText="Add"
+              title="Date"
+              onConfirm={(value) => {
+                value[0] && value[1] && value[2]
+                  ? (() => {
+                      const georgian = shamsi.jalaliToGregorian(
+                        parseInt(value[0].toString()),
+                        parseInt(value[1].toString()) as any,
+                        parseInt(value[2].toString()) as any
+                      );
+                      setSbirth(
+                        `${georgian[0].toString()}-${georgian[1].toString()}-${georgian[2].toString()}`
+                      );
+                    })()
+                  : "";
+              }}
+            >
+              {(value) => "  "}
+            </Picker>
+            <p className="font-light lin text-gray-400 leading-4 mt-1">
+              Please add the date of birthday or your wedding date.
+            </p>
+
+            <Radio.Group
+              defaultValue="0"
+              className="mt-4"
+              onChange={(val) => {
+                setRepeatable(val.target.value);
+              }}
+            >
+              <Space direction="vertical">
+                <Radio value="1">Repeatable? Wiishy announce you yearly</Radio>
+                <Radio value="0">Just Once</Radio>
+              </Space>
+            </Radio.Group>
+            <p className="font-light lin text-gray-400 leading-4 mt-1">
+              For event like birthday choose Repeatable, and for single happen
+              event choose JustOnce.
             </p>
           </Form.Item>
           {/* END DATE */}

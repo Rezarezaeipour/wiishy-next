@@ -7,6 +7,7 @@ export async function addEvent(data: any) {
     formData.append("relationship", data.rel),
     formData.append("event_type", data.type);
   formData.append("event_date", data.date);
+  formData.append("repeatable",data.repeatable);
 
   const res = await fetch("/api/addnewevent", {
     method: "POST",
