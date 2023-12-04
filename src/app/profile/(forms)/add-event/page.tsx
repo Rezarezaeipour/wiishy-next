@@ -57,6 +57,8 @@ function AddEvent() {
   const router = useRouter();
   /// Handle Submit
   const onSubmit = async (data: any) => {
+
+    setLoading(true);
     const response = await addEvent({
       ...data,
       user_gender: gender,
@@ -69,7 +71,6 @@ function AddEvent() {
       content: response,
       position: "bottom",
     });
-    setLoading(true);
     setTimeout(() => {
       router.push("/profile/events");
     }, 1000);
@@ -81,7 +82,6 @@ function AddEvent() {
     <>
       <div className="p-3 pb-20">
         <h1 className="main-head">Add event</h1>
-
         <form onSubmit={handleSubmit(onSubmit)}>
           {/*  DATE */}
           <h2 className="mt-4 text-[20px]">When?</h2>
@@ -102,7 +102,7 @@ function AddEvent() {
               Choose the date
             </Button>
             <Button
-              className="btn-regular"
+              className="btn-regular ml-1"
               style={{ fontSize: "14px" }}
               onClick={() => {
                 setShamsiDateVisible(true);

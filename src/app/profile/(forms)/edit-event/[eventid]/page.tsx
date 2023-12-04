@@ -39,8 +39,10 @@ function EditEvent({ params }: { params: { eventid: number } }) {
   const [loading, setLoading] = useState(false);
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
+  const [shamsiBirth, setShamsiBirth] = useState(['1402','1','1'])
   const minDate = new Date(1960, 1, 1);
   const [repeatable, setRepeatable] = useState(0);
+  
 
   const router = useRouter();
 
@@ -65,6 +67,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
       const response = await getEventDetail(params.eventid);
       response && response.status == "success"
         ? (() => {
+           
             const date = response.event.event_date
               ? new Date(response.event.event_date)
               : new Date();
@@ -73,22 +76,28 @@ function EditEvent({ params }: { params: { eventid: number } }) {
             setGender(response.event.gender);
             setRel(response.event.relationship);
             setType(response.event.event_type);
+            setRepeatable(response.event.repeatable);
             setbirth(date);
             setSbirth(
               `${date?.getFullYear()}-${
                 date?.getMonth() + 1
               }-${date?.getDate()}`
             );
+           
+            const sb = shamsi.gregorianToJalali(parseInt(date?.getFullYear().toString()), parseInt(date?.getMonth().toString())+1 as any, parseInt(date?.getDate().toString()) as any )
+           
+            setShamsiBirth([sb[0].toString(),sb[1].toString(),sb[2].toString()]);
           })()
         : (() => {
             setEvent("");
-            console.log(response.status);
+
           })();
     })();
   }, []);
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
+    setLoading(true);
     const response = await editEvent({
       ...data,
       user_gender: gender,
@@ -103,7 +112,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
       position: "bottom",
     });
     (() => {
-      setLoading(true);
+      
       setTimeout(() => {
         router.push("/profile/events");
       }, 1000);
@@ -114,6 +123,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
 
   /// Delete Handler
   const deleteHandler = async () => {
+    setLoading(true);
     const res = await DeleteEvent(params.eventid);
     res && res.status === "success"
       ? (() => {
@@ -122,7 +132,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
             position: "bottom",
           });
 
-          setLoading(true);
+         
           setTimeout(() => {
             router.push("/profile/events");
           }, 1000);
@@ -155,7 +165,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
               Choose the date
             </Button>
             <Button
-              className="btn-regular"
+              className="btn-regular ml-1"
               style={{ fontSize: "14px" }}
               onClick={() => {
                 setShamsiDateVisible(true);
@@ -193,6 +203,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
 
             {/* Shamsi */}
             <Picker
+              value={shamsiBirth}
               columns={basicColumns}
               visible={shamsidatevisible}
               onClose={() => {
@@ -202,8 +213,11 @@ function EditEvent({ params }: { params: { eventid: number } }) {
               confirmText="Add"
               title="Date"
               onConfirm={(value) => {
+                
+               
                 value[0] && value[1] && value[2]
                   ? (() => {
+                     setShamsiBirth([value[0].toString(),value[1].toString(),value[2].toString(),]);
                       const georgian = shamsi.jalaliToGregorian(
                         parseInt(value[0].toString()),
                         parseInt(value[1].toString()) as any,
@@ -223,13 +237,14 @@ function EditEvent({ params }: { params: { eventid: number } }) {
             </p>
 
             <Radio.Group
+              value={repeatable}
               defaultValue="0"
               className="mt-4"
               onChange={(val) => {
                 setRepeatable(val.target.value);
               }}
             >
-              <Space direction="vertical">
+              <Space direction="vertical" >
                 <Radio value="1">Repeatable? Wiishy announce you yearly</Radio>
                 <Radio value="0">Just Once</Radio>
               </Space>
