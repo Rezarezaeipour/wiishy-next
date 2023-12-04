@@ -1,11 +1,19 @@
 "use client";
-import { Button, DatePicker, Form, Picker, Selector, Toast } from "antd-mobile";
+import {
+  ActionSheet,
+  Button,
+  DatePicker,
+  Form,
+  Picker,
+  Selector,
+  Toast,
+} from "antd-mobile";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { addEvent } from "@/app/api-client/events";
 import { useRouter } from "next/navigation";
 import * as shamsi from "shamsi-date-converter";
-
+import { Radio, Space } from "antd";
 
 function AddEvent() {
   const {
@@ -27,11 +35,12 @@ function AddEvent() {
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
   const [datevisible, setDateVisible] = useState(false);
+  const [repeatable, setRepeatable] = useState(0);
 
   /// Shamsi Calendar
   const [shamsidatevisible, setShamsiDateVisible] = useState(false);
   var yeararray = [];
-  for (let i = 1395; i >= 1340; i--) {
+  for (let i = 1404; i >= 1340; i--) {
     yeararray.push({ label: i.toString(), value: i.toString() });
   }
   var montharray = [];
@@ -54,6 +63,7 @@ function AddEvent() {
       rel: rel,
       type: type,
       date: sbirth,
+      repeatable : repeatable
     });
     Toast.show({
       content: response,
@@ -98,8 +108,12 @@ function AddEvent() {
                 setShamsiDateVisible(true);
               }}
             >
-              Shamsi
+              Shamsi Calendar
             </Button>
+            <p className="inline-block ml-3 font-bold">
+              {"  " + sbirth + "  "}
+            </p>
+
             <DatePicker
               visible={datevisible}
               onClose={() => {
@@ -114,11 +128,12 @@ function AddEvent() {
               title="Date"
               onConfirm={(value) => {
                 setSbirth(
-                  `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
+                  `${value?.getFullYear()}-${value?.getMonth()+1}-${value?.getDate()}`
                 );
               }}
             >
-              {(value) => "  " + value?.toDateString()}
+              {/* {(value) => "  " + value?.toDateString()} */}
+              {(value) => "  "}
             </DatePicker>
 
             {/* Shamsi */}
@@ -134,32 +149,39 @@ function AddEvent() {
               onConfirm={(value) => {
                 value[0] && value[1] && value[2]
                   ? (() => {
-                      console.log(parseInt(value[1].toString()));
-                      console.log(
+                      const georgian = shamsi.jalaliToGregorian(
                         parseInt(value[0].toString()),
-                        parseInt(value[1].toString()),
-                        parseInt(value[2].toString())
+                        parseInt(value[1].toString())  as any,
+                        parseInt(value[2].toString()) as any
                       );
-                      console.log(
-                        shamsi.jalaliToGregorian(
-                          parseInt(value[0].toString()), 
-                          parseInt(value[1].toString()),         
-                          parseInt(value[2].toString())           
-                        )
+                      setSbirth(
+                        `${georgian[0].toString()}-${georgian[1].toString()}-${georgian[2].toString()}`
                       );
                     })()
                   : "";
-
-                // setSbirth(
-                //   `${value?.getFullYear()}-${value?.getMonth()}-${value?.getDate()}`
-                // );
               }}
             >
               {(value) => "  "}
             </Picker>
-            <p>
-              Please add the date of birthday or your wedding date. We aware you
-              annualy this important event in event feed and also by email.
+            <p className="font-light lin text-gray-400 leading-4 mt-1">
+              Please add the date of birthday or your wedding date.
+            </p>
+
+            <Radio.Group
+              defaultValue="0"
+              className="mt-4"
+              onChange={(val) => {
+                setRepeatable(val.target.value);
+              }}
+            >
+              <Space direction="vertical">
+                <Radio value="1">Repeatable? Wiishy announce you yearly</Radio>
+                <Radio value="0">Just Once</Radio>
+              </Space>
+            </Radio.Group>
+            <p className="font-light lin text-gray-400 leading-4 mt-1">
+              For event like birthday choose Repeatable, and for single happen
+              event choose JustOnce.
             </p>
           </Form.Item>
           {/* END DATE */}
