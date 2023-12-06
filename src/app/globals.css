@@ -202,6 +202,16 @@ background-color: #eaeaea !important;
   background-color: #000000 !important;
 }
 
+.suggest-card{
+  background-color: white;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: solid 1px #eaeaea;
+  border-radius: 5px;
+  padding: 10px 18px;
+  padding-bottom: 15px;
+}
+
 
 
 
