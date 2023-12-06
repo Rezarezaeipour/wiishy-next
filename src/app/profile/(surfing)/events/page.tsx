@@ -1,5 +1,5 @@
 "use client";
-import EventList from "@/app/components/eventComponents/eventList/eventList";
+import RecentEventList from "@/app/components/eventComponents/recentEventList/recentEventList";
 import { Button } from "antd-mobile";
 import { useRouter } from "next/navigation";
 
@@ -18,7 +18,7 @@ function Events() {
             + Add new event
           </Button>
           <div className="mt-3 h-full">
-            <EventList />
+            <RecentEventList />
           </div>
         </div>
       </div>

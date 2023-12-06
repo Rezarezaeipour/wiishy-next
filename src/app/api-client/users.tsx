@@ -188,3 +188,14 @@ export async function getFollowers(userId: number) {
     return "{'message':'Something went wrong'}";
   }
 }
+
+export async function suggestedUsers(){
+  const res = await fetch("/api/suggestedUsers", {
+    method: "GET",
+  });
+  if (res.ok) {
+    return await res.json();
+  } else {
+    return "{'message':'Something went wrong'}";
+  }
+}

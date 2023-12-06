@@ -180,7 +180,9 @@ export default function GiftDetail(props: { giftid: number }) {
                       "Are you sure you want to add it to your collection?",
                     confirmText: "Yes",
                     cancelText: "No",
-                    onConfirm: async () => {},
+                    onConfirm: async () => {
+                      router.push(`/profile/new-added-gift/${props.giftid}`)
+                    },
                   });
                 }}
               >
@@ -207,7 +209,7 @@ export default function GiftDetail(props: { giftid: number }) {
           </>
         </div>
       ) : (
-        <div className="py-5 px-4">
+        <div className="py-5 px-4 pt-0">
           <Skeleton avatar paragraph={{ rows: 1 }} />
           <Skeleton
             paragraph={{ rows: 5 }}

@@ -69,6 +69,17 @@ export async function getMyEventList() {
   }
 }
 
+export async function getMyRecentEventList() {
+  const response = await fetch("/api/getmyrecenteventlist", {
+    method: "GET",
+  });
+  if (response.ok) {
+    return response.json();
+  } else {
+    return "something went wrong";
+  }
+}
+
 export async function getEventDetail(eventid: number) {
   const response = await fetch("/api/geteventdetail", {
     method: "POST",
