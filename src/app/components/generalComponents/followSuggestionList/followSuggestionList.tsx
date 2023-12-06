@@ -4,7 +4,7 @@ import RectangularProfileCard from "../../profileComponents/rectangularProfileCa
 import { useEffect, useState } from "react";
 import { Profile } from "next-auth";
 
-async function FollowSuggestionList() {
+function FollowSuggestionList() {
   const [list, setList] = useState<[Profile]>();
   useEffect(() => {
     (async () => {
@@ -18,8 +18,8 @@ async function FollowSuggestionList() {
     <>
       {list
         ? list.length > 0
-          ? list.map((item: any, index: any) => {
-              return <RectangularProfileCard user={item} />;
+          ? list.map((item: any, key: any) => {
+              return <RectangularProfileCard user={item} key={item.userID+""+key} />;
             })
           : ""
         : ""}
