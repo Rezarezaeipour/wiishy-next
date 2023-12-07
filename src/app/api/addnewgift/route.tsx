@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   
   let xdata = null;
   const data = await request.formData();
- 
+   console.log(data)
   const cookie = cookies();
   const infoCookie = cookie.get("w-token");
 

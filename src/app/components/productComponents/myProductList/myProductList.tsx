@@ -4,7 +4,7 @@ import MyPrdCard from "@/app/components/productComponents/myPrdCard/myPrdCard";
 
  
 function MyProductList(props: { productList: [Product] }) {
-  
+ 
   return (
     <>
       {props.productList.map((Item, index) => {
@@ -18,6 +18,7 @@ function MyProductList(props: { productList: [Product] }) {
             gift_view={Item.gift_view}
             gift_id={Item.gift_id}
             gift_image_url={Item.gift_image_url}
+            price_unit = {Item.price_unit}
           />
         );
       })}

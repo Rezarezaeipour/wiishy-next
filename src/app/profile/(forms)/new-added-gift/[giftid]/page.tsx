@@ -19,7 +19,7 @@ import {
 
 import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/navigation";
-import { Skeleton } from "antd";
+import { Select, Skeleton } from "antd";
 
 
 function EditGift({ params }: { params: { giftid: string } }) {
@@ -33,6 +33,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
   const router = useRouter();
   const now = new Date();
   const [loaded, setLoaded] = useState(false);
+  const [priceunit, setPriceunit] = useState<string>("1");
 
   /// Handle Load Gift
 
@@ -51,6 +52,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
             setUnitid(loadedGift.price_unit_id);
             setImage(loadedGift.gift_image_url);
             setLoaded(true);
+            setPriceunit(loadedGift.price_unit_id);
           })()
         : (() => {
             Toast.show({
@@ -186,14 +188,46 @@ function EditGift({ params }: { params: { giftid: string } }) {
                 label="Gift Price (in USD)"
                 className="font-extrabold text-3xl"
                 style={{ backgroundColor: "transparent" }}
-              >
+              ></Form.Item>
+              <div className="flex">
                 <input
                   type="number"
                   placeholder="250"
-                  className="font-normal  wiishy-input-text"
+                  className="font-normal  wiishy-input-text py-3 basis-3/4"
+                  style={{ height:"45px", borderRight: "none", borderRadius: "5px 0px 0px 5px" }}
                   {...register("giftprice")}
                 />
-              </Form.Item>
+                <Select
+                  labelInValue
+                  defaultValue={{ value:`${priceunit}`}}
+                  style={{
+                    border: "solid thin silver",
+                    borderRadius: "0px 5px 5px 0px",
+                    height: "45px",
+                  }}
+                  className="basis-1/4"
+                  onChange={(v) => setPriceunit(v.value)}
+                  options={[
+                    {
+                      value: "1",
+                      label: "$",
+                    },
+                    {
+                      value: "2",
+                      label: "€",
+                    },
+                    {
+                      value: "3",
+                      label: "£",
+                    },
+                    {
+                      value: "4",
+                      label: "IRR",
+                    },
+                  ]}
+                />
+              </div>
+
               {/* END GIFT PRICE */}
 
               {/* GIFT DESIRE */}

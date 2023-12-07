@@ -1,11 +1,9 @@
 "use client";
 
 import MyProfileWrapper from "@/app/components/profileComponents/myProfileWrapper/myProfileWrapper";
-
 import { useEffect, useRef, useState } from "react";
 import { Skeleton } from "antd";
 import { getMyData } from "@/app/api-client/users";
-import { chatting } from "@/app/api-client/ai";
 import ProductEventContainer from "@/app/components/profileComponents/productEventcontainer/productEventContainer";
 
 function MyProfile() {
@@ -64,6 +62,7 @@ function MyProfile() {
         <div className="mt-7">
           <ProductEventContainer />
         </div>
+        
       </div>
     </>
   );

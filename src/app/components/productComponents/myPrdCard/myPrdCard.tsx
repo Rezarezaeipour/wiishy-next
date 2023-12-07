@@ -46,7 +46,7 @@ function MyPrdCard(props: Product) {
           </h2>
           <div className="flex flex-row mt-2 align-middle justify-between">
             <p className="text-sm font-normal">
-              {`$${props.gift_price}` || "$1400"}{" "}
+              {`${props.price_unit}${props.gift_price}` || "$1400"}{" "}
             </p>
             <Rate
               style={{ "--star-size": "12px" }}

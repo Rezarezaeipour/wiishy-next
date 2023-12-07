@@ -11,8 +11,9 @@ export interface Product {
   gift_price?: string,
   gift_desc?: string,
   gift_url?: string,
-  islike?: boolean
-  gift_image_url?:string
+  islike?: boolean,
+  gift_image_url?:string,
+  price_unit?:string
 }
 
 export interface ProductComplete {
