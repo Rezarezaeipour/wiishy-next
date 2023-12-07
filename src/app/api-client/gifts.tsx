@@ -1,3 +1,5 @@
+import { format } from "path";
+
 export async function addHandler(data: any) {
   const formData = new FormData();
 
@@ -6,7 +8,8 @@ export async function addHandler(data: any) {
     formData.append("gift_desc", data.giftdescription),
     formData.append("gift_url", data.gift_url),
     formData.append("desire_rate", data.desire_rate);
-    formData.append("price_unit_id",data.unit)
+    formData.append("gift_image_url",data.gift_image_url)
+    formData.append("price_unit_id",data.gift_unit_price);
   if (data.image) {
     formData.append("image", data.image);
   }
