@@ -18,6 +18,7 @@ function ProductEventContainer() {
   useEffect(() => {
     (async () => {
       const ProductList = await myProductListHandler();
+      console.log(await ProductList);
       setProductList(ProductList.gifts);
     })();
   }, [setProductList]);

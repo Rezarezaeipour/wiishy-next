@@ -1,11 +1,5 @@
 "use client";
-import {
-  Button,
-  DotLoading,
-  Form,
-  Slider,
-  Toast,
-} from "antd-mobile";
+import { Button, DotLoading, Dropdown, Form, Slider, Toast } from "antd-mobile";
 import { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
@@ -17,6 +11,7 @@ import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/navigation";
 import { HeartOutlined } from "@ant-design/icons";
 import { chatting } from "@/app/api-client/ai";
+import { Select } from "antd";
 
 function NewGift() {
   const { register, handleSubmit, setValue, reset } = useForm();
@@ -27,6 +22,7 @@ function NewGift() {
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState("");
   const [aiload, setAiload] = useState(false);
+  const [priceunit, setPriceunit] = useState<string>("1");
 
   const router = useRouter();
   const urlRef = useRef<any>();
@@ -36,15 +32,15 @@ function NewGift() {
   // Temp ChatGpt API
   const getUrl = async (url: string) => {
     url.length > 0
-      ? ((async() => {
+      ? (async () => {
           setAiload(true);
-    //       const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product in this 
-    // page in a object with JSON format with these keys: name, price, price_unit, image_url
-    // here is the link : ${url}. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
-    //  please dont add anyhting else, return just an json structure without json word. 
-    //  `;
-          const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product in this 
-          page in a object with JSON format with these keys: name, price, price_unit, image_url. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
+          //       const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product in this
+          // page in a object with JSON format with these keys: name, price, price_unit, image_url
+          // here is the link : ${url}. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
+          //  please dont add anyhting else, return just an json structure without json word.
+          //  `;
+          const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product 
+           in a object with JSON format with these keys: name, price, price_unit, image_url. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
            please dont add anyhting else, return just an json structure without json word. 
       for example, in this link:"https://www.digikala.com/product/dkp-8182784/%DA%AF%D9%88%D8%B4%DB%8C-%D9%85%D9%88%D8%A8%D8%A7%DB%8C%D9%84-%D9%86%D9%88%DA%A9%DB%8C%D8%A7-%D9%85%D8%AF%D9%84-g21-ta-1418-%D8%AF%D9%88-%D8%B3%DB%8C%D9%85-%DA%A9%D8%A7%D8%B1%D8%AA-%D8%B8%D8%B1%D9%81%DB%8C%D8%AA-128-%DA%AF%DB%8C%DA%AF%D8%A7%D8%A8%D8%A7%DB%8C%D8%AA-%D9%88-%D8%B1%D9%85-6-%DA%AF%DB%8C%DA%AF%D8%A7%D8%A8%D8%A7%DB%8C%D8%AA/" the result is like this : 
       { "product": { "name": "گوشی موبایل نوکیا مدل G21 TA-1418 دو سیم کارت ظرفیت 128 گیگابایت و رم 6 گیگابایت", "price": "۴,۷۴۹,۰۰۰", "price_unit": "تومان", "image_url": "https://dkstatics-public.digikala.com/digikala-products/220320651.jpg" } } and in this link : "https://www.digikala.com/product/dkp-11281765/%DA%AF%D9%88%D8%B4%DB%8C-%D9%85%D9%88%D8%A8%D8%A7%DB%8C%D9%84-%D8%B4%DB%8C%D8%A7%D8%A6%D9%88%D9%85%DB%8C-%D9%85%D8%AF%D9%84-redmi-note-12-4g-%D8%AF%D9%88-%D8%B3%DB%8C%D9%85-%DA%A9%D8%A7%D8%B1%D8%AA-%D8%B8%D8%B1%D9%81%DB%8C%D8%AA-128-%DA%AF%DB%8C%DA%AF%D8%A7%D8%A8%D8%A7%DB%8C%D8%AA-%D9%88-%D8%B1%D9%85-4-%DA%AF%DB%8C%DA%AF%D8%A7%D8%A8%D8%A7%DB%8C%D8%AA-%DA%AF%D9%84%D9%88%D8%A8%D8%A7%D9%84-clone-1-of-11205904/" the result should be :
@@ -65,13 +61,13 @@ function NewGift() {
           const price_unit = product.price_unit;
           //  imageRef.current.value = product.price_unit;
           setAiload(false);
-        })())
-      : ((() => {
+        })()
+      : (() => {
           Toast.show({
             content: "Add a product link",
             position: "bottom",
           });
-        })())
+        })();
   };
 
   /// Handle Submit
@@ -81,7 +77,7 @@ function NewGift() {
       const response = await addHandler({
         ...data,
         desire_rate: desire,
-        unit: 1,
+        gift_unit_price : priceunit,
         image: file,
       });
       if (response) {
@@ -202,38 +198,71 @@ function NewGift() {
           {/* GIFT PRICE */}
           <Form.Item
             label="Gift Price (in USD)"
-            className="font-extrabold text-3xl flex flex-row"
             style={{ backgroundColor: "transparent" }}
-          >
-            {/*   <input
-              autoComplete="off"
-              type="number"
-              placeholder="250"
-              className="font-normal  wiishy-input-text basis-3/4 "
-              {...register("giftprice", { required: true })}
-            /> 
-          </Form.Item> */}
+          ></Form.Item>
+          {/* END GIFT PRICE */}
+
+          <div className="flex">
             <input
               autoComplete="off"
               type="number"
               placeholder="250"
               className="font-normal  wiishy-input-text py-3 basis-3/4"
-              style={{ borderRight: "none", borderRadius: "5px 0px 0px 5px" }}
+              style={{ height:"45px", borderRight: "none", borderRadius: "5px 0px 0px 5px" }}
               {...register("giftprice", { required: true })}
             />
-            {/* <Dropdown className="basis-1/4 " style={{border:"solid thin silver",borderRadius:"0px 5px 5px 0px"}}>
+            <Select
+              labelInValue
+              defaultValue={{ value: `${priceunit}`}}
+              // value={{ value: "4", label: "IRR" }}
+              style={{
+                  border: "solid thin silver",
+                  borderRadius: "0px 5px 5px 0px",
+                  height: "45px",
+              }}
+              className="basis-1/4"
+              onChange={(v)=>setPriceunit(v.value)}
+              options={[
+                {
+                  value: "1",
+                  label: "$",
+                },
+                {
+                  value: "2",
+                  label: "€",
+                },
+                {
+                  value: "3",
+                  label: "£",
+                },
+                {
+                  value: "4",
+                  label: "IRR",
+                },
+              ]}
+            />
+            {/* <Dropdown
+              className=" "
+              style={{
+                border: "solid thin silver",
+                borderRadius: "0px 5px 5px 0px",
+                height: "45px",
+              }}
+              closeOnMaskClick={true}
+            >
               <Dropdown.Item key="sorter" title="Unit">
                 <div style={{ padding: 12 }}>
-                  $
+                  <p onClick={() => setPriceunit(1)}>$</p>
                   <br />
-                  IRR
+                  <p onClick={() => setPriceunit(2)}>€</p>
+                  <br />
+                  <p onClick={() => setPriceunit(3)}>£</p>
+                  <br />
+                  <p onClick={() => setPriceunit(4)}>IRR</p>
                 </div>
               </Dropdown.Item>
             </Dropdown> */}
-          </Form.Item>
-          {/* END GIFT PRICE */}
-
-          <div className="flex"></div>
+          </div>
 
           {/* GIFT DESIRE */}
           <Form.Item

@@ -36,7 +36,8 @@ export async function updateHandler(data: any) {
     formData.append("gift_url", data.gift_url),
     formData.append("gift_image_url", data.gift_url),
     formData.append("desire_rate", data.desire_rate);
-  formData.append("gift_id", data.giftid);
+    formData.append("price_unit_id",data.gift_unit_price);
+    formData.append("gift_id", data.giftid);
   if (data.image) {
     formData.append("image", data.image);
   }

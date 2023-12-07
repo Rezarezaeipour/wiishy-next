@@ -212,6 +212,13 @@ background-color: #eaeaea !important;
   padding-bottom: 15px;
 }
 
+.ant-select-selector{
+  border-radius: 0px 5px 5px 0px !important;
+  height: 43px !important;
+  border: none !important;
+  vertical-align: middle ;
+}
+
 
 
 
