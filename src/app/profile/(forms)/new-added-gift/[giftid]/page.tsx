@@ -14,6 +14,7 @@ import {
   loadGiftHandler,
   updateHandler,
   deleteGift,
+  addHandler,
 } from "@/app/api-client/gifts";
 
 import { AddCircleOutline } from "antd-mobile-icons";
@@ -28,6 +29,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
   const [image, setImage] = useState("");
   const [desire, setDesire] = useState<SliderValue>(5);
   const [loading, setLoading] = useState(false);
+  const [unitid,setUnitid] = useState(1);
   const router = useRouter();
   const now = new Date();
   const [loaded, setLoaded] = useState(false);
@@ -38,15 +40,16 @@ function EditGift({ params }: { params: { giftid: string } }) {
     (async () => {
       const data = await loadGiftHandler(Number.parseInt(params.giftid));
       const loadedGift = data.gift_detail[0];
-     
+      console.log(loadedGift);
       data
         ? (() => {
             setValue("gift_url", loadedGift.gift_url);
             setValue("giftname", loadedGift.gift_name);
             setValue("giftprice", loadedGift.gift_price);
             setValue("giftdescription", loadedGift.gift_desc);
-            setDesire(loadedGift.desire_rate);
-            setImage("https://wiishy-backend.ir/" + loadedGift.gift_image_url);
+            setDesire(4);
+            setUnitid(loadedGift.price_unit_id);
+            setImage(loadedGift.gift_image_url);
             setLoaded(true);
           })()
         : (() => {
@@ -63,16 +66,18 @@ function EditGift({ params }: { params: { giftid: string } }) {
   /// Handle Submit
   const onSubmit = async (data: any) => {
     setLoading(true);
-    const response = await updateHandler({
+    const response = await addHandler({
       ...data,
       desire_rate: desire,
       image: file,
       giftid: params.giftid,
+      gift_image_url: image,
+      gift_unit_price : unitid
     });
     if (response) {
       setLoading(false);
       Toast.show({
-        content: response.message,
+        content: response,
         position: "bottom",
       }); 
       (() => {
@@ -117,7 +122,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
             <>
               <div className="flex justify-center pt-5 w-full">
                 <Image
-                  src={image}
+                  src={`https://wiishy-backend.ir/${image}`}
                   width={300}
                   height={250}
                   alt="wiishy user"
@@ -232,34 +237,10 @@ function EditGift({ params }: { params: { giftid: string } }) {
                 <Button
                   loading={loading}
                   type="submit"
-                  className="btn btn-regular btn-big-style w-full m-1 basis-3/4"
+                  className="btn btn-regular btn-big-style w-full m-1"
                   style={{ fontSize: "14px" }}
                 >
-                  Update
-                </Button>
-                <Button
-                  loading={loading}
-                  type="button"
-                  className="btn btn-regular-outline btn-big-style w-full m-1 basis-1/4 backdrop-blur-sm"
-                  style={{ fontSize: "14px"}}
-                  onClick={async () => {
-                    const result = await Dialog.confirm({
-                      content: "Are you sure to delete this Gift?",
-                      confirmText: "Yes",
-                      cancelText: "No",
-                      onConfirm: async () => {
-                        deleteHandler();
-                      },
-                      onCancel: async () => {
-                        Toast.show({
-                          content: "Delete aborted",
-                          position: "bottom",
-                        });
-                      },
-                    });
-                  }}
-                >
-                  Delete
+                  Add
                 </Button>
                 {/* END SUBMIT BUTTON */}
               </div>

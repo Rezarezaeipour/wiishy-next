@@ -9,20 +9,33 @@ function FollowSuggestionList() {
   useEffect(() => {
     (async () => {
       var suggestingLis = await suggestedUsers();
-      console.log(suggestingLis);
       setList(suggestingLis.suggestions);
     })();
   }, []);
 
   return (
     <>
-      {list
-        ? list.length > 0
-          ? list.map((item: any, key: any) => {
-              return <RectangularProfileCard user={item} key={item.userID+""+key} />;
-            })
-          : ""
-        : ""}
+      {list ? (
+        list.length > 0 ? (
+          <div className="flex flex-col">
+            <h3 className="block mb-2 font-[900]">People you may know</h3>
+            <div className="flex flex-row">
+            {list.map((item: any, key: any) => {
+              return (
+                <RectangularProfileCard
+                  user={item}
+                  key={item.userID + "" + key}
+                />
+              );
+            })}
+            </div>
+          </div>
+        ) : (
+          ""
+        )
+      ) : (
+        ""
+      )}
     </>
   );
 }

@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const token = infoCookieObject.token;
    
     const response = await fetch(
-      `http://wiishy-backend.ir/api/gift-add/${userId}`,
+      `http://wiishy-backend.ir/api/gift-add`,
       {
         method: "POST",
         headers: {

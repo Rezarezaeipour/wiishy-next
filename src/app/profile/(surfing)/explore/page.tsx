@@ -21,7 +21,8 @@ function Explore() {
     <>
       <div className="py-5 px-2 w-full h-screen">
         <h1 className="main-head">Explore</h1>
-        <div className="flex flex-row pb-3 mt-5 mb-1" style={{ width: "100%", overflow: "scroll"}}>
+        <div className="flex flex-col pb-3 mt-5 mb-1" style={{ width: "100%", overflow: "scroll"}}>
+             
             <FollowSuggestionList />
         </div>
         {giftlist ? (

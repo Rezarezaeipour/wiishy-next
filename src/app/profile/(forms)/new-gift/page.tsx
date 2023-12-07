@@ -1,11 +1,8 @@
 "use client";
 import {
   Button,
-  DatePicker,
   DotLoading,
-  Dropdown,
   Form,
-  Selector,
   Slider,
   Toast,
 } from "antd-mobile";
@@ -17,7 +14,6 @@ import { addHandler } from "@/app/api-client/gifts";
 import wiishy from "./../../../../../public/logo/wiishy-gray.jpg";
 
 import { AddCircleOutline } from "antd-mobile-icons";
-import scrapp from "@/app/api-client/scrap";
 import { useRouter } from "next/navigation";
 import { HeartOutlined } from "@ant-design/icons";
 import { chatting } from "@/app/api-client/ai";
