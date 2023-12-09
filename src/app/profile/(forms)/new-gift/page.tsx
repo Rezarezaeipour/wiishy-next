@@ -53,7 +53,6 @@ function NewGift() {
           const resObj = await JSON.parse(response);
           const product = resObj.product;
 
-          console.log("product", product);
 
           setValue("giftname", product.name);
           setValue("giftprice", product.price);

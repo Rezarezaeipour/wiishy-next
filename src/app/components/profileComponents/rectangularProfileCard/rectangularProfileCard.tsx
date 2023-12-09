@@ -17,10 +17,10 @@ function RectangularProfileCard(props: any) {
   const [floading, setFloading] = useState(false);
 
   useEffect(() => {
-    console.log(props);
+   
     (async () => {
       const data = await getMyData(0);
-      console.log(data);
+     
       setNewuser(data?.users);
     })();
   }, [setNewuser]);
@@ -57,7 +57,7 @@ function RectangularProfileCard(props: any) {
                   : setIsfollow(true);
                 setFloading(false);
               }}
-              className="btn btn-regular-outline mt-3"
+              className="btn btn-regular-outline-small mt-3"
             >
               Unfollow
             </Button>
@@ -73,7 +73,7 @@ function RectangularProfileCard(props: any) {
                   : setIsfollow(false);
                 setFloading(false);
               }}
-              className="btn btn-regular-outline mt-3"
+              className="btn btn-regular-outline-small mt-3"
             >
               Follow
             </Button>

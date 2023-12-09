@@ -78,12 +78,12 @@ function MyProfileWrapper(props: {
         </p>
         <div className="flex flex-row gap-2 mt-2.5">
           <Link href="/profile/edit-profile">
-            <Button color="default" fill="outline" size="mini">
+            <Button className="btn-regular-outline">
               Edit profile
             </Button>
           </Link>
           <Link href="/profile/add-event">
-            <Button color="default" fill="outline" size="mini">
+            <Button className="btn-regular-outline">
               Add event
             </Button>
           </Link>

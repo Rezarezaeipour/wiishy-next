@@ -26,6 +26,7 @@ export default function GiftDetail(props: { giftid: number }) {
     (async () => {
       const response = await loadGiftHandler(props.giftid);
       if (response) {
+      
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
         setLikeCount(parseInt(response.gift_detail[0].gift_like));
@@ -53,7 +54,7 @@ export default function GiftDetail(props: { giftid: number }) {
     <>
       {giftDetail ? (
         <div className="py-5 px-4">
-          <div className="flex flex-row mt-2 mb-3 p-2 pb-0 items-center justify-between">
+          <div className="h-profile-container flex flex-row mt-2 mb-3 p-2 pb-0 items-center justify-between">
             <Link
               className="text-black"
               href={`/profile/profile/${giftDetail.user_id}`}
@@ -120,7 +121,8 @@ export default function GiftDetail(props: { giftid: number }) {
                   width: "100%",
                   height: "250px",
                   objectFit: "cover",
-                  borderRadius: "15px",
+                  borderRadius: "10px",
+                  border:"solid thin #d4d4d4"
                 }}
                 //  onError={()=>{this.src}}
               />
@@ -168,12 +170,12 @@ export default function GiftDetail(props: { giftid: number }) {
               </p>
             </div>
 
-            <div className="flex flex-row pb-5 px-0 mt-3 ">
+            <div className="flex flex-row pb-5 px-0 mt-3 betwee ">
               <Button
                 loading={loading}
                 type="submit"
                 className="btn btn-regular w-full m-1 basis-3/5"
-                style={{ fontSize: "14px" }}
+              
                 onClick={async () => {
                   const result = await Dialog.confirm({
                     content:
@@ -186,13 +188,13 @@ export default function GiftDetail(props: { giftid: number }) {
                   });
                 }}
               >
-                Add to my wish list +
+                Add to my wish list
               </Button>
+            
               <Button
                 loading={loading}
                 type="button"
-                className="btn btn-regular-outline w-full m-1 basis-2/5"
-                style={{ fontSize: "14px" }}
+                className="btn btn-regular-outline w-full m-1 ml-2 basis-2/5"
                 onClick={() => {
                   giftDetail.gift_url
                     ? router.push(`${giftDetail.gift_url}?utm=wiishy`)
