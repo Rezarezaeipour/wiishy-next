@@ -27,7 +27,7 @@ export default function Header() {
           height={37}
           alt="wiishy"
           className="mx-auto"
-          style={{height:'35px',width:'auto'}}
+          style={{height:'25px !important',width:'auto'}}
         />
       </NavBar>
 

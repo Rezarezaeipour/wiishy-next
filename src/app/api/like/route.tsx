@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
     const parsedInf = JSON.parse(info.value);
     const token = parsedInf.token;
     const userid = parsedInf.userId;
+   
     const response = await fetch(
       `http://wiishy-backend.ir/api/gift-like/${giftid.giftid}/${userid}`,
       {
