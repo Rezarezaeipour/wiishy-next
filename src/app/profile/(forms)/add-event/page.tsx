@@ -35,7 +35,7 @@ function AddEvent() {
   const now = new Date();
   const [birth, setbirth] = useState<Date>();
   const [datevisible, setDateVisible] = useState(false);
-  const [repeatable, setRepeatable] = useState(0);
+  const [repeatable, setRepeatable] = useState(1);
 
   /// Shamsi Calendar
   const [shamsidatevisible, setShamsiDateVisible] = useState(false);
@@ -168,7 +168,7 @@ function AddEvent() {
             </p>
 
             <Radio.Group
-              defaultValue="0"
+              defaultValue="1"
               className="mt-4"
               onChange={(val) => {
                 setRepeatable(val.target.value);
