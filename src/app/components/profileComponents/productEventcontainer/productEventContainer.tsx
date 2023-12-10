@@ -12,13 +12,13 @@ function ProductEventContainer() {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabItems = [
     { key: "Desired Gift", title: "Desired Gift" },
-    { key: "Events", title: "Events" },
+    { key: "Events", title: "My Events" },
   ];
 
   useEffect(() => {
     (async () => {
       const ProductList = await myProductListHandler();
-      console.log(await ProductList);
+    
       setProductList(ProductList.gifts);
     })();
   }, [setProductList]);

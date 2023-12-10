@@ -14,7 +14,7 @@ export default function Login() {
   const [google,setGoogle] = useState(false);
 
   return (
-    <div className="flex flex-col items-center space-y-3 justify-center h-full bg-white p-4">
+    <div className="flex flex-col items-center space-y-3 justify-center h-full #f1f1f1 p-4">
       <Image
         src={wiishylogo}
         style={{ width: "100%" }}

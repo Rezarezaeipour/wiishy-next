@@ -26,7 +26,7 @@ export default function GiftDetail(props: { giftid: number }) {
     (async () => {
       const response = await loadGiftHandler(props.giftid);
       if (response) {
-      
+    
         setIslike(response.islike);
         setGiftDetail(response.gift_detail[0]);
         setLikeCount(parseInt(response.gift_detail[0].gift_like));
@@ -148,10 +148,10 @@ export default function GiftDetail(props: { giftid: number }) {
                   allowClear
                   defaultValue={isLike ? 1 : 0}
                   onChange={() => {
-                    giftDetail.id
+                    giftDetail.gift_id
                       ? isLike
-                        ? unLikeit(giftDetail.id)
-                        : likeit(giftDetail.id)
+                        ? unLikeit(giftDetail.gift_id)
+                        : likeit(giftDetail.gift_id)
                       : "";
                   }}
                 />
@@ -170,7 +170,7 @@ export default function GiftDetail(props: { giftid: number }) {
               </p>
             </div>
 
-            <div className="flex flex-row pb-5 px-0 mt-3 betwee ">
+            <div className="flex flex-row gap-1 pb-5 px-0 mt-3 betwee ">
               <Button
                 loading={loading}
                 type="submit"
