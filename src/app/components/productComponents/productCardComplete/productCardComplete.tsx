@@ -13,15 +13,15 @@ function ProductCardComplete(props: ProductComplete) {
   return !props ? (
     <Skeleton.Image active />
   ) : (
-    <div className="flex flex-col pb-5">
+    <div className="flex flex-col pb-5" style={{border:'solid thin #e4e4e4',marginBottom:'10px',borderRadius:'5px', backgroundColor:'#F7F7F7'}}>
       <Link href={`/profile/profile/${props.user_id}`}>
-        <div className="flex flex-row mt-2 p-2 pb-0 items-end justify-left">
+        <div className="flex flex-row mt-2 mb-2 p-2 pb-0 items-center justify-left">
           <Avatar
             src={`https://wiishy-backend.ir/${props.user_image_url}`}
-            style={{ "--size": "32px", "--border-radius": "30px" }}
+            style={{ "--size": "50px", "--border-radius": "30px" }}
           />
-          <div>
-            <div className="text-xs font-normal ml-2">
+          <div className="h-full">
+            <div className="text-sm font-normal ml-2">
               {props.name} {props.family} 
             </div>
             <p className="text-xs font-thin ml-2">{`${props.age} years old`}</p>
@@ -56,11 +56,11 @@ function ProductCardComplete(props: ProductComplete) {
             </div>
           </div>
           <div>
-            <h2 className="font-bold text-md mt-3 ">
+            <h2 className="font-bold text-lg mt-3 ">
               {props.gift_name || "Macbook Air M2 15"}
             </h2>
             <div className="flex flex-row mt-2 align-middle justify-between">
-              <p className="text-sm font-normal">
+              <p className="text-md font-normal">
                 {`$${props.gift_price}` || "$1400"}{" "}
               </p>
               <Rate

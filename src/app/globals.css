@@ -158,8 +158,8 @@ body {
   color: black !important;
   border-radius: 5px !important;
   font-size: 14px !important;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
 }
 
 .btn-regular-outline-small {
@@ -242,6 +242,21 @@ background-color: #fcfcfc !important;
   background-color: #f8f8f8;
 }
 
+.h-event-container{
+  border: 1px solid #d4d4d4;
+  border-radius: 7px;
+  padding: 0px 10px 4px 5px;
+  background-color: #f8f8f8;
+}
+
+.event-list-top-line{
+  font-weight: 900 !important;
+}
+
+.event-list-bottom-line{
+  font-weight: 200 !important;
+  color: #787878;
+}
 
 
 

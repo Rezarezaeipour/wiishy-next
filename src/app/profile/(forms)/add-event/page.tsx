@@ -58,22 +58,30 @@ function AddEvent() {
   /// Handle Submit
   const onSubmit = async (data: any) => {
 
-    setLoading(true);
-    const response = await addEvent({
-      ...data,
-      user_gender: gender,
-      rel: rel,
-      type: type,
-      date: sbirth,
-      repeatable : repeatable
-    });
-    Toast.show({
-      content: response,
-      position: "bottom",
-    });
-    setTimeout(() => {
-      router.push("/profile/events");
-    }, 1000);
+    sbirth ? (async()=>{
+      setLoading(true);
+      const response = await addEvent({
+        ...data,
+        user_gender: gender,
+        rel: rel,
+        type: type,
+        date: sbirth,
+        repeatable : repeatable
+      });
+      Toast.show({
+        content: response,
+        position: "bottom",
+      });
+      setTimeout(() => {
+        router.push("/profile/my-profile?e=1");
+      }, 1000);
+    }) : (
+      Toast.show({
+        content: 'Choose the date of the event, please',
+        position: "bottom",
+      })
+    )
+   
   };
 
   /// End Handle Submit
