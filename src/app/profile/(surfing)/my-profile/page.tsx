@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { Skeleton } from "antd";
 import { getMyData } from "@/app/api-client/users";
 import ProductEventContainer from "@/app/components/profileComponents/productEventcontainer/productEventContainer";
+import { useSearchParams } from 'next/navigation'
+import Link from "next/link";
 
 function MyProfile() {
   const [newuser, setNewuser] = useState<{
@@ -19,18 +21,24 @@ function MyProfile() {
     age: string;
   }>();
 
+  const [defaulttab,setDefaulttab] = useState<any>();
+  const searchParams = useSearchParams();
+  
   useEffect(() => {
     (async () => {
-     
+      // const element = document.getElementById("second");    
+      // element?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+      setDefaulttab(searchParams.get('e'));
       const data = await getMyData(0);
       setNewuser(data.users);
     
     })();
-  }, [setNewuser]);
+  }, [setNewuser,searchParams]);
 
   return (
     <>
-      <div className="py-5 px-2">
+      
+      <div  className="py-5 px-2">
         {!newuser ? (
           <div className="flex flex-col items-center pt-5">
             <Skeleton.Avatar active={true} size={150} shape={"circle"} />
@@ -60,7 +68,8 @@ function MyProfile() {
         )}
 
         <div className="mt-7">
-          <ProductEventContainer />
+          {/* <a href="second" id="second"/> */}
+          <ProductEventContainer  defaultTab={defaulttab} />
         </div>
         
       </div>

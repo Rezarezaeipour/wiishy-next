@@ -6,7 +6,7 @@ import { Skeleton } from "antd";
 import MyProductList from "@/app/components/productComponents/myProductList/myProductList";
 import { myProductListHandler } from "@/app/api-client/gifts";
 
-function ProductEventContainer() {
+function ProductEventContainer(props:any) {
   const [productList, setProductList] = useState();
   const swiperRef = useRef<SwiperRef>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,11 +17,12 @@ function ProductEventContainer() {
 
   useEffect(() => {
     (async () => {
-      const ProductList = await myProductListHandler();
-    
+      const ProductList = await myProductListHandler();     
+      setActiveIndex(props.defaultTab == '1' ? 1 : 0);
+      swiperRef.current?.swipeTo(props.defaultTab == '1' ? 1 : 0);
       setProductList(ProductList.gifts);
     })();
-  }, [setProductList]);
+  }, [setProductList,props.defaultTab]);
   
   return (
     <>
@@ -80,7 +81,7 @@ function ProductEventContainer() {
           </div>
         </Swiper.Item>
         <Swiper.Item>
-          <div className="mt-2 mb-10">
+          <div className="mt-2 mb-10 pt-3">
             <EventList />
           </div>
         </Swiper.Item>

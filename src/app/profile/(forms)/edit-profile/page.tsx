@@ -55,7 +55,11 @@ function EditProfile() {
             setGender(data.users?.user_gender);
             setImage("https://wiishy-backend.ir" + data.users?.user_image_url);
             setbirth(bd);
-           
+            setSbirth(
+              `${bd?.getFullYear()}-${
+                bd?.getMonth() + 1
+              }-${bd?.getDate()}`
+            );
           })()
         : (() => {
             Toast.show({

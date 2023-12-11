@@ -4,6 +4,7 @@ import { getMyRecentEventList } from "@/app/api-client/events";
 import HorizontalEventCard from "../horizontalCardEvent/horizontalCard";
 import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
+import Link from "next/link";
 
 function RecentEventList() {
   const [eventlist, setEventlist] = useState<[Event]>();
@@ -24,10 +25,14 @@ function RecentEventList() {
             return <HorizontalEventCard event={item} key={`evennt${index}`} />;
           })
         ) : (
-          <div className="w-full h-full flex justify-center items-center">
-            <p className="w-full text-center">
+          <div className="w-full h-full flex flex-col justify-center items-center">
+            <p className="w-full text-center mt-6">
+              Here you can find the events happening <br/> in the next 30 days
+              <br/>
               There is no close event
             </p>
+            <br/>
+            <Link className="underline" href={'/profile/my-profile?e=1'}>my registered events</Link>
           </div>
         )
       ) : (

@@ -93,7 +93,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
 
           })();
     })();
-  }, []);
+  }, [params.eventid,setValue]);
 
   /// Handle Submit
   const onSubmit = async (data: any) => {
