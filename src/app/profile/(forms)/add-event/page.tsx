@@ -75,7 +75,7 @@ function AddEvent() {
       setTimeout(() => {
         router.push("/profile/my-profile?e=1");
       }, 1000);
-    }) : (
+    })() : (
       Toast.show({
         content: 'Choose the date of the event, please',
         position: "bottom",

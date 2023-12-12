@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     if (response.ok) {
       xdata = await response.json();
-      console.log("xdata",xdata);
+      // console.log("xdata",xdata);
       return NextResponse.json(xdata);
     }else{
       return NextResponse.json("Something went wrong!");

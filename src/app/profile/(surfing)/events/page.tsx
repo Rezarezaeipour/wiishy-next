@@ -9,7 +9,7 @@ function Events() {
   return (
     <>
       <div className="py-5 px-2 h-full">
-        <h1 className="main-head">Events</h1>
+        <h1 className="main-head">Upcoming events <span className="text-xs">(In the next 30 days)</span></h1>
         <div className="grid mb-10 mt-7">
           <Button
             onClick={() => router.push("/profile/add-event")}

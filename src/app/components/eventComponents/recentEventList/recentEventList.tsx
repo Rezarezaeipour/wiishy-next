@@ -27,9 +27,9 @@ function RecentEventList() {
         ) : (
           <div className="w-full h-full flex flex-col justify-center items-center">
             <p className="w-full text-center mt-6">
-              Here you can find the events happening <br/> in the next 30 days
+            There are no close events <br/> in the next 30 days
               <br/>
-              There is no close event
+              
             </p>
             <br/>
             <Link className="underline" href={'/profile/my-profile?e=1'}>my registered events</Link>
