@@ -134,7 +134,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
 
          
           setTimeout(() => {
-            router.push("/profile/events");
+            router.push("/profile/my-profile?e=1");
           }, 1000);
         })()
       : "";
@@ -434,7 +434,7 @@ function EditEvent({ params }: { params: { eventid: number } }) {
           <br />
 
           {/* SUBMIT BUTTON */}
-          <div className="flex flex-row pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10">
+          <div className="flex flex-row pb-5 px-3 mt-1 fixed bottom-0 left-0 w-full z-10 gap-1">
             <Button
               loading={loading}
               type="submit"
