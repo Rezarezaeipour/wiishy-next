@@ -33,7 +33,7 @@ function MyProfile() {
       setNewuser(data.users);
     
     })();
-  }, [setNewuser,searchParams]);
+  }, [setNewuser,setDefaulttab]);
 
   return (
     <>

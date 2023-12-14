@@ -13,7 +13,7 @@ export async function addHandler(data: any) {
   if (data.image) {
     formData.append("image", data.image);
   }
-   console.log(formData);
+  
   const res = await fetch("/api/addnewgift", {
     method: "POST",
     body: formData,
