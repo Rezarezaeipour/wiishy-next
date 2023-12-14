@@ -18,7 +18,7 @@ function NewGift() {
 
   const [file, setFile] = useState<File>();
   const [image, setImage] = useState(wiishy.src);
-  const [desire, setDesire] = useState<SliderValue>(50);
+  const [desire, setDesire] = useState<SliderValue>(3);
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState("");
   const [aiload, setAiload] = useState(false);
