@@ -12,14 +12,15 @@ function ProductEventContainer(props:any) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabItems = [
     { key: "Desired Gift", title: "Desired Gift" },
+    { key: "My Products", title: "My Products" },
     { key: "Events", title: "My Events" },
   ];
 
   useEffect(() => {
     (async () => {
       const ProductList = await myProductListHandler();     
-      setActiveIndex(props.defaultTab == '1' ? 1 : 0);
-      swiperRef.current?.swipeTo(props.defaultTab == '1' ? 1 : 0);
+      setActiveIndex(props.defaultTab == '1' ? 2 : 0);
+      swiperRef.current?.swipeTo(props.defaultTab == '1' ? 2 : 0);
       setProductList(ProductList.gifts);
     })();
   }, [setProductList,props.defaultTab]);
@@ -50,6 +51,36 @@ function ProductEventContainer(props:any) {
           setActiveIndex(index);
         }}
       >
+        <Swiper.Item>
+          <div className="grid grid-cols-2 gap-0 mt-3 mb-10">
+            {productList ? (
+              <MyProductList productList={productList} />
+            ) : (
+              <>
+                <Skeleton
+                  paragraph={{ rows: 5 }}
+                  active
+                  className="mt-3 p-3 text-center"
+                />
+                <Skeleton
+                  paragraph={{ rows: 5 }}
+                  active
+                  className="mt-3 p-3 text-center"
+                />
+                <Skeleton
+                  paragraph={{ rows: 5 }}
+                  active
+                  className="mt-3 p-3 text-center"
+                />
+                <Skeleton
+                  paragraph={{ rows: 5 }}
+                  active
+                  className="mt-3 p-3 text-center"
+                />
+              </>
+            )}
+          </div>
+        </Swiper.Item>
         <Swiper.Item>
           <div className="grid grid-cols-2 gap-0 mt-3 mb-10">
             {productList ? (
