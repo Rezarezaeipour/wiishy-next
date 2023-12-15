@@ -10,6 +10,7 @@ export async function addHandler(data: any) {
     formData.append("desire_rate", data.desire_rate);
     formData.append("gift_image_url",data.gift_image_url)
     formData.append("price_unit_id",data.gift_unit_price);
+    formData.append("my_product",data.isproduct);
   if (data.image) {
     formData.append("image", data.image);
   }
@@ -41,7 +42,7 @@ export async function updateHandler(data: any) {
   if (data.image) {
     formData.append("image", data.image);
   }
-
+  
   const res = await fetch("/api/updategift", {
     method: "POST",
     body: formData,

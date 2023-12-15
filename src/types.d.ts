@@ -25,6 +25,7 @@ export interface ProductComplete {
   created_at?: Date,
   gift_name?: string,
   gift_price?: string,
+  price_unit?:String,
   gift_desc?: string,
   gift_url?: string,
   islike?: boolean

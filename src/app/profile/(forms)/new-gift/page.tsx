@@ -11,7 +11,7 @@ import { AddCircleOutline } from "antd-mobile-icons";
 import { useRouter } from "next/navigation";
 import { HeartOutlined } from "@ant-design/icons";
 import { chatting } from "@/app/api-client/ai";
-import { Select } from "antd";
+import { Radio, Select, Space } from "antd";
 
 function NewGift() {
   const { register, handleSubmit, setValue, reset } = useForm();
@@ -23,6 +23,7 @@ function NewGift() {
   const [fetched, setFetched] = useState("");
   const [aiload, setAiload] = useState(false);
   const [priceunit, setPriceunit] = useState<string>("1");
+  const [isproduct, setIsproduct] = useState(0);
 
   const router = useRouter();
   const urlRef = useRef<any>();
@@ -53,7 +54,6 @@ function NewGift() {
           const resObj = await JSON.parse(response);
           const product = resObj.product;
 
-
           setValue("giftname", product.name);
           setValue("giftprice", product.price);
 
@@ -76,8 +76,9 @@ function NewGift() {
       const response = await addHandler({
         ...data,
         desire_rate: desire,
-        gift_unit_price : priceunit,
+        gift_unit_price: priceunit,
         image: file,
+        isproduct: isproduct
       });
       if (response) {
         setLoading(false);
@@ -117,44 +118,75 @@ function NewGift() {
   return (
     <>
       <div className="p-3 pb-20">
+        <h1 className="main-head">Add product</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center pt-5 ">
-            <Image
-              src={image}
-              width={300}
-              height={250}
-              alt="wiishy user"
-              style={{
-                width: "100%",
-                height: "350px",
-                objectFit: "cover",
-                borderRadius: "10px",
+          <Form.Item
+            className="font-normal text-xs mt-1"
+            style={{ backgroundColor: "transparent" }}
+          >
+            <Radio.Group
+             
+              defaultValue="0"
+              className="mt-4"
+              onChange={(val) => {
+                setIsproduct(val.target.value);
+                console.log(val.target.value);
               }}
-            />
-          </div>
-          <div className="flex justify-center py-8 relative">
-            <AddCircleOutline
-              className="uploaGiftBtn"
-              onClick={() =>
-                document.getElementById("input-image-gift")?.click()
-              }
-            />
-            <input
-              type="file"
-              name="file"
-              id="input-image-gift"
-              onChange={(e) => {
-                setFile(e.target.files?.[0]);
-                e.target.files?.[0] &&
-                  setImage(URL.createObjectURL(e.target.files?.[0]));
-              }}
-              style={{ display: "none" }}
-            />
-          </div>
-
+            >
+              <Space direction="vertical">
+                <Radio value="1">It's my product</Radio>
+                <Radio value="0">It's my desire gift</Radio>
+              </Space>
+            </Radio.Group>
+            <p className="font-light text-xs text-gray-400 leading-4 mt-1">
+              If you're a producer and want to introduce your product choose the
+              first. Otherwise, if you are adding your desired gift, choose the
+              second.
+            </p>
+          </Form.Item>
+          <Form.Item
+            label="Product Image"
+            className="font-extrabold text-3xl mt-0"
+            style={{ backgroundColor: "transparent" }}
+          >
+            <div className="flex justify-center pt-2 ">
+              <Image
+                src={image}
+                width={300}
+                height={250}
+                alt="wiishy user"
+                style={{
+                  width: "100%",
+                  height: "350px",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                  border: "solid thin silver",
+                }}
+              />
+            </div>
+            <div className="flex justify-center py-3 relative">
+              <AddCircleOutline
+                className="uploaGiftBtn"
+                onClick={() =>
+                  document.getElementById("input-image-gift")?.click()
+                }
+              />
+              <input
+                type="file"
+                name="file"
+                id="input-image-gift"
+                onChange={(e) => {
+                  setFile(e.target.files?.[0]);
+                  e.target.files?.[0] &&
+                    setImage(URL.createObjectURL(e.target.files?.[0]));
+                }}
+                style={{ display: "none" }}
+              />
+            </div>
+          </Form.Item>
           {/* GIFT URL */}
           <Form.Item
-            label="Gift URL"
+            label="Product URL"
             className="font-extrabold text-3xl "
             style={{ backgroundColor: "transparent" }}
           >
@@ -180,7 +212,7 @@ function NewGift() {
           {fetched}
 
           <Form.Item
-            label="Gift name"
+            label="Product name"
             className="font-extrabold text-3xl "
             style={{ backgroundColor: "transparent" }}
           >
@@ -196,7 +228,7 @@ function NewGift() {
 
           {/* GIFT PRICE */}
           <Form.Item
-            label="Gift Price (in USD)"
+            label="Product Price"
             style={{ backgroundColor: "transparent" }}
           ></Form.Item>
           {/* END GIFT PRICE */}
@@ -207,20 +239,24 @@ function NewGift() {
               type="number"
               placeholder="250"
               className="font-normal  wiishy-input-text py-3 basis-3/4"
-              style={{ height:"45px", borderRight: "none", borderRadius: "5px 0px 0px 5px" }}
+              style={{
+                height: "45px",
+                borderRight: "none",
+                borderRadius: "5px 0px 0px 5px",
+              }}
               {...register("giftprice", { required: true })}
             />
             <Select
               labelInValue
-              defaultValue={{ value: `${priceunit}`}}
+              defaultValue={{ value: `${priceunit}` }}
               // value={{ value: "4", label: "IRR" }}
               style={{
-                  border: "solid thin silver",
-                  borderRadius: "0px 5px 5px 0px",
-                  height: "45px",
+                border: "solid thin silver",
+                borderRadius: "0px 5px 5px 0px",
+                height: "45px",
               }}
               className="basis-1/4"
-              onChange={(v)=>setPriceunit(v.value)}
+              onChange={(v) => setPriceunit(v.value)}
               options={[
                 {
                   value: "1",
@@ -285,13 +321,13 @@ function NewGift() {
           {/* Endi GIFT DESIRE */}
           {/* GIFT DESCRIPTION */}
           <Form.Item
-            label="Gift description"
+            label="Product description"
             className="font-extrabold text-3xl"
             style={{ backgroundColor: "transparent" }}
           >
             <textarea
               autoComplete="false"
-              placeholder="Write atleast three lines about the gift"
+              placeholder="Write atleast three lines about the product"
               maxLength={100}
               rows={3}
               className="font-normal wiishy-input-text"
@@ -309,7 +345,7 @@ function NewGift() {
               className="btn btn-regular btn-big-style w-full m-1"
               style={{ fontSize: "14px" }}
             >
-              Save
+              Save product
             </Button>
 
             {/* END SUBMIT BUTTON */}

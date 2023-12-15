@@ -264,7 +264,7 @@ function EditGift({ params }: { params: { giftid: string } }) {
               {/* END GIFT DESCRIPTION */}
               {/* SUBMIT BUTTON */}
               {/* <div className="pb-5 px-2 mt-1 fixed bottom-0 left-0 w-full z-10"> */}
-              <div className="flex flex-row pb-5 px-3 mt-1 fixed bottom-0 left-0 w-full z-10">
+              <div className="flex flex-row pb-5 px-3 mt-1 fixed bottom-0 left-0 w-full z-10 gap-1">
                 <Button
                   loading={loading}
                   type="submit"
