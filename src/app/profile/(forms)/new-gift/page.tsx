@@ -134,12 +134,12 @@ function NewGift() {
               }}
             >
               <Space direction="vertical">
-                <Radio value="1">It's my product</Radio>
-                <Radio value="0">It's my desire gift</Radio>
+                <Radio value="1">It is my product</Radio>
+                <Radio value="0">It is my desire gift</Radio>
               </Space>
             </Radio.Group>
             <p className="font-light text-xs text-gray-400 leading-4 mt-1">
-              If you're a producer and want to introduce your product choose the
+              If you are a producer and want to introduce your product choose the
               first. Otherwise, if you are adding your desired gift, choose the
               second.
             </p>
