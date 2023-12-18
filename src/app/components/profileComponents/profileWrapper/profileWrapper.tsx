@@ -114,7 +114,7 @@ export default function ProfileWrapper(props: { id: number }) {
           </div>
           <p className="px-4 py-1">
             {newuser?.user_desc ||
-              " A passionate web developer and designer looking for new opportunities in European "}
+              "  "}
           </p>
           <div className="flex flex-row gap-2 mt-2.5">
             {isfollow ? (

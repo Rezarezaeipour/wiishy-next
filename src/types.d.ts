@@ -39,6 +39,7 @@ export interface ProductComplete {
 
 export interface Event {
   id?:number;
+  user_id?: number;
   name: string,
   family: string,
   gender: number,

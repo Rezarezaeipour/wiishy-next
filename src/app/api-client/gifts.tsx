@@ -2,7 +2,7 @@ import { format } from "path";
 
 export async function addHandler(data: any) {
   const formData = new FormData();
-
+ 
   formData.append("gift_name", data.giftname),
     formData.append("gift_price", data.giftprice),
     formData.append("gift_desc", data.giftdescription),
@@ -56,6 +56,28 @@ export async function updateHandler(data: any) {
 
 export async function myProductListHandler() {
   const list = await fetch("/api/getmygifts", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await list.json();
+}
+
+export async function myProducedProduct() {
+  const list = await fetch("/api/getmyproducedproduct", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await list.json();
+}
+
+export async function myWishesProduct() {
+  const list = await fetch("/api/getmywishgifts", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
