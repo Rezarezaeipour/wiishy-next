@@ -4,10 +4,11 @@ import EventList from "@/app/components/eventComponents/eventList/eventList";
 import { useEffect, useRef, useState } from "react";
 import { Skeleton } from "antd";
 import MyProductList from "@/app/components/productComponents/myProductList/myProductList";
-import { myProductListHandler } from "@/app/api-client/gifts";
+import { myProducedProduct, myProductListHandler, myWishesProduct } from "@/app/api-client/gifts";
 
 function ProductEventContainer(props:any) {
   const [productList, setProductList] = useState();
+  const [wishList, setWishList] = useState();
   const swiperRef = useRef<SwiperRef>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const tabItems = [
@@ -18,12 +19,14 @@ function ProductEventContainer(props:any) {
 
   useEffect(() => {
     (async () => {
-      const ProductList = await myProductListHandler();     
+      const ProductList = await myProducedProduct();    // What I produced
+      const WishList = await myWishesProduct();    // What I wish to have 
       setActiveIndex(props.defaultTab == '1' ? 2 : 0);
       swiperRef.current?.swipeTo(props.defaultTab == '1' ? 2 : 0);
-      setProductList(ProductList.gifts);
+      setProductList(ProductList.gifts); 
+      setWishList(WishList.gifts); 
     })();
-  }, [setProductList,props.defaultTab]);
+  }, [setProductList,setWishList,props.defaultTab]);
   
   return (
     <>
@@ -53,8 +56,8 @@ function ProductEventContainer(props:any) {
       >
         <Swiper.Item>
           <div className="grid grid-cols-2 gap-0 mt-3 mb-10">
-            {productList ? (
-              <MyProductList productList={productList} />
+            {wishList ? (
+              <MyProductList productList={wishList} />
             ) : (
               <>
                 <Skeleton

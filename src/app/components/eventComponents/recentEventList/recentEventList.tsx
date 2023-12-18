@@ -5,6 +5,7 @@ import HorizontalEventCard from "../horizontalCardEvent/horizontalCard";
 import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
 import Link from "next/link";
+import HorizontalCardEvent_2 from "../horizontalCardEvent_2/horizontalCardEvent_2";
 
 function RecentEventList() {
   const [eventlist, setEventlist] = useState<[Event]>();
@@ -12,17 +13,18 @@ function RecentEventList() {
   useEffect(() => {
     (async () => {
       const response = await getMyRecentEventList();
-      const tempeventList: [Event] = response.event;
+      console.log(response);
+      const tempeventList: [Event] = response.events;
       setEventlist(tempeventList);
     })();
-  }, []);
+  }, [setEventlist]);
 
   return (
     <div className="h-full w-full">
       {eventlist ? (
         eventlist && eventlist.length > 0 ? (
           eventlist.map((item, index) => {
-            return <HorizontalEventCard event={item} key={`evennt${index}`} />;
+            return <HorizontalCardEvent_2 event={item} key={`evennt${index}`} />;
           })
         ) : (
           <div className="w-full h-full flex flex-col justify-center items-center">

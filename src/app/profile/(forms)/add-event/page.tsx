@@ -194,7 +194,7 @@ function AddEvent() {
           </Form.Item>
           {/* END DATE */}
 
-          <h2 className="mt-4 text-[20px]">Abou who?</h2>
+          <h2 className="mt-4 text-[20px]">About who?</h2>
           {/* NAME */}
           <Form.Item
             label="Name"

@@ -78,7 +78,8 @@ function NewGift() {
         desire_rate: desire,
         gift_unit_price: priceunit,
         image: file,
-        isproduct: isproduct
+        isproduct: isproduct,
+        gift_url: urlRef.current.value
       });
       if (response) {
         setLoading(false);
@@ -194,7 +195,6 @@ function NewGift() {
               autoComplete="off"
               placeholder="https://amazon.com/xxx"
               className="font-normal wiishy-input-text"
-              {...register("gift_url")}
               ref={urlRef}
             />
           </Form.Item>

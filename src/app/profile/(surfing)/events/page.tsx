@@ -13,7 +13,7 @@ function Events() {
         <div className="grid mb-10 mt-7">
           <Button
             onClick={() => router.push("/profile/add-event")}
-            className="btn-regular-outline w-full mb-3"
+            className="btn-regular  w-full mb-3"
           >
             + Add new event
           </Button>
