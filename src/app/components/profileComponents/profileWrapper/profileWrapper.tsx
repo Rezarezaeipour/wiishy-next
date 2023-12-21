@@ -33,6 +33,7 @@ export default function ProfileWrapper(props: { id: number }) {
       const data = await getUserData(props.id);
 
       setNewuser(data.users);
+     
       setFollowings(parseInt(data.users.followings));
       setFollowers(parseInt(data.users.followers));
     })();
@@ -74,15 +75,16 @@ export default function ProfileWrapper(props: { id: number }) {
             fit="cover"
           />
 
-          <h1 className="font-bold text-xl mt-3">
+          <h1 className="font-bold text-xl mt-1.5">
             {newuser.name || "Name"} {newuser.family || "Family"}
           </h1>
-          <div className="flex flex-row mt-1">
+          <div className="flex flex-row mt-0">
             <p> {newuser.age ? newuser.age.toString() + " years old" : ""} </p>
           </div>
-          <h2 className="mt-1">
+          <h2 className="mt-0">
             (
-            {(() => {
+            {newuser.user_gender ? (() => {
+              
               switch (newuser.user_gender.toString()) {
                 case "1":
                   return "Man";
@@ -90,58 +92,55 @@ export default function ProfileWrapper(props: { id: number }) {
                   return "Woman";
                 case "3":
                   return "Unknown";
-              }
-            })()}
+              } 
+            })() :  "Unknown"}
             )
           </h2>
           {/* <div className="flex flex-row mt-1">
             <LocationFill className="mt-0.5 mr-1" />
             <p>{"Berlin | Gernmany"}</p>
           </div> */}
-          <div className="flex flex-row gap-4 mt-2 mb-2">
+          <div className="flex flex-row gap-3 mt-1 mb-2">
             <Link href={`/profile/followings/${props.id}/${newuser.name}`}>
-              <div className="flex flex-col items-center align-middle">
-                <p className="font-bold">{followings}</p>
-                <p>following</p>
+              <div className="flex flex-row items-center align-middle">
+                <p className="font-bold mr-1">{followings}</p>
+                <p className="font-light">following</p>
               </div>
             </Link>
             <Link href={`/profile/followers/${props.id}/${newuser.name}`}>
-              <div className="flex flex-col items-center">
-                <p className="font-bold">{followers}</p>
-                <p>followers</p>
+              <div className="flex flex-row items-center">
+                <p className="font-bold mr-1">{followers}</p>
+                <p className="font-light">followers</p>
               </div>
             </Link>
           </div>
           <p className="px-4 py-1">
-            {newuser?.user_desc ||
-              "  "}
+            { (newuser?.user_desc && newuser?.user_desc!='null')  ? newuser?.user_desc : "  "}
           </p>
-          <div className="flex flex-row gap-2 mt-2.5">
+          <div className="flex flex-row mt-0">
             {isfollow ? (
               <div className="flex flex-col">
-                <p>Youre following</p>
+               
                 <Button
                   loading={loading}
                   onClick={async () => {
                     setLoading(true);
                     const result = await unFollowUser(props.id);
-
                     result.status == "success"
                       ? setIsfollow(false)
                       : setIsfollow(true);
                     setFollowers((old) => old - 1);
                     setLoading(false);
                   }}
-                  color="default"
-                  fill="outline"
-                  size="mini"
+                  className="adm-button adm-button-default adm-button-shape-default btn btn-regular-outline-small"
                 >
                   Unfollow
                 </Button>
+                <p  className="text-xs mt-1">Youre following</p>
               </div>
             ) : (
               <div className="flex flex-col">
-                <p>Follow to learn more...</p>
+                
                 <Button
                   loading={loading}
                   onClick={async () => {
@@ -153,12 +152,11 @@ export default function ProfileWrapper(props: { id: number }) {
                     setFollowers((old) => old + 1);
                     setLoading(false);
                   }}
-                  color="default"
-                  fill="outline"
-                  size="mini"
+                  className=" adm-button adm-button-default adm-button-shape-default btn btn-regular-outline-small"
                 >
                   Follow
                 </Button>
+                <p className="text-xs mt-1">Follow to learn more...</p>
               </div>
             )}
           </div>

@@ -239,12 +239,14 @@ function NewGift() {
               type="number"
               placeholder="250"
               className="font-normal  wiishy-input-text py-3 basis-3/4"
+              maxLength={12}
+              min={1}
               style={{
                 height: "45px",
                 borderRight: "none",
                 borderRadius: "5px 0px 0px 5px",
               }}
-              {...register("giftprice", { required: true })}
+              {...register("giftprice", { required: true , maxLength:12})}
             />
             <Select
               labelInValue

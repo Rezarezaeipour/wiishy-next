@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
 import React from "react";
-import "@/app/globals.css";
+import "@/app/style.css";
 import Header from "@/app/components/generalComponents/header/header";
 import { useSession } from "next-auth/react";
 
