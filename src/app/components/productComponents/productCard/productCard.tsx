@@ -1,7 +1,7 @@
 "use client";
 import { Rate } from "antd-mobile";
 import "./style.module.css";
-import "@/app/globals.css";
+import "@/app/style.css";
 import { Product } from "@/types";
 import { EyeOutline, LikeOutline } from "antd-mobile-icons";
 import Link from "next/link";

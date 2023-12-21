@@ -1,7 +1,7 @@
 "use client";
 import { Avatar, Rate } from "antd-mobile";
 import "./style.module.css";
-import "@/app/globals.css";
+import "@/app/style.css";
 import { ProductComplete } from "@/types";
 import Link from "next/link";
 import { Skeleton } from "antd";
@@ -57,10 +57,10 @@ function ProductCardComplete(props: ProductComplete) {
           </div>
           <div>
             <h2 className="font-bold text-lg mt-3 ">
-              {props.gift_name || "Macbook Air M2 15"}
+              {props.gift_name || " "}
             </h2>
             <div className="flex flex-row mt-2 align-middle justify-between">
-              <p className="text-md font-normal">
+              <p className="text-md font-normal truncate">
                 {`${props.price_unit}${props.gift_price}` || "$1400"}{" "}
               </p>
               <Rate

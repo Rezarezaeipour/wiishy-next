@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from "react";
-import './globals.css';
+import './style.css';
 import { SessionProvider } from 'next-auth/react';
 import { GeistMono } from 'geist/font/mono';
 import { Roboto } from 'next/font/google'

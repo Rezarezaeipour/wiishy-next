@@ -58,13 +58,13 @@ export default function ProfileWrapperLittle(props: { id: number }) {
         </div>
       ) : (
         <div className="flex flex-row pt-0 mx-3">
-          <div className=" basis-1/4">
+          <div className=" basis-1/4" >
             <Image
               width={100}
               height={100}
               alt={newuser.name}
               src={`https://wiishy-backend.ir${newuser.user_image_url}`}
-              className="rounded-full w-1/2"
+              className="rounded-full "
               style={{
                 width: "100px !important",
                 height: "100px !important",
@@ -74,7 +74,7 @@ export default function ProfileWrapperLittle(props: { id: number }) {
               fit="cover"
             />
           </div>
-          <div className="flex flex-col basis-3/4 px-3">
+          <div className="flex flex-col  justify-center basis-3/4 px-3">
             <h1 className="font-bold text-xl mt-3">
               {newuser.name || "Name"} {newuser.family || "Family"}
             </h1>
@@ -95,7 +95,7 @@ export default function ProfileWrapperLittle(props: { id: number }) {
               )
               </p>
             </div>
-            <div className="flex flex-row items-start gap-4 mt-0 mb-2">
+            {/* <div className="flex flex-row items-start gap-4 mt-0 mb-2">
               <Link href={`/profile/followings/${props.id}/${newuser.name}`}>
                 <div className="flex flex-row items-start align-middle">
                   <p className="font-bold mr-1">{followings}</p>
@@ -108,7 +108,7 @@ export default function ProfileWrapperLittle(props: { id: number }) {
                   <p>followers</p>
                 </div>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
