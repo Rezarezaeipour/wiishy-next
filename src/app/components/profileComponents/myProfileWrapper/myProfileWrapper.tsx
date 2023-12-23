@@ -76,7 +76,7 @@ function MyProfileWrapper(props: {
           {props.bio ||
             " A passionate web developer and designer looking for new opportunities in European "}
         </p>
-        <div className="flex flex-row gap-2 mt-2.5">
+        <div className="flex flex-row gap-1.5 mt-2.5">
           <Link href="/profile/edit-profile">
             <Button className="btn-regular-outline">
               Edit profile
@@ -87,7 +87,13 @@ function MyProfileWrapper(props: {
               Add event
             </Button>
           </Link>
+          <Link href="#">
+            <Button className="adm-button adm-button-default adm-button-shape-default btn btn-regular w-full m-1">
+              Share my wishlist
+            </Button>
+          </Link>
         </div>
+       
       </div>
     </>
   );
