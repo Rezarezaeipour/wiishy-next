@@ -1,7 +1,8 @@
 import { Skeleton } from "antd";
-import { Button, Image } from "antd-mobile";
+import { Button, Dialog, Image, Toast } from "antd-mobile";
 import { LocationFill } from "antd-mobile-icons";
 import Link from "next/link";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 function MyProfileWrapper(props: {
   id: number;
@@ -37,7 +38,7 @@ function MyProfileWrapper(props: {
           {props.name || "Name"} {props.family || "Family"}
         </h1>
         <div className="flex flex-row mt-1">
-          <p>{props.age }</p>
+          <p>{props.age}</p>
         </div>
         <h2 className="mt-1">
           (
@@ -57,7 +58,7 @@ function MyProfileWrapper(props: {
           <LocationFill className="mt-0.5 mr-1" />
           <p>{props.location || "Berlin | Gernmany"}</p>
         </div> */}
-       
+
         <div className="flex flex-row gap-4 mt-2 mb-2">
           <Link href={`/profile/followings/${props.id}/${props.name}`}>
             <div className="flex flex-col items-center align-middle">
@@ -76,24 +77,35 @@ function MyProfileWrapper(props: {
           {props.bio ||
             " A passionate web developer and designer looking for new opportunities in European "}
         </p>
-        <div className="flex flex-row gap-1.5 mt-2.5">
-          <Link href="/profile/edit-profile">
-            <Button className="btn-regular-outline">
-              Edit profile
-            </Button>
-          </Link>
-          <Link href="/profile/add-event">
-            <Button className="btn-regular-outline">
-              Add event
-            </Button>
-          </Link>
-          <Link href="#">
-            <Button className="adm-button adm-button-default adm-button-shape-default btn btn-regular w-full m-1">
+        <div className="flex flex-col">
+          <div className="flex flex-row gap-1.5 mt-2.5">
+            <Link href="/profile/edit-profile">
+              <Button className="btn-regular-outline">Edit profile</Button>
+            </Link>
+            <Link href="/profile/add-event">
+              <Button className="btn-regular-outline">Add event</Button>
+            </Link>
+          </div>
+          <div>
+            <Button
+              className="adm-button adm-button-default adm-button-shape-default btn btn-regular w-full m-1"
+              onClick={() => {
+                Dialog.alert({
+                  content: `https://wiishy-backend.ir/wishlist/${props.id}`,
+                  closeOnMaskClick: true,
+                  confirmText:"Copy Wishlist link",
+                  onConfirm: () => {  Toast.show({
+                    content: 'Copied!',
+                    position: "bottom",
+                  });}
+                 
+                });
+              }}
+            >
               Share my wishlist
             </Button>
-          </Link>
+          </div>
         </div>
-       
       </div>
     </>
   );
