@@ -4,7 +4,7 @@ import getUserData from "@/app/api-client/users";
 import AIGiftIdea from "@/app/components/productComponents/aiGiftSuggestion/aiGiftSuggestion";
 import ProductList from "@/app/components/profileComponents/productList/productList";
 import ProfileWrapperLittle from "@/app/components/profileComponents/profileWrapperLittle/profileWrapperLittle";
-import { useEffect, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 
 function Profile({ params }: { params: { userid: number } }) {
   const [newuser, setNewuser] = useState<{
@@ -18,12 +18,17 @@ function Profile({ params }: { params: { userid: number } }) {
     user_image_url: string;
     age?: number;
   }>();
+  const ai = useMemo(() => {
+    if(newuser && newuser.user_gender && newuser.age){
+      return <AIGiftIdea genderid={ newuser.user_gender} age={newuser.age} key={newuser.id}/>
+    }
+  },[newuser])
   useEffect(() => {
     (async () => {
       const data = await getUserData(params.userid);
       setNewuser(data.users);
     })();
-  }, []);
+  }, [params.userid]);
   return (
     <>
       <div className="py-5 px-2">
@@ -57,11 +62,7 @@ function Profile({ params }: { params: { userid: number } }) {
               : " "}
           </span>
           <div>
-            {/* {newuser && newuser.user_gender && newuser.age ?
-              <AIGiftIdea genderid={ newuser.user_gender} age={newuser.age} />
-            :
-             " "
-            } */}
+            {ai}
           </div>
         </h1>
       </div>
