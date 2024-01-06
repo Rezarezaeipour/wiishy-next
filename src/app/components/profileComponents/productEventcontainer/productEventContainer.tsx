@@ -12,9 +12,9 @@ function ProductEventContainer(props:any) {
   const swiperRef = useRef<SwiperRef>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const tabItems = [
-    { key: "Desired Gift", title: "Desired Gift" },
-    { key: "My Products", title: "My Products" },
-    { key: "Events", title: "My Events" },
+    { key: "Wish list", title: "Wish list" },
+    { key: "My Shop", title: "My Shop" },
+    { key: "Events", title: "Event Reminder" },
   ];
 
   useEffect(() => {

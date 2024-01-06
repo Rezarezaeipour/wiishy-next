@@ -11,9 +11,13 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
+    // setTimeout(async() => {
+    //   const token = await isNew();
+    //   token ? router.push("/profile/explore") : router.push("/steps");
+    // }, 1000);
+
     setTimeout(async() => {
-      const token = await isNew();
-      token ? router.push("/profile/explore") : router.push("/steps");
+       router.push("/profile/explore");
     }, 1000);
   
   }, [router]);
