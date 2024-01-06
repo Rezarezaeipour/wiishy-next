@@ -2,18 +2,27 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  console.log('xxxx',req).body;
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_SECRET_KEY,
-  });
 
-  const chatCompletion = await openai.chat.completions.create({
-    messages: [{ role: "user", content: "Say this is a test" }],
-    model: "gpt-3.5-turbo",
-  });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_SECRET_KEY,
+});
 
-  console.log(chatCompletion.choices[0]);
-  console.log('xxx', chatCompletion);
+const response = await openai.chat.completions.create({
+  model: "gpt-3.5-turbo",
+  messages: [
+    {
+      "role": "system",
+      "content": "hi"
+    },
+  ],
+  temperature: 1,
+  max_tokens: 256,
+  top_p: 1,
+  frequency_penalty: 0,
+  presence_penalty: 0,
+});
+
+console.log(response);
 
   // const API_URL = 'https://api.openai.com/v1/chat/completions';
   // const prompt  = await req.json();

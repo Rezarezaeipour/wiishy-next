@@ -2,11 +2,10 @@ import { getGiftIdea } from "@/app/api-client/gifts";
 import {useEffect} from "react";
 
 function AIGiftIdea(props:{genderid:number,age:number}) {
-    console.log('aigift')
-
+   
     useEffect(() => {
         (async () => {
-            const GiftSuggestion = await  getGiftIdea(props.genderid,props.age);
+            const GiftSuggestion = await getGiftIdea(props.genderid,props.age);
             console.log(GiftSuggestion)
         })()
     }, []);
