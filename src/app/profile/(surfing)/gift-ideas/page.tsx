@@ -8,12 +8,12 @@ function GiftIdeas() {
   const [count, setCount] = useState(0);
   const [giftlist, setGiftlist] = useState();
 
-  useEffect(() => {
-    (async () => {
-      const res = await getGiftIdea();
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getGiftIdea();
 
-    })();
-  }, []);
+  //   })();
+  // }, []);
 
   return (
     <>

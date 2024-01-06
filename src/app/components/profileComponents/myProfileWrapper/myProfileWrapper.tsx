@@ -75,7 +75,7 @@ function MyProfileWrapper(props: {
         </div>
         <p className="px-4 py-1">
           {props.bio ||
-            " A passionate web developer and designer looking for new opportunities in European "}
+            "  "}
         </p>
         <div className="flex flex-col">
           <div className="flex flex-row gap-1.5 mt-2.5">
@@ -86,9 +86,9 @@ function MyProfileWrapper(props: {
               <Button className="btn-regular-outline">Add event</Button>
             </Link>
           </div>
-          <div>
+          <div className="mt-1">
             <Button
-              className="adm-button adm-button-default adm-button-shape-default btn btn-regular w-full m-1"
+              className="adm-button adm-button-default adm-button-shape-default btn btn-regular w-full "
               onClick={() => {
                 Dialog.alert({
                   content: `https://wiishy-backend.ir/wishlist/${props.id}`,

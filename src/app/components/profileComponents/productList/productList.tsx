@@ -18,7 +18,7 @@ function ProductList(props: { userId: number }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-0 mt-7 mb-10">
+      <div className="grid grid-cols-2 gap-0 mb-10">
         {gifts ? (
           gifts.length > 0 ? (
             gifts.map((Item, index) => {

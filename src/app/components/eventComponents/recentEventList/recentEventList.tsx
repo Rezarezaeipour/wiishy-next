@@ -13,7 +13,7 @@ function RecentEventList() {
   useEffect(() => {
     (async () => {
       const response = await getMyRecentEventList();
-      console.log(response);
+      // console.log(response);
       const tempeventList: [Event] = response.events;
       setEventlist(tempeventList);
     })();

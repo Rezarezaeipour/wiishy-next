@@ -163,15 +163,16 @@ export async function likeGift(giftid: number) {
   }
 }
 
-export async function getGiftIdea() {
-
-  // const res = await fetch("/api/giftidea", {
-  //   method: "GET",
-  // });
-  // if (res.ok) {
-  //   const response = await res.json();
-  //   console.log("xxxxx",response)
-  // }
+export async function getGiftIdea(genderid:number,age:number) {
+  console.log(genderid,'zz',age);
+  const res = await fetch("/api/giftidea", {
+    method: "POST",
+    body: JSON.stringify(`Give me some idea in bullet points for a 36 years old man`)
+  });
+  if (res.ok) {
+    const response = await res.json();
+    console.log(response);
+  }
   
 }
 
