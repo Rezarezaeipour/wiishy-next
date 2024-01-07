@@ -15,6 +15,7 @@
     "@types/node": "20.5.0",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "ai": "^2.2.31",
     "antd": "^5.8.3",
     "antd-mobile": "^5.32.0",
     "antd-mobile-icons": "^0.3.0",

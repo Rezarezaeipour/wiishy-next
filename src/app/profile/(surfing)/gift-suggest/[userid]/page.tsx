@@ -37,7 +37,7 @@ function Profile({ params }: { params: { userid: number } }) {
         />
 
         <h1 className="second-head ml-2.5 mt-4">
-          {newuser?.name}'s wishlist
+          {newuser?.name}s wishlist
           {/* <span className="text-xs">(In the next 30 days)</span> */}
         </h1>
         <ProductList userId={params && params.userid ? params.userid : 0} />
