@@ -172,6 +172,7 @@ export async function getGiftIdea(genderid:number,age:number) {
   if (res.ok) {
     const response = await res.json();
     console.log(response);
+    return response;
   }
   
 }
