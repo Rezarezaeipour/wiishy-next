@@ -164,15 +164,21 @@ export async function likeGift(giftid: number) {
 }
 
 export async function getGiftIdea(genderid:number,age:number) {
-  console.log(genderid,'zz',age);
-  const res = await fetch("/api/giftidea", {
-    method: "POST",
-    body: JSON.stringify(`Give me some idea in bullet points for a 36 years old man`)
-  });
-  if (res.ok) {
-    const response = await res.json();
-    console.log(response);
-    return response;
+ 
+  try {
+    const prompt = [`Give me some idea in bullet points for a ${age} years old ${genderid}`];
+    const response = await fetch("/api/gptengine", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+    });
+
+    const data = await response.json();
+    // console.log(data);
+    return data;
+    
+  } catch (error) {
+     console.error(error);
+    // console.log(error);
   }
   
 }
