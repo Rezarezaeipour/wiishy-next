@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest, res: NextResponse) {
   const API_URL = 'https://api.openai.com/v1/chat/completions';
   const   {prompt}  = await req.json();
-   console.log(prompt[0]);
+   console.log(prompt);
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.OPENAI_SECRET_KEY}`,
       },
-      body: JSON.stringify({
+      body: JSON.stringify({    
         messages: [
           {
             role: "system",

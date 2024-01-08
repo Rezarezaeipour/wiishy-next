@@ -174,7 +174,7 @@ export async function getGiftIdea(genderid:number,age:number) {
 
     const data = await response.json();
     // console.log(data);
-    return data;
+    return data+"cc";
     
   } catch (error) {
      console.error(error);
