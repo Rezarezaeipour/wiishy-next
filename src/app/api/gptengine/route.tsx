@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest, res: NextResponse) {
   const API_URL = 'https://api.openai.com/v1/chat/completions';
   const   {prompt}  = await req.json();
-  // console.log(prompt[0]);
+   console.log(prompt[0]);
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -24,12 +24,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     const data = await response.json();
-    // console.log(data.choices[0].message.content);
+    console.log(data.choices[0].message.content);
     return NextResponse.json(data.choices[0].message.content)
-
+    
   } catch (error) {
-    // console.log(error);
-    // console.error(error);
+    console.log(error);
+    console.error(error);
     return NextResponse.json(error)
   }
 }
