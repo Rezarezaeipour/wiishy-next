@@ -7,7 +7,7 @@ function AIGiftIdea(props:{genderid:number,age:number}) {
         (async () => {
             const GiftSuggestion = await getGiftIdea(props.genderid,props.age);
             console.log(GiftSuggestion);
-            setxx(GiftSuggestion);
+            setxx(JSON.stringify(GiftSuggestion));
         })()
     }, []);
 
