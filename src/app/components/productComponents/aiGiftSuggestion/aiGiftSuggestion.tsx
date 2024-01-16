@@ -6,7 +6,8 @@ function AIGiftIdea(props:{genderid:number,age:number}) {
     useEffect(() => {
         (async () => {
             const GiftSuggestion = await getGiftIdea(props.genderid,props.age);
-            console.log(GiftSuggestion);
+            alert(JSON.stringify(GiftSuggestion));
+            console.log(JSON.stringify(GiftSuggestion));
             setxx(JSON.stringify(GiftSuggestion));
         })()
     }, []);
