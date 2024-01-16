@@ -173,12 +173,13 @@ export async function getGiftIdea(genderid:number,age:number) {
     });
 
     const data = await response.json();
-    // console.log(data);
+     console.log(data);
     return data+"cc";
     
   } catch (error) {
      console.error(error);
-    // console.log(error);
+     console.log(error);
+     return error;
   }
   
 }

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const API_URL = 'https://api.openai.com/v1/chat/completions';
-  const   {prompt}  = await req.json();
-   console.log(prompt);
+  const API_URL = "https://api.openai.com/v1/chat/completions";
+  const { prompt } = await req.json();
+ 
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.OPENAI_SECRET_KEY}`,
       },
-      body: JSON.stringify({    
+      body: JSON.stringify({
         messages: [
           {
             role: "system",
@@ -19,14 +19,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
           },
           { role: "user", content: prompt[0] },
         ],
-         model: "gpt-3.5-turbo-1106",
+        model: "gpt-3.5-turbo-1106",
       }),
     });
+    console.log(await response);
 
-    const data = await response.json();
-    console.log(data.choices[0].message.content);
-    return NextResponse.json(data.choices[0].message.content)
-    
+    if (response.status == 200) {
+      const data = await response.json();
+      console.log(data.choices[0].message.content);
+      
+     return NextResponse.json(data.choices[0].message.content)
+    }
   } catch (error) {
     console.log(error);
     console.error(error);
