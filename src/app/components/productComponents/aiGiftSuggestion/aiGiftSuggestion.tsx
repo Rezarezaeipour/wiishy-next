@@ -1,21 +1,27 @@
 import { getGiftIdea } from "@/app/api-client/gifts";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-function AIGiftIdea(props:{genderid:number,age:number}) {
-    const [xx,setxx] = useState('');
-    useEffect(() => {
-        (async () => {
-            const GiftSuggestion = await getGiftIdea(props.genderid,props.age);
-            alert(JSON.stringify(GiftSuggestion));
-            console.log(JSON.stringify(GiftSuggestion));
-            setxx(JSON.stringify(GiftSuggestion));
-        })()
-    }, []);
+function AIGiftIdea(props: { genderid: number; age: number }) {
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const GiftSuggestion = await getGiftIdea(props.genderid, props.age);
+      const GiftSuggestionJson = JSON.parse(GiftSuggestion);
+      console.log(GiftSuggestionJson);
+      console.log(GiftSuggestionJson.giftIdeas);
+      setResult(GiftSuggestionJson.giftIdeas);
+    })();
+  }, []);
 
-    return (
-        "hi"+{xx}
-     );
+  return (
+    <>
+      <ul>
+        {result.map((item, index) => {
+          return <li className="gift-suggestion-li" key={"gift" + index}>{item}</li>;
+        })}
+      </ul>
+    </>
+  );
 }
 
 export default AIGiftIdea;
-

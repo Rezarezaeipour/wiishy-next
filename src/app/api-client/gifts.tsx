@@ -2,19 +2,19 @@ import { format } from "path";
 
 export async function addHandler(data: any) {
   const formData = new FormData();
- 
+
   formData.append("gift_name", data.giftname),
     formData.append("gift_price", data.giftprice),
     formData.append("gift_desc", data.giftdescription),
     formData.append("gift_url", data.gift_url),
     formData.append("desire_rate", data.desire_rate);
-    formData.append("gift_image_url",data.gift_image_url)
-    formData.append("price_unit_id",data.gift_unit_price);
-    formData.append("my_product",data.isproduct);
+  formData.append("gift_image_url", data.gift_image_url);
+  formData.append("price_unit_id", data.gift_unit_price);
+  formData.append("my_product", data.isproduct);
   if (data.image) {
     formData.append("image", data.image);
   }
-  
+
   const res = await fetch("/api/addnewgift", {
     method: "POST",
     body: formData,
@@ -37,12 +37,12 @@ export async function updateHandler(data: any) {
     formData.append("gift_url", data.gift_url),
     formData.append("gift_image_url", data.gift_url),
     formData.append("desire_rate", data.desire_rate);
-    formData.append("price_unit_id",data.gift_unit_price);
-    formData.append("gift_id", data.giftid);
+  formData.append("price_unit_id", data.gift_unit_price);
+  formData.append("gift_id", data.giftid);
   if (data.image) {
     formData.append("image", data.image);
   }
-  
+
   const res = await fetch("/api/updategift", {
     method: "POST",
     body: formData,
@@ -163,27 +163,35 @@ export async function likeGift(giftid: number) {
   }
 }
 
-export async function getGiftIdea(genderid:number,age:number) {
- 
+export async function getGiftIdea(genderid: number, age: number) {
   try {
-    const prompt = [`Give me some idea in bullet points for a ${age} years old ${genderid}`];
+    let gender = "";
+    switch (genderid.toString()) {
+      case "1":
+        gender = "Man";
+        break;
+      case "2":
+        gender = "Woman";
+        break;
+      case "3":
+        gender = "Unisex";
+        break;
+    }
+
+    const prompt = [
+      `Give me 10 gift ideas in a simple object of strings for a ${age} years old ${gender}. sample: {giftIdeas : ['idea1','idea2']}`,
+    ];
     const response = await fetch("/api/gptengine", {
       method: "POST",
       body: JSON.stringify({ prompt }),
     });
 
     const data = await response.json();
-     console.log(data);
-    return data+"cc";
-    
+
+    return data;
   } catch (error) {
-     console.error(error);
-     console.log(error);
-     return error;
+    console.error(error);
+    console.log(error);
+    return error;
   }
-  
 }
-
-
-
-

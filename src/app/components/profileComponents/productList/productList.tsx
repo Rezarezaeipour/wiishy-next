@@ -18,49 +18,58 @@ function ProductList(props: { userId: number }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-0 mb-10">
+      <div className="mb-10 pt-6">
         {gifts ? (
           gifts.length > 0 ? (
-            gifts.map((Item, index) => {
-              return (
-                <ProductCard
-                  key={"prd" + index}
-                  gift_name={Item.gift_name}
-                  gift_url={Item.gift_url}
-                  gift_price={Item.gift_price}
-                  desire_rate={Item.desire_rate}
-                  gift_id={Item.gift_id}
-                  gift_image_url={Item.gift_image_url}
-                  gift_like = {Item.gift_like}
-                />
-              );
-            })
+            <div className="grid grid-cols-2 gap-0 mb-10">
+              {" "}
+              {gifts.map((Item, index) => {
+                return (
+                  <ProductCard
+                    key={"prd" + index}
+                    gift_name={Item.gift_name}
+                    gift_url={Item.gift_url}
+                    gift_price={Item.gift_price}
+                    desire_rate={Item.desire_rate}
+                    gift_id={Item.gift_id}
+                    gift_image_url={Item.gift_image_url}
+                    gift_like={Item.gift_like}
+                  />
+                );
+              })}
+            </div>
           ) : (
-            <p className="my-auto">Noting Added anything yet</p>
+            <div className="w-full">
+              <p className="my-auto text-center w-full pt-4">
+                Noting Added anything yet
+              </p>
+            </div>
           )
         ) : (
-          <>
-            <Skeleton
-              paragraph={{ rows: 5 }}
-              active
-              className="mt-3 p-3 text-center"
-            />
-            <Skeleton
-              paragraph={{ rows: 5 }}
-              active
-              className="mt-3 p-3 text-center"
-            />
-             <Skeleton
-              paragraph={{ rows: 5 }}
-              active
-              className="mt-3 p-3 text-center"
-            />
-             <Skeleton
-              paragraph={{ rows: 5 }}
-              active
-              className="mt-3 p-3 text-center"
-            />
-          </>
+          <div className="grid grid-cols-2 gap-0 mb-10">
+            <div>
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+              <Skeleton
+                paragraph={{ rows: 5 }}
+                active
+                className="mt-3 p-3 text-center"
+              />
+            </div>
+          </div>
         )}
       </div>
     </>
