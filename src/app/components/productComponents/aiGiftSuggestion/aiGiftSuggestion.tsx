@@ -17,7 +17,7 @@ function AIGiftIdea(props: { genderid: number; age: number }) {
     <>
       <ul>
         {result.map((item, index) => {
-          return <li className="gift-suggestion-li" key={"gift" + index}>{item}</li>;
+          return <li className="gift-suggestion-li" key={"gift" + index}> - {item}</li>;
         })}
       </ul>
     </>
