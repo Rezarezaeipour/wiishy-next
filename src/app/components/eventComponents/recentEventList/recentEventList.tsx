@@ -1,7 +1,6 @@
 "use client";
 import { Event } from "@/types";
 import { getMyRecentEventList } from "@/app/api-client/events";
-import HorizontalEventCard from "../horizontalCardEvent/horizontalCard";
 import { useEffect, useState } from "react";
 import Loading from "@/app/loading";
 import Link from "next/link";
@@ -13,11 +12,11 @@ function RecentEventList() {
   useEffect(() => {
     (async () => {
       const response = await getMyRecentEventList();
-      // console.log(response);
       const tempeventList: [Event] = response.events;
       setEventlist(tempeventList);
+      console.log(tempeventList);
     })();
-  }, [setEventlist]);
+  }, []);
 
   return (
     <div className="h-full w-full">

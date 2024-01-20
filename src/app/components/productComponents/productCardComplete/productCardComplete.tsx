@@ -13,7 +13,7 @@ function ProductCardComplete(props: ProductComplete) {
   return !props ? (
     <Skeleton.Image active />
   ) : (
-    <div className="flex flex-col pb-5" style={{border:'solid thin #e4e4e4',marginBottom:'10px',borderRadius:'5px', backgroundColor:'#F7F7F7'}}>
+    <div className="flex flex-col pb-5 big-product-card" >
       <Link href={`/profile/profile/${props.user_id}`}>
         <div className="flex flex-row mt-2 mb-2 p-2 pb-0 items-center justify-left">
           <Avatar
@@ -21,7 +21,7 @@ function ProductCardComplete(props: ProductComplete) {
             style={{ "--size": "50px", "--border-radius": "30px" }}
           />
           <div className="h-full">
-            <div className="text-sm font-normal ml-2">
+            <div className="text-sm font-normal ml-2 text-tiffany-dark">
               {props.name} {props.family} 
             </div>
             <p className="text-xs font-thin ml-2">{`${props.age} years old`}</p>
@@ -56,11 +56,11 @@ function ProductCardComplete(props: ProductComplete) {
             </div>
           </div>
           <div>
-            <h2 className="font-bold text-lg mt-3 ">
+            <h2 className="font-bold text-lg mt-3 text-tiffany-dark">
               {props.gift_name || " "}
             </h2>
             <div className="flex flex-row mt-2 align-middle justify-between">
-              <p className="text-md font-normal truncate">
+              <p className="text-md font-normal truncate text-tiffany-dark">
                 {`${props.price_unit}${props.gift_price}` || "$1400"}{" "}
               </p>
               <Rate
