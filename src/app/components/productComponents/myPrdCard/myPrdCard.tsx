@@ -41,8 +41,8 @@ function MyPrdCard(props: Product) {
           </div>
         </div>
         <div>
-          <h2 className="font-bold text-md mt-3">
-            {props.gift_name || "Macbook Air M2 15"}
+          <h2 className="font-bold text-md mt-3 text-tiffany-dark">
+            {props.gift_name || " "}
           </h2>
           <div className="flex flex-row mt-2 align-middle justify-between">
             <p className="text-sm font-normal">

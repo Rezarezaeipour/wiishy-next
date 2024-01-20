@@ -57,7 +57,7 @@ function RectangularProfileCard(props: any) {
                   : setIsfollow(true);
                 setFloading(false);
               }}
-              className="btn btn-regular-outline-small mt-3"
+              className="btn btn-regular-outline-small mt-4"
             >
               Unfollow
             </Button>
