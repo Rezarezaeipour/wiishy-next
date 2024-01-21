@@ -44,7 +44,6 @@ body {
     )
     rgb(var(--background-start-rgb)); */
   background-color: var(--wiishy-tiffany-super-light);
-
 }
 
 /* Navbar */
@@ -65,17 +64,18 @@ body {
 }
 
 .nbutton{
-  color : #666666;
+  color : var(--wiishy-tiffany-dark);
   font-weight: normal;
 }
 
 .nbutton-active{
-  color : #000;
+  color : var(--wiishy-orange) !important;
   font-weight: bold;
 }
 
 .nicon{
   font-size: 20px !important  ;
+  /* color: var(--wiishy-tiffany-dark); */
 }
 
 .ntext{
@@ -115,7 +115,18 @@ body {
 /* end pages */
 
 
+/* Menu */
+
+
+/* End Menu */
+
 /* Forms */
+
+input::placeholder {
+  height: 90% !important;
+  font-size: small !important;
+}
+
 .wiishy-input-text{
   width: 100%;
   height: 100%;
@@ -149,6 +160,26 @@ body {
   font-size: 39px;
   cursor: pointer;
 }
+
+.adm-form-item.adm-form-item-vertical .adm-form-item-label{
+  margin-bottom: 0px !important;
+}
+
+.currency-list{
+  border: solid thin var(--wiishy-tiffany-light);
+  border-radius: 0px 5px 5px 0px;
+  height: 45px;
+}
+
+.currency-list .ant-select-selection-item{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--wiishy-tiffany-dark);
+}
+
 /* End Forms */
 
 .mt-45px {
@@ -191,7 +222,7 @@ body {
 .btn-regular-outline {
   border-color: var(--wiishy-tiffany-light) !important;
   background-color: white;
-  color: black !important;
+  color: var(--wiishy-tiffany-dark) !important;
   border-radius: 5px !important;
   font-size: 14px !important;
   padding-top: 10px !important;
@@ -228,6 +259,7 @@ body {
 }
 
 .adm-slider-thumb{
+  padding-top: 2px !important;
   display: flex;
 }
 
@@ -242,15 +274,16 @@ body {
 
 
 .adm-selector-item-active, .adm-selector-item-multiple-active{
-color: black !important ;
+color:var(--wiishy-tiffany) !important;
 border-radius: 5px !important;
-border-color: black !important;
+border-color: var(--wiishy-tiffany) !important;
 background-color: #fcfcfc !important;
 }
 
 .ant-radio-inner{
   border-color: #ffffff !important;
-  background-color: #000000 !important;
+  background-color: var(--wiishy-tiffany) !important;
+
 }
 
 .suggest-card{
@@ -297,6 +330,11 @@ background-color: #fcfcfc !important;
 
 .gift-suggestion-li{
   font-size: 13px;
+  border: solid thin var(--wiishy-tiffany-light);
+  background-color: var(--wiishy-tiffany-super-light);
+  border-radius: 4px;
+  padding: 4px 5px;
+  margin-bottom: 5px;
 }
 
 /* Explore & Home */

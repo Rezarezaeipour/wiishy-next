@@ -251,13 +251,7 @@ function NewGift() {
             <Select
               labelInValue
               defaultValue={{ value: `${priceunit}` }}
-              // value={{ value: "4", label: "IRR" }}
-              style={{
-                border: "solid thin silver",
-                borderRadius: "0px 5px 5px 0px",
-                height: "45px",
-              }}
-              className="basis-1/4"
+              className="basis-1/4 currency-list"
               onChange={(v) => setPriceunit(v.value)}
               options={[
                 {

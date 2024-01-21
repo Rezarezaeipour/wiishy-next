@@ -37,21 +37,24 @@ function Profile({ params }: { params: { userid: number } }) {
   }, [params.userid]);
   return (
     <>
-      <div className="py-5 px-2">
+
+      <div className="py-5 px-5">
         <ProfileWrapperLittle
           id={params && params.userid ? params.userid : 0}
         />
 
-        <h1 className="second-head ml-2.5 mt-4">
+        <h1 className="second-head ml-2.5 mt-4 text-tiffany-dark">
           {newuser?.name ? newuser?.name + '\'s wishlist' : ''}
           {/* <span className="text-xs">(In the next 30 days)</span> */}
         </h1>
         <ProductList userId={params && params.userid ? params.userid : 0} />
+      </div>
 
-        <h1 className="second-head ml-2.5 mt-4">
+      <div className="py-4 px-5 pb-8 bg-white " style={{borderTop:'solid thin var(--wiishy-tiffany-light)'}}>
+        <h1 className="second-head mt-4 text-tiffany-dark">
           Wiishy AI suggestions for {newuser?.name}
         </h1>
-        <h1 className="second-head ml-2.5 mt-0">
+        <h1 className="second-head text-tiffany mt-0">
           <span className="text-xs">
             A {newuser?.age} years old
             {newuser?.user_gender
@@ -67,10 +70,11 @@ function Profile({ params }: { params: { userid: number } }) {
                   }
                 })()
               : " "}
-          </span>
-          <div>{ai}</div>
+          </span>   
         </h1>
-      </div>
+        <div className="mt-4 mb-9">{ai}</div>
+      </div>  
+
     </>
   );
 }
