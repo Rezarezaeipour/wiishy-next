@@ -24,7 +24,7 @@ export default function Navbar() {
       <div>
         <Link
           className={`flex flex-col nbutton ${
-            pathname === "/profile/home" ? "nbutton-active" : ""
+            pathname === "/profile/home" ? "c" : ""
           }`}
           href={"/profile/home"}
         >

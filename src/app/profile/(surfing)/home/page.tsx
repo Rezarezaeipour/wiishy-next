@@ -18,7 +18,7 @@ function Home() {
  
   return (
     <>
-      <div className="py-5 px-2 w-full h-screen">
+      <div className="py-5 px-4 w-full h-screen">
         <h1 className="main-head">Home</h1>
         
         {giftlist ? (

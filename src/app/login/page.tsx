@@ -20,7 +20,7 @@ export default function Login() {
         style={{ width: "100%" }}
         alt="wiishyLogo"
       ></Image>
-      <h1 style={{ marginTop: "50px" }} className="text-xl">
+      <h1 style={{ marginTop: "50px" }} className="text-xl text-tiffany-dark">
         Login to your account
       </h1>
       <Button
