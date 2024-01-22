@@ -50,13 +50,13 @@ function Profile({ params }: { params: { userid: number } }) {
         <ProductList userId={params && params.userid ? params.userid : 0} />
       </div>
 
-      <div className="py-4 px-5 pb-8 bg-white " style={{borderTop:'solid thin var(--wiishy-tiffany-light)'}}>
+      <div className="h-full py-4 px-5 pb-8 bg-white " style={{borderTop:'solid thin var(--wiishy-tiffany-light)'}}>
         <h1 className="second-head mt-4 text-tiffany-dark">
-          Wiishy AI suggestions for {newuser?.name}
+          Wiishy AI suggestions
         </h1>
         <h1 className="second-head text-tiffany mt-0">
           <span className="text-xs">
-            A {newuser?.age} years old
+          {newuser?.name}, A {newuser?.age} years old
             {newuser?.user_gender
               ? (() => {
                   switch (newuser.user_gender.toString()) {
@@ -72,7 +72,7 @@ function Profile({ params }: { params: { userid: number } }) {
               : " "}
           </span>   
         </h1>
-        <div className="mt-4 mb-9">{ai}</div>
+        <div className="mt-4 mb-9 h-full">{ai}</div>
       </div>  
 
     </>

@@ -48,15 +48,24 @@ body {
 
 /* Navbar */
 
-.adm-tab-bar {
-  position: fixed;
+.adm-tab-bar-container{
   width: 100%;
-  bottom: -4px;
-  left: 0px;
+  position: fixed;
+  bottom: 7px;
+  text-align: center;
+}
+
+.adm-tab-bar {
+  width: 92%;
   background-color: white;
-  padding:10px 22px 10px;
-  border-radius: 10px 10px 0 0;
-  border-top: solid thin var(--wiishy-tiffany-light) !important;
+  margin: 3px auto;
+  padding:10px 22px 9px;
+  border-radius: 90px;
+  border: solid thin var(--wiishy-tiffany-light) !important;
+  background: rgba( 255, 255, 255, 0.7 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 11px );
+  -webkit-backdrop-filter: blur( 11px );
 }
 
 .adm-tab-bar-item-title-with-icon{
@@ -329,12 +338,13 @@ background-color: #fcfcfc !important;
 }
 
 .gift-suggestion-li{
-  font-size: 13px;
+  font-size: 14px;
   border: solid thin var(--wiishy-tiffany-light);
   background-color: var(--wiishy-tiffany-super-light);
   border-radius: 4px;
   padding: 4px 5px;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 /* Explore & Home */
