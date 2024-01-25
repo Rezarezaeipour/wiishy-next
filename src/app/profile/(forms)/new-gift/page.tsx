@@ -1,6 +1,6 @@
 "use client";
 import { Button, DotLoading, Dropdown, Form, Slider, Toast } from "antd-mobile";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { SliderValue } from "antd-mobile/es/components/slider";
@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { HeartOutlined } from "@ant-design/icons";
 import { chatting } from "@/app/api-client/ai";
 import { Radio, Select, Space } from "antd";
+import { getCategoryList } from "@/app/api-client/category";
 
 function NewGift() {
   const { register, handleSubmit, setValue, reset } = useForm();
@@ -24,6 +25,7 @@ function NewGift() {
   const [aiload, setAiload] = useState(false);
   const [priceunit, setPriceunit] = useState<string>("1");
   const [isproduct, setIsproduct] = useState(0);
+  const [categoryList, setCategoryList] = useState([]);
 
   const router = useRouter();
   const urlRef = useRef<any>();
@@ -35,11 +37,6 @@ function NewGift() {
     url.length > 0
       ? (async () => {
           setAiload(true);
-          //       const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product in this
-          // page in a object with JSON format with these keys: name, price, price_unit, image_url
-          // here is the link : ${url}. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
-          //  please dont add anyhting else, return just an json structure without json word.
-          //  `;
           const prompt = `I'll give you a link of an e-commerce wesite. Please give me the name, price, price unit and the main image address of the product 
            in a object with JSON format with these keys: name, price, price_unit, image_url. something like this : {product: { name: '', price : 00, price_unit:'',image_url:''}} .
            please dont add anyhting else, return just an json structure without json word. 
@@ -79,7 +76,7 @@ function NewGift() {
         gift_unit_price: priceunit,
         image: file,
         isproduct: isproduct,
-        gift_url: urlRef.current.value
+        gift_url: urlRef.current.value,
       });
       if (response) {
         setLoading(false);
@@ -107,6 +104,14 @@ function NewGift() {
   };
   /// End Handle Submit
 
+  useEffect(() => {
+    (async () => {
+      const response = await getCategoryList();
+      response && setCategoryList(response);
+      console.log(response);
+    })();
+  }, []);
+
   const marks = {
     0: 0,
     1: 1,
@@ -126,7 +131,6 @@ function NewGift() {
             style={{ backgroundColor: "transparent" }}
           >
             <Radio.Group
-             
               defaultValue="0"
               className="mt-4"
               onChange={(val) => {
@@ -140,9 +144,9 @@ function NewGift() {
               </Space>
             </Radio.Group>
             <p className="font-light text-xs text-gray-400 leading-4 mt-1">
-              If you are a producer and want to introduce your product choose the
-              first. Otherwise, if you are adding your desired gift, choose the
-              second.
+              If you are a producer and want to introduce your product choose
+              the first. Otherwise, if you are adding your desired gift, choose
+              the second.
             </p>
           </Form.Item>
           <Form.Item
@@ -246,7 +250,7 @@ function NewGift() {
                 borderRight: "none",
                 borderRadius: "5px 0px 0px 5px",
               }}
-              {...register("giftprice", { required: true , maxLength:12})}
+              {...register("giftprice", { required: true, maxLength: 12 })}
             />
             <Select
               labelInValue
