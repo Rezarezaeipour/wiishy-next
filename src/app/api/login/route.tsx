@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   const { name, email, provider,image } = await req.json();
   const response = await fetch(
-    `https://wiishy-backend.ir/api/auth/${provider}`,
+    `${process.env.BACKEND_URL}/api/auth/${provider}`,
     {
       method: "POST",
       headers: {
