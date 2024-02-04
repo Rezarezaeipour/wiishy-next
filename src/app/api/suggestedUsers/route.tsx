@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const userId = TokenObj.userId;
     const realToken = TokenObj.token;
     const res = await fetch(
-      `http://wiishy-backend.ir/api/follow-suggestion`,
+      `${process.env.BACKEND_URL}/api/follow-suggestion`,
       {
         method: "GET",
         headers: {

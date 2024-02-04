@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     const token = parsedInf.token;
 
     const response = await fetch(
-      `http://wiishy-backend.ir/api/isfollow/${originId}/${destId}`,
+      `${process.env.BACKEND_URL}/api/isfollow/${originId}/${destId}`,
       {
         method: "GET",
         headers: {

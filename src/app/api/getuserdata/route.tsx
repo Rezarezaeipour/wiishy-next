@@ -13,7 +13,7 @@ export async function GET(request: Request) {
         const userid = parsedInf.userId;
       
         const response = await fetch(
-          `http://wiishy-backend.ir/api/userprofile/${userid}`,
+          `${process.env.BACKEND_URL}/api/userprofile/${userid}`,
           {
             method: "GET",
             headers: {

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
         const TokenObj = JSON.parse(Token.value);
         const realToken = TokenObj.token;
         
-        const res = await fetch(`http://wiishy-backend.ir/api/user-home`,{
+        const res = await fetch(`${process.env.BACKEND_URL}/api/user-home`,{
             method:"GET",
             headers: {
                 "Authorization" : `Bearer ${realToken}`,

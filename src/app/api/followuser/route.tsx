@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const token = infoCookieObject.token;
 
     const response = await fetch(
-      `http://wiishy-backend.ir/api/follow/${userId}/${req.userId}`,
+      `${process.env.BACKEND_URL}/api/follow/${userId}/${req.userId}`,
       {
         method: "GET",
         headers: {

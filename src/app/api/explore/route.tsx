@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const realToken = TokenObj.token;
 
     const res = await fetch(
-      `http://wiishy-backend.ir/api/gift-explore`,
+      `${process.env.BACKEND_URL}/api/gift-explore`,
       {
         method: "GET",
         headers: {

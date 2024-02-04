@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
         const userId = TokenObj.userId;
         const realToken = TokenObj.token;
         
-        const res = await fetch(`http://wiishy-backend.ir/api/followingsgifts/${userId}`,{
+        const res = await fetch(`${process.env.BACKEND_URL}/api/followingsgifts/${userId}`,{
             method:"GET",
             headers: {
                 "Authorization" : `Bearer ${realToken}`,

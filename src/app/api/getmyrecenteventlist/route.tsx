@@ -9,7 +9,7 @@ export async function GET() {
   if (info) {
     const parsedInf = JSON.parse(info.value);
     const token = parsedInf.token;
-    const response = await fetch(`http://wiishy-backend.ir/api/event-followings_birthday`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/event-followings_birthday`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",

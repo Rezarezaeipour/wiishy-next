@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const token = parsedInf.token;
     const userid = parsedInf.userId;
     const response = await fetch(
-      `http://wiishy-backend.ir/api/gift-dislike/${giftid.giftid}/${userid}`,
+      `${process.env.BACKEND_URL}/api/gift-dislike/${giftid.giftid}/${userid}`,
       {
         method: "DELETE",
         headers: {
