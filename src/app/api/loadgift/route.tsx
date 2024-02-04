@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const token = parsedInf.token;
 
     const response = await fetch(
-      `http://wiishy-backend.ir/api/giftdetail/${giftid.giftid}`,
+      `${process.env.BACKEND_URL}/api/giftdetail/${giftid.giftid}`,
       {
         method: "GET",
         headers: {

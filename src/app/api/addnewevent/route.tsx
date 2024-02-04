@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     const infoCookieObject = JSON.parse(infoCookie.value);
     const token = infoCookieObject.token;
 
-    const response = await fetch(`http://wiishy-backend.ir/api/event-add`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/event-add`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

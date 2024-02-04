@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     const userid = parsedInf.userId;
    
     const response = await fetch(
-      `http://wiishy-backend.ir/api/gift-like/${giftid.giftid}/${userid}`,
+      `${process.env.BACKEND_URL}/api/gift-like/${giftid.giftid}/${userid}`,
       {
         method: "GET",
         headers: {
