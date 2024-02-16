@@ -17,6 +17,7 @@ export interface Product {
 }
 
 export interface ProductComplete {
+  
   id?:number,
   gift_id?: number,
   gift_view?: number,
