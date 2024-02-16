@@ -4,9 +4,10 @@ import { ProductComplete } from "@/types";
 import ProductCardComplete from "@/app/components/productComponents/productCardComplete/productCardComplete";
 
 function MyFollowingsProductList(props: { productList: [ProductComplete] }) {
+  console.log('props',props);
   return (
     <>
-      {props.productList.map((Item, index) => {
+      {props.productList.map((Item : any, index) => {
         return (
           <ProductCardComplete
             key={"prd" + index}
@@ -18,11 +19,11 @@ function MyFollowingsProductList(props: { productList: [ProductComplete] }) {
             gift_view={Item.gift_view}
             gift_id={Item.gift_id}
             gift_image_url={Item.gift_image_url}
-            name={Item.name}
-            family={Item.family}
-            user_image_url={Item.user_image_url}
+            name={Item.user.name}
+            family={Item.user.family}
+            user_image_url={Item.user.user_image_url}
             user_id={Item.user_id}
-            age={Item.age}
+            age={Item.user.age}
           />
         );
       })}

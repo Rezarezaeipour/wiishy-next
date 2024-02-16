@@ -15,6 +15,7 @@ function Explore() {
       const res = await explore();
       setCount(res.explore);
       setGiftlist(res.explore);
+      console.log('res',res);
     })();
   }, []);
   return (
@@ -27,6 +28,7 @@ function Explore() {
         {giftlist ? (
           <div className="grid grid-cols-1 gap-0 mt-4 mb-10 ">
             <MyFollowingsProductList productList={giftlist} />
+            
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-0 mt-7 pb-10 ">
