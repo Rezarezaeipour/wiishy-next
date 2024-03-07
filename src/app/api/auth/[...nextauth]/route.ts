@@ -1,7 +1,8 @@
 // import { login } from "@/api/authentication";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import TwitterProvider from "next-auth/providers/twitter";import GoogleProvider from "next-auth/providers/google";
+import TwitterProvider from "next-auth/providers/twitter";
+import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider, { LinkedInProfile } from "next-auth/providers/linkedin";
 import { signIn } from "next-auth/react";
 
